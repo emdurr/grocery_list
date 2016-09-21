@@ -6,7 +6,10 @@ import foodImg from '../images/food.jpg';
 const styles = {
 	filler: { height: '350px' },
 	txt: { color: 'black' },
-	foodImg: { marginTop: '40px', width: '100%', height: '100%' }
+	food: { height: '739px', position: 'relative', backgroundImage: 'url(' + foodImg + ')', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', boxShadow: '10px 10px 5px #888888' },
+	overImg: { paddingLeft: '40px', textAlign: 'justify', position: 'absolute' },
+	emptyBlock: { height: '250px' },
+	ptxt: { color: 'black', backgroundColor: 'rgba(238,238,238,.6)', padding: '10px', borderRadius: '8px'  }
 }
 
 class Home extends Component {
@@ -23,10 +26,13 @@ class Home extends Component {
 		return(
 			<div>
 		 		<div className='center container'>
-		 			<div className='row'>
-		 				<img src={foodImg} style={ styles.foodImg } />
-		 				<div className='col s5'>
-			 				<p>Proin eget tortor risus. Nulla porttitor accumsan tincidunt. 
+		 			<div className='row' style={ styles.food } >
+		 				<div style={ styles.emptyBlock} >
+		 					<p></p>
+		 				</div>
+		 				<div className='col s6' style={ styles.overImg } >
+			 				<p style={ styles.ptxt} >
+			 					Proin eget tortor risus. Nulla porttitor accumsan tincidunt. 
 				 				Curabitur arcu erat, accumsan id imperdiet et, 
 				 				porttitor at sem. Curabitur non nulla sit 
 				 				amet nisl tempus convallis quis ac lectus. 
@@ -40,12 +46,9 @@ class Home extends Component {
 				 				velit nisi, pretium ut lacinia in, elementum id enim. 
 				 				Curabitur aliquet quam id dui posuere blandit.
 				 			</p>
+				 			<button className='btn col s3 offset-s1 yellow' style={ styles.txt } onClick={this.SignUp}>Sign Up</button>
+				 			<button className='btn col s3 offset-s2 yellow' style={ styles.txt }>Login</button>
 				 		</div>
-				 		<div className='col s6' style={ styles.filler }>
-				 			<p> </p>
-				 		</div>
-				 		<button className='btn col s2 offset-s1 yellow' style={ styles.txt } onClick={this.SignUp}>Sign Up</button>
-				 		<button className='btn col s2 offset-s1 yellow' style={ styles.txt }>Login</button>
 				 	</div>
 				</div>
 			</div>
