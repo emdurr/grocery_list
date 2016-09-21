@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: lists
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe List, type: :model do

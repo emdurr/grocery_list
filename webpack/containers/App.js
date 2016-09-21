@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Home from '../components/Home';
+// import Images from '../src/images';
 
 const styles = {
 	filler: { height: '350px' },
@@ -13,8 +14,7 @@ const styles = {
 const App = ({ children }) => (
 	<div>
 		<Navbar />
-		<Home />
-  	  { children }
+		{ children }
   	<Footer />
   </div>
 )

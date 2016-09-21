@@ -44,10 +44,14 @@ var config = {
         {
           presets:['es2015', 'react', 'stage-0']
         }
-        // test: /\.jpg$/, loader: 'file?name=[path][name].[hash].[ext]',
-        // test: /\.css$/, loader: ['style-loader', 'css-loader'],
-        // test: /\.scss$/, loader: ['style', 'css', 'sass'], s
-        // test: /\.(png|jpg|jpeg|gif|woff)$/, loader: 'url-loader?limit=100000', include: PATHS.images
+        
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+                  'file?hash=sha512&digest=hex&name=[hash].[ext]',
+                  'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                  ]
       }
     ]
   },
