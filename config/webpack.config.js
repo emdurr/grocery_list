@@ -37,12 +37,17 @@ var config = {
     loaders: [
       {
         test: /\.jsx?$/,         // Match both .js and .jsx files
+        test: /\.js$/, loader: 'jsx-loader?harmony',
         exclude: /node_modules/,
         loader: "babel",
         query:
         {
           presets:['es2015', 'react', 'stage-0']
         }
+        // test: /\.jpg$/, loader: 'file?name=[path][name].[hash].[ext]',
+        // test: /\.css$/, loader: ['style-loader', 'css-loader'],
+        // test: /\.scss$/, loader: ['style', 'css', 'sass'], s
+        // test: /\.(png|jpg|jpeg|gif|woff)$/, loader: 'url-loader?limit=100000', include: PATHS.images
       }
     ]
   },
