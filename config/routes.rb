@@ -30,14 +30,23 @@
 
 Rails.application.routes.draw do
   root 'home#index'
+
   devise_for :users, controllers: {
         registrations: 'users/registrations',
         sessions: 'users/sessions'
       }
 
+# handle adding user ID in controller
   namespace :api do
 		namespace :v1 do
-  		resources :lists
+  		resources :lists, except: [:new, :edit]
+      resources :menus, except: [:new, :edit]
+      resources :recipes, except: [:new, :edit]
+      resources :ingredients, except: [:new, :edit]
+      resources :pantry, only: [:create, :update, :destroy]
+      resources :recipe_ings, only: [:create, :update, :destroy]
+      resources :menu_recs, only: [:create, :update, :destroy]
+      resources :list_ings, only: [:create, :update, :destroy]
   	end
   end
 
