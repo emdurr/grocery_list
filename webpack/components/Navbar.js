@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 const styles = {
 	logoName: { paddingLeft: '10px', color: 'black', fontSize: '40px' },
@@ -7,18 +8,22 @@ const styles = {
   navBack: { backgroundColor: '#F9E883' }
 }
 
-const Navbar = () => (
-	<nav>
-    <div className="nav-wrapper" style={ styles.navBack }>
-    	<Link to='/' style={ styles.logoName }>Grocery List</Link>
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li> <Link to='/lists' style={ styles.aboutLink }>Lists</Link> </li>
-        <li> <Link to='/recipe_search' style={ styles.aboutLink }>Recipe Search</Link> </li>
-        <li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
-      	<li> <Link to='/contact_us' style={ styles.aboutLink }>Contact Us</Link> </li>
-      </ul>
-    </div>
-  </nav>
-)
+class Navbar extends React.Component {
+  render() {
+    return(
+    	<nav>
+        <div className="nav-wrapper" style={ styles.navBack }>
+        	<Link to='/' style={ styles.logoName }>Grocery List</Link>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li> <Link to='/lists' style={ styles.aboutLink }>Lists</Link> </li>
+            <li> <Link to='/recipe_search' style={ styles.aboutLink }>Recipe Search</Link> </li>
+            <li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
+          	<li> <Link to='/contact_us' style={ styles.aboutLink }>Contact Us</Link> </li>
+          </ul>
+        </div>
+      </nav>
+    )
+  }
+}
 
-export default Navbar;
+export default connect()(Navbar);

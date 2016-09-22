@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import SignUp from './SignUp';
 import foodImg from '../images/food.jpg';
 
 const styles = {
 	filler: { height: '350px' },
 	txt: { color: 'black' },
-	food: { height: '739px', position: 'relative', backgroundImage: 'url(' + foodImg + ')', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', boxShadow: '10px 10px 5px #888888' },
+	food: { height: '739px', position: 'relative', backgroundImage: 'url(' + foodImg + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', boxShadow: '10px 10px 5px #888888' },
 	overImg: { paddingLeft: '40px', textAlign: 'justify', position: 'absolute' },
 	emptyBlock: { height: '250px' },
 	ptxt: { color: 'black', backgroundColor: 'rgba(238,238,238,.6)', padding: '10px', borderRadius: '8px'  }
@@ -15,11 +14,6 @@ const styles = {
 class Home extends Component {
 	constructor(props) {
 		super(props);
-		this.SignUp = this.SignUp.bind(this);
-	}
-
-	SignUp() {
-		this.props.history.push('/users/sign_up');
 	}
 
 	render() {

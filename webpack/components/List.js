@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListIngs from './ListIngs';
 
 class List extends Component {
 	constructor(props) {
@@ -10,7 +11,7 @@ class List extends Component {
 
 	componentWillMount() {
 		$.ajax({
-			url: `/api/v1/lists/${this.props.params.id}`,
+			url: `/api/v1/lists/${this.props.id}`,
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( list => {
@@ -26,7 +27,7 @@ class List extends Component {
 
 	deleteList() {
 		$.ajax({
-			url: `/api/v1/lists/${this.props.params.id}`,
+			url: `/api/v1/lists/${this.props.id}`,
 			type: 'DELETE',
 			dataType: 'JSON'
 		}).done( () => {
@@ -40,8 +41,8 @@ class List extends Component {
 				<div className="row">
 	        <div className="col s12">
 	          <div className="card blue-grey darken-1">
-	            <div className="card-content white-text">
-	              <p>List Name: { this.state.list.name }</p>
+	            <div className="card-content white-text" onClick={this.revealListIng} >
+	              <ListIngs />
 	            </div>
 	            <div className="card-action">
 	            	<button className='btn' onClick={this.editList} >Edit</button>

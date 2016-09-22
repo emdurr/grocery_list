@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import List from './List';
 
 const styles = {
 	lcard: { fontSize: '40px' },
@@ -11,7 +12,9 @@ class Lists extends Component {
 	constructor(props) {
 		super(props);
 		this.handleAddList = this.handleAddList.bind(this);
-		this.state = { lists: [] };
+		this.toggleShowList = this.toggleShowList.bind(this);
+		this.listOn = this.listOn.bind(this);
+		this.state = { lists: [], showList: [] };
 	}
 
 	componentWillMount() {
@@ -26,6 +29,26 @@ class Lists extends Component {
 		});
 	}
 
+	toggleShowList(id) {
+		if (this.state.showList.indexOf(id) === -1) {
+			this.setState({ showList: [...this.state.showList, id]})
+		} else {
+			this.setState({ showList: this.state.showList.filter( l => l !== id ) })
+		}
+	}
+
+	listOn(id) {
+		let list;
+		this.state.showList.map( listId => {
+			if (id === listId) {
+				list = <List id={listId} />
+			} else {
+				return( null )
+			}
+		})	
+		return list
+	}
+
 	displayLists() {
 		let lists = this.state.lists.map( list => {
 			return(
@@ -33,8 +56,9 @@ class Lists extends Component {
 	        <div className="col s12">
 	          <div className="card yellow darken-1" style={ styles.lcard } >
 	            <div className="card-content white-text">
-								<li>
-									<Link to={`lists/${list.id}`}>{ list.name } </Link>
+								<li onClick={ () => this.toggleShowList(list.id) }>
+									{ list.name }
+									{ this.listOn(list.id) }
 								</li>
 							</div>
 						</div>
