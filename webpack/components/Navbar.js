@@ -12,7 +12,7 @@ const Navbar = () => (
     <div className="nav-wrapper" style={ styles.navBack }>
     	<Link to='/' style={ styles.logoName }>Grocery List</Link>
       <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li> <Link to='/list' style={ styles.aboutLink }>List</Link> </li>
+        <li> <Link to='/lists' style={ styles.aboutLink }>Lists</Link> </li>
         <li> <Link to='/recipe_search' style={ styles.aboutLink }>Recipe Search</Link> </li>
         <li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
       	<li> <Link to='/contact_us' style={ styles.aboutLink }>Contact Us</Link> </li>

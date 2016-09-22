@@ -17,6 +17,14 @@
 #                          PATCH  /users(.:format)               users/registrations#update
 #                          PUT    /users(.:format)               users/registrations#update
 #                          DELETE /users(.:format)               users/registrations#destroy
+#               list_index GET    /list(.:format)                list#index
+#                          POST   /list(.:format)                list#create
+#                 new_list GET    /list/new(.:format)            list#new
+#                edit_list GET    /list/:id/edit(.:format)       list#edit
+#                     list GET    /list/:id(.:format)            list#show
+#                          PATCH  /list/:id(.:format)            list#update
+#                          PUT    /list/:id(.:format)            list#update
+#                          DELETE /list/:id(.:format)            list#destroy
 #                          GET    /*unmatched_route(.:format)    home#index
 #
 
@@ -25,6 +33,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
         registrations: 'users/registrations'
       }
+
+  namespace :api do
+		namespace :v1 do
+  		resources :lists
+  	end
+  end
 
   get '*unmatched_route', to: 'home#index'
 end
