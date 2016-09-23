@@ -9,7 +9,8 @@ class ListIngs extends Component {
 	constructor(props) {
 		super(props);
 		this.handleAddIngredient = this.handleAddIngredient.bind(this);
-		this.state = { listIngredients: [] };
+		this.displayIngredients = this.displayIngredients.bind(this);
+		this.state = { list_id: this.props.id , listIngredients: [] };
 	}
 
 	componentWillMount() {
@@ -32,7 +33,7 @@ class ListIngs extends Component {
 	          <div className="card yellow darken-1" style={ styles.lcard } >
 	            <div className="card-content black-text">
 								<li>
-									<p>{ list.name }</p>
+									<p>{ ingredient }</p>
 								</li>
 							</div>
 						</div>
@@ -47,7 +48,7 @@ class ListIngs extends Component {
 		e.preventDefault();
 		let name = this.refs.addName.value;
 		$.ajax({
-			url: `/api/v1/lists/${this.props.id}/list_ings`,
+			url: `/api/v1/lists/${this.state.list_id}/list_ings`,
 			type: 'POST',
 			dataType: 'JSON',
 			data: { list_ing: { name }}

@@ -4,9 +4,10 @@ import App from './containers/App';
 import Home from './components/Home';
 import List from './components/List';
 import Lists from './components/Lists';
+import ListIngs from './components/ListIngs';
 import Menus from './components/Menus';
 import NoMatch from './components/NoMatch';
-import SignUp from './components/SignUp';
+
 
 export default (
   <Route>
@@ -14,6 +15,7 @@ export default (
     	<IndexRoute component={Home} />
     	<Route path='/lists' component={Lists} />
     	<Route path='/lists/:id' component={List} />
+    	<Route path='/lists/:id/ingrs' component={ListIngs} />
     	<Route path='/menus' component={Menus} />
     	
     	<Route path="*" status={404} component={NoMatch}/>

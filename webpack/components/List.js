@@ -41,7 +41,7 @@ class List extends Component {
     e.preventDefault();
     let name = this.refs.editName.value;
     $.ajax({
-      url: `/api/v1/lists/${this.props.params.id}`,
+      url: `/api/v1/lists/${this.props.id}`,
       type: 'PUT',
       dataType: 'JSON',
       data: { list: { name } }
@@ -55,7 +55,7 @@ class List extends Component {
 			url: `/api/v1/lists/${this.props.id}`,
 			type: 'DELETE',
 			dataType: 'JSON'
-		}).done( ( data ) => {
+		}).done( () => {
 			this.props.history.push('/lists');
 		})
 	}
@@ -67,7 +67,7 @@ class List extends Component {
 	        <div className="col s12">
 	          <div className="card yellow">
 	            <div className="card-content black-text" onClick={this.revealListIng} >
-	              <ListIngs />
+	              <ListIngs list={this.state.list} />
 	            </div>
 	            <div className="card-action">
 	            	<button className='btn yellow lighten-3 black-text' style={ styles.cbtn } onClick={this.toggleEditList} >Edit List Name</button>
