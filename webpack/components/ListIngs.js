@@ -1,41 +1,79 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+
+const styles = {
+	addBtn: { fontSize: '18px' }
+}
 
 class ListIngs extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { list_ings: [] };
+		this.handleAddIngredient = this.handleAddIngredient.bind(this);
+		this.state = { listIngredients: [] };
 	}
 
-	handleAddItem() {
-		let newListIngs = this.state.list_ings.concat([prompt('Enter some text')]);
-		this.setState({list_ings: newListIngs});
+	componentWillMount() {
+		$.ajax({
+			url: `/api/v1/lists/${this.props.id}/list_ings`,
+			type: 'GET',
+			dataType: 'JSON'
+		}).done( listIngredients => {
+			this.setState({ listIngredients });
+		}).fail( data => {
+			console.log(data);
+		});
 	}
 
-	handleRemove(i) {
-		var newListIngs = this.state.list_ings.slice();
-		newListIngs.splice(i, 1);
-		this.setState({list_ings: newListIngs});
+	displayIngredients() {
+		let listIngredients = this.state.listIngredients.map( ingredient => {
+			return(
+				<div className="row" key={ingredient.id}>
+	        <div className="col s12">
+	          <div className="card yellow darken-1" style={ styles.lcard } >
+	            <div className="card-content black-text">
+								<li>
+									<p>{ list.name }</p>
+								</li>
+							</div>
+						</div>
+					</div>
+				</div>
+			)
+		})
+		return listIngredients;
+	}
+
+	handleAddIngredient(e) {
+		e.preventDefault();
+		let name = this.refs.addName.value;
+		$.ajax({
+			url: `/api/v1/lists/${this.props.id}/list_ings`,
+			type: 'POST',
+			dataType: 'JSON',
+			data: { list_ing: { name }}
+		}).done( list => {
+			this.setState({
+				listIngredients: [
+					...this.state.listIngredients,
+					list
+				]
+			});
+			this.refs.addName.value = '';
+		}).fail( data =>{
+			console.log(data);
+		});
 	}
 
 	render() {
-		let list_ings = this.state.list_ings.map( (list_ing, i) => {
-			return(
-				<div key={list_ing} onClick={this.handleRemove.bind(this, i)}>
-       	 	{list_ing}
-      	</div>
-			)
-		})
   	return (
     	<div>
-     	  <button onClick={this.handleAddItem}>Add List Ingredient</button>
-      	<ReactCSSTransitionGroup 
-        	transitionName="example" 
-        	transitionEnterTimeout={500} 
-        	transitionLeaveTimeout={300}>
-        	{list_ings}
-      	</ReactCSSTransitionGroup>
+    		<form id='addIngredientForm' onSubmit={this.handleAddIngredient}>
+					<input type='text' ref='addName' />
+					<button style={ styles.addBtn } type="submit">Add</button>
+				</form>
+				<ul>
+					{ this.displayIngredients() }
+				</ul>
     	</div>
     )
 	}

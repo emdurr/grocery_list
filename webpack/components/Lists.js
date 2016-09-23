@@ -55,9 +55,9 @@ class Lists extends Component {
 				<div className="row" key={list.id}>
 	        <div className="col s12">
 	          <div className="card yellow darken-1" style={ styles.lcard } >
-	            <div className="card-content white-text">
-								<li onClick={ () => this.toggleShowList(list.id) }>
-									{ list.name }
+	            <div className="card-content black-text">
+								<li>
+									<p onClick={ () => this.toggleShowList(list.id)}>{ list.name }</p>
 									{ this.listOn(list.id) }
 								</li>
 							</div>
