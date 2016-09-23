@@ -24,13 +24,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates_presence_of :first_name, :last_name
-  has_many :menus
-  has_many :lists
-  has_one :pantry
+  has_many :menus, dependent: :destroy
+  has_many :lists, dependent: :destroy
+  has_one :pantry, dependent: :destroy
   has_many :ingredients, :through => :pantry
 
-  def full_name
-  	"#{first_name} #{last_name}"
-  end
 end
