@@ -10,19 +10,7 @@ class ListIngs extends Component {
 		super(props);
 		this.handleAddIngredient = this.handleAddIngredient.bind(this);
 		this.displayIngredients = this.displayIngredients.bind(this);
-		this.state = { list_id: this.props.id , listIngredients: [] };
-	}
-
-	componentWillMount() {
-		$.ajax({
-			url: `/api/v1/lists/${this.props.id}/list_ings`,
-			type: 'GET',
-			dataType: 'JSON'
-		}).done( listIngredients => {
-			this.setState({ listIngredients });
-		}).fail( data => {
-			console.log(data);
-		});
+		this.state = { listIngredients: this.props.ingredients };
 	}
 
 	displayIngredients() {
@@ -33,7 +21,7 @@ class ListIngs extends Component {
 	          <div className="card yellow darken-1" style={ styles.lcard } >
 	            <div className="card-content black-text">
 								<li>
-									<p>{ ingredient }</p>
+									<p>{ ingredient.name }</p>
 								</li>
 							</div>
 						</div>

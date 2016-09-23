@@ -11,12 +11,10 @@ class Signup extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let firstName = this.refs.firstName.value;
-    let lastName = this.refs.lastName.value;
     let email = this.refs.email.value;
     let password = this.refs.password.value;
     this.props.dispatch(
-      handleSignup(firstName, lastName, email, password, this.state.redirectRoute, this.props.history)
+      handleSignup(email, password, this.state.redirectRoute, this.props.history)
     )
   }
 
@@ -25,8 +23,6 @@ class Signup extends React.Component {
       <div>
         <h3>Sign Up</h3>
         <form onSubmit={this.handleSubmit}>
-          <input ref="firstName" required placeholder="First Name (Required)" />
-          <input ref="lastName" required placeholder="Last Name (Required)" />
           <input ref="email" required placeholder="Email (Required)" />
           <input ref="password" type="password" required placeholder="Password (Required)" />
           <button type="submit" className="btn">Sign Up</button>

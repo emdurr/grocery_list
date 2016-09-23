@@ -14,6 +14,7 @@ class Lists extends Component {
 		this.handleAddList = this.handleAddList.bind(this);
 		this.toggleShowList = this.toggleShowList.bind(this);
 		this.listOn = this.listOn.bind(this);
+		this.deleteList = this.deleteList.bind(this);
 		this.state = { lists: [], showList: [] };
 	}
 
@@ -29,6 +30,23 @@ class Lists extends Component {
 		});
 	}
 
+	deleteList(id) {
+		let lists = this.state.lists;
+		$.ajax({
+			url: `/api/v1/lists/${id}`,
+			type: 'DELETE',
+			dataType: 'JSON'
+		}).done( () => {
+			let deleteIndex = lists.findIndex( list => list.id === id);
+			this.setState({
+				lists: [
+				  ...lists.slice(0, deleteIndex),
+				  ...lists.slice(deleteIndex + 1, lists.length)
+				]
+			});
+		});
+	}
+
 	toggleShowList(id) {
 		if (this.state.showList.indexOf(id) === -1) {
 			this.setState({ showList: [...this.state.showList, id]})
@@ -41,7 +59,7 @@ class Lists extends Component {
 		let list;
 		this.state.showList.map( listId => {
 			if (id === listId) {
-				list = <List id={listId} />
+				list = <List id={listId} deleteList={this.deleteList} />
 			} else {
 				return( null )
 			}

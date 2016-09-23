@@ -1,4 +1,4 @@
-class Api::V1::List_ingsController < ApplicationController
+class Api::V1::List_ingsController < ApiController
 	before_action :set_list
 	def index
 		@list_ings = @list.list_ings.all
@@ -19,7 +19,7 @@ class Api::V1::List_ingsController < ApplicationController
 		list_ing.destroy
 		render json: { message: "Destroyed!!" }
 	end
-	
+
 	private
 		def set_list
 			@list = List.find(params[:id])

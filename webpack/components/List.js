@@ -9,8 +9,7 @@ class List extends Component {
 	constructor(props) {
 		super(props);
 		this.toggleEditList = this.toggleEditList.bind(this);
-		this.deleteList = this.deleteList.bind(this);
-		this.state = { list: {}, showEdit: false };
+		this.state = { list: null, showEdit: false };
 	}
 
 	componentWillMount() {
@@ -18,8 +17,8 @@ class List extends Component {
 			url: `/api/v1/lists/${this.props.id}`,
 			type: 'GET',
 			dataType: 'JSON'
-		}).done( list => {
-			this.setState({ list });
+		}).done( data => {
+			this.setState({ list: data.list });
 		}).fail( data => {
 			console.log(data);
 		});
@@ -50,28 +49,18 @@ class List extends Component {
     })
   }
 
-	deleteList() {
-		$.ajax({
-			url: `/api/v1/lists/${this.props.id}`,
-			type: 'DELETE',
-			dataType: 'JSON'
-		}).done( () => {
-			this.props.history.push('/lists');
-		})
-	}
-
 	render() {
-		if(this.state) {
+		if(this.state.list) {
 			return(
 				<div className="row">
 	        <div className="col s12">
 	          <div className="card yellow">
 	            <div className="card-content black-text" onClick={this.revealListIng} >
-	              <ListIngs list={this.state.list} />
+	              <ListIngs ingredients={this.state.list.ingredients} />
 	            </div>
 	            <div className="card-action">
 	            	<button className='btn yellow lighten-3 black-text' style={ styles.cbtn } onClick={this.toggleEditList} >Edit List Name</button>
-	            	<button className='btn yellow lighten-3 black-text' style={ styles.cbtn } onClick={this.deleteList}>Delete List</button>
+	            	<button className='btn yellow lighten-3 black-text' style={ styles.cbtn } onClick={() => this.props.deleteList(this.props.id)}>Delete List</button>
 	            </div>
 	          </div>
 	        </div>
