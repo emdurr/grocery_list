@@ -25,27 +25,36 @@ class Navbar extends React.Component {
 	authLink() {
 		if (this.props.auth) {
 			return (
+				<div>
+					<li> <Link to='/lists' href='#!' style={ styles.aboutLink }>Lists</Link> </li>
 					<li key='auth-link-0' style={ styles.aboutLink }><a href='#' onClick={this.logout}>Logout</a></li>
+				</div>
 			)
 		} else {
 			return(<li><Link to="/login" style={ styles.aboutLink }>Login</Link></li>);
 		}
 	}
 
+
+
   render() {
     return(
-    	<nav>
-        <div className="nav-wrapper" style={ styles.navBack }>
-        	<Link to='/' style={ styles.logoName }>Grocery List</Link>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li> <Link to='/lists' style={ styles.aboutLink }>Lists</Link> </li>
-            <li> <Link to='/recipe_search' style={ styles.aboutLink }>Recipe Search</Link> </li>
-            <li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
-          	<li> <Link to='/contact' style={ styles.aboutLink }>Contact Us</Link> </li>
-						{ this.authLink() }
-          </ul>
-        </div>
-      </nav>
+    	<div className='navbar-fixed'>
+    		<ul id="dropdown1" className="dropdown-content">
+	        <li> <Link to='/recipe_search' style={ styles.aboutLink }>Recipe Search</Link> </li>
+	        <li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
+	      	<li> <Link to='/contact' style={ styles.aboutLink }>Contact Us</Link> </li>
+					{ this.authLink() }
+	      </ul>
+	    	<nav>
+	        <div className="nav-wrapper" style={ styles.navBack }>
+	        	<Link to='/' style={ styles.logoName }>Grocery List</Link>
+	          <ul className="right hide-on-med-and-down">
+	          	<li><a className="dropdown-button" href="#!" data-activates="dropdown1">Dropdown</a></li>
+	          </ul>
+	        </div>
+	      </nav>
+	    </div>
     )
   }
 }

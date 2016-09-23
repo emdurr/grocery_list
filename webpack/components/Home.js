@@ -40,8 +40,8 @@ class Home extends Component {
 				 				velit nisi, pretium ut lacinia in, elementum id enim. 
 				 				Curabitur aliquet quam id dui posuere blandit.
 				 			</p>
-				 			<button className='btn col s3 offset-s1 yellow' style={ styles.txt } onClick={this.SignUp}>Sign Up</button>
-				 			<button className='btn col s3 offset-s2 yellow' style={ styles.txt }>Login</button>
+				 			<Link to="/signup" className='btn col s3 offset-s1 yellow' style={ styles.txt } onClick={this.SignUp}>Sign Up</Link>
+				 			<Link to="/login" className='btn col s3 offset-s2 yellow' style={ styles.txt }>Login</Link>
 				 		</div>
 				 	</div>
 				</div>
