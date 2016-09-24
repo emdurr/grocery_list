@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleSignup } from './actions';
 
+const styles = {
+  inForm: { border: '1px solid grey', borderRadius: '8px', padding: '15px', marginTop:' 15px', boxShadow: '10px 10px 5px #888888' }
+}
+
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -22,15 +26,17 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>Sign Up</h3>
-        <form onSubmit={this.handleSubmit}>
-          <input ref="firstName" required placeholder="First Name (Required)" />
-          <input ref="lastName" required placeholder="Last Name (Required)" />
-          <input ref="email" required placeholder="Email (Required)" />
-          <input ref="password" type="password" required placeholder="Password (Required)" />
-          <button type="submit" className="btn">Sign Up</button>
-        </form>
+      <div className='container'>
+        <div style={ styles.inForm }>
+          <h3>Sign Up</h3>
+          <form onSubmit={this.handleSubmit}>
+            <input ref="firstName" required placeholder="First Name (Required)" />
+            <input ref="lastName" required placeholder="Last Name (Required)" />
+            <input ref="email" required placeholder="Email (Required)" />
+            <input ref="password" type="password" required placeholder="Password (Required)" />
+            <button type="submit" className="btn">Sign Up</button>
+          </form>
+        </div>
       </div>
     )
   }

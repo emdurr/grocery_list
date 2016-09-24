@@ -56,7 +56,7 @@ class List extends Component {
 	        <div className="col s12">
 	          <div className="card yellow">
 	            <div className="card-content black-text" onClick={this.revealListIng} >
-	              <ListIngs ingredients={this.state.list.ingredients} />
+	              <ListIngs list={this.state.list} />
 	            </div>
 	            <div className="card-action">
 	            	<button className='btn yellow lighten-3 black-text' style={ styles.cbtn } onClick={this.toggleEditList} >Edit List Name</button>
