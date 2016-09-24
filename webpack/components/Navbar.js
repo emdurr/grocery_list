@@ -41,7 +41,7 @@ class Navbar extends React.Component {
     return(
     	<div className='navbar-fixed'>
     		<ul id="dropdown1" className="dropdown-content">
-	        <li> <Link to='/recipe_search' style={ styles.aboutLink }>Recipe Search</Link> </li>
+	        <li> <Link to='/recipes' style={ styles.aboutLink }>Recipe Box</Link> </li>
 	        <li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
 	      	<li> <Link to='/contact' style={ styles.aboutLink }>Contact Us</Link> </li>
 					{ this.authLink() }

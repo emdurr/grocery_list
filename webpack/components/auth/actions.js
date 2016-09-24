@@ -30,8 +30,10 @@ export const handleSignup = (first_name, last_name, email, password, redirect, h
       localStorage.setItem('userId', id);
       dispatch(loggedIn(id, api_key));
       history.push(redirect);
+      Materialize.toast('Successfull Sign up', 4000);
     }).fail( res => {
       console.log(res);
+      Materialize.toast('Email has already been used', 4000);
     });
   }
 }
@@ -50,8 +52,9 @@ export const handleLogin = (email, password, redirect, history) => {
       localStorage.setItem('userId', id);
       dispatch(loggedIn(id, api_key));
       history.push(redirect);
+      Materialize.toast('Successfully Signed In', 4000);
     }).fail( res => {
-      //TODO show something on page
+      Materialize.toast('Check Email or Password', 4000);
     });
   }
 }
