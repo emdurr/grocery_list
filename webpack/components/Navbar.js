@@ -47,8 +47,10 @@ class Navbar extends React.Component {
   render() {
     return(
     	<div className='navbar-fixed'>
+
     		<ul id="dropdown1" className="dropdown-content" style={ styles.dropDwn } >
-	        
+
+
 	      </ul>
 	    	<nav>
 	        <div className="nav-wrapper" style={ styles.navBack }>
