@@ -8,9 +8,9 @@ class Api::V1::MenusController < ApiController
 	end
 
 	def show
-		menu_recs = MenuRec.where(menu_id: params[:id])
-		recipes_list = Menu.recipe_list(menu_recs)
-		render json: {menu: @menu, recipes: recipes_list}
+		# menu_recs = MenuRec.where(menu_id: params[:id])
+		# recipes_list = Menu.recipe_list(menu_recs)
+		# render json: {menu: @menu, recipes: recipes_list}
 	end
 
 	def create

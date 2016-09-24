@@ -14,14 +14,19 @@ class Menu < ApplicationRecord
 	has_many :menu_recs
 	has_many :recipes, :through => :menu_recs
 
+
+	# For MenuRecipeListItem
+
 	def self.recipe_list(menu_recs)
 		list = []
 		menu_recs.each do |menu_rec|
 			recipe = menu_rec.recipe
-			list << {name: recipe.name, id: recipe.id}
+			list << { id: menu_rec.id, recipe: recipe }
 		end
 		return list
 	end
+
+	# For MenuListItem
 
 	def self.menu_full_list(menu_ob_array)
 		full_list = []
