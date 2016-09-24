@@ -14,9 +14,9 @@ const styles = {
 				  boxShadow: '10px 10px 5px #888888' },
 	overImg: { paddingLeft: '40px', textAlign: 'justify', position: 'absolute' },
 	emptyBlock: { height: '150px' },
-	emptyBlock: { height: '150px' },
-	ptxt: { color: 'black', backgroundColor: 'rgba(238,238,238,.6)', padding: '10px', borderRadius: '8px'  },
-	wtxt: { color: 'white', backgroundColor: 'rgba(238,238,238,.6)', padding: '10px', borderRadius: '8px'  }
+	emptyBlock1: { height: '15px' },
+	ptxt: { color: 'black', backgroundColor: 'rgba(238,238,238,.4)', padding: '10px', borderRadius: '8px'  },
+	wtxt: { color: 'white', backgroundColor: 'rgba(238,238,238,.2)', padding: '10px', borderRadius: '8px'  }
 }
 
 class Home extends Component {
@@ -30,13 +30,13 @@ class Home extends Component {
 			<div>
 		 		<div className='center container'>
 		 			<div className='row' style={ styles.food } >
-		 				<div style={ styles.emptyBlock} >
-		 					<Link to='/lists' style={ styles.wtxt } >Lists</Link> 
-		 					<Link to='/menus' style={ styles.wtxt } >Menus</Link>
-		 					<Link to='/recipes' style={ styles.wtxt } >Recipes</Link>
-		 					<Link to='/pantry' style={ styles.wtxt } >Pantry</Link>
+		 				<div style={ styles.emptyBlock1} >
 		 				</div>
-		 				<div className='col s6' style={ styles.overImg } >
+		 				<div className='col s12' style={ styles.overImg } >
+		 					<Link className="col s3" to='/lists' style={ styles.wtxt } >Lists</Link> 
+		 					<Link className="col s3" to='/menus' style={ styles.wtxt } >Menus</Link>
+		 					<Link className="col s3" to='/recipes' style={ styles.wtxt } >Recipes</Link>
+		 					<Link className="col s3" to='/pantry' style={ styles.wtxt } >Pantry</Link>
 		 				</div>
 				 	</div>
 				</div>
@@ -46,7 +46,7 @@ class Home extends Component {
 
 	render() {
 		if (this.props.auth) {
-			this.userHome();
+			return(this.userHome());
 		} else {
 			return(
 				<div>
@@ -71,8 +71,8 @@ class Home extends Component {
 					 				velit nisi, pretium ut lacinia in, elementum id enim. 
 					 				Curabitur aliquet quam id dui posuere blandit.
 					 			</p>
-					 			<Link to="/signup" className='btn col s3 offset-s1 yellow' style={ styles.txt } >Sign Up</Link>
-					 			<Link to="/login" className='btn col s3 offset-s2 yellow' style={ styles.txt }>Login</Link>
+					 			<Link to="/signup" className='col s3 offset-s1 ' style={ styles.ptxt } >Sign Up</Link>
+					 			<Link to="/login" className='col s3 offset-s2' style={ styles.ptxt }>Login</Link>
 					 		</div>
 					 	</div>
 					</div>
@@ -81,4 +81,13 @@ class Home extends Component {
 		}
 	}
 }
-export default connect()(Home);
+
+const mapStateToProps = (state) => {
+  if (state.auth)
+    return {
+      auth: state.auth.isAuthenticated
+    }
+  else
+    return state
+}
+export default connect(mapStateToProps)(Home);
