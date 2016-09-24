@@ -1,4 +1,4 @@
-class Api::V1::MenusController < ApplicationController
+class Api::V1::MenusController < ApiController
 	before_action :set_menu, except: [:index, :create]
 
 	def index
@@ -31,7 +31,7 @@ class Api::V1::MenusController < ApplicationController
 		end
 	end
 
-	def delete
+	def destroy
 		@menu.destroy
 		render json: {message: 'Menu Destroyed'}
 	end
