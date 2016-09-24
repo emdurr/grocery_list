@@ -8,6 +8,7 @@ import Lists from './components/Lists';
 import List from './components/List';
 import ListIngs from './components/ListIngs';
 import Login from './components/auth/Login';
+import Menu from './components/Menu';
 import Menus from './components/Menus';
 import Signup from './components/auth/Signup';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
@@ -34,7 +35,7 @@ export default (
     	<Route path='/lists/:id' component={List} />
     	<Route path='/lists/:id/ingrs' component={ListIngs} />
     	<Route path='/menus' component={Menus} />
-
+        <Route path='/menus/:id' component={Menu} />
     	<Route path="*" status={404} component={NoMatch}/>
     </Route>
   </Route>

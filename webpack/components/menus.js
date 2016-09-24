@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
+import MenuListItem from './MenuListItem';
 
 class Menus extends React.Component {
 	constructor(props) {
 		super(props)
 		this.displayMenus = this.displayMenus.bind(this)
-
 		this.state = { menus: [] }
 	}
 
@@ -15,7 +15,7 @@ class Menus extends React.Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( menus => {
-			this.setState( {menus} )
+			this.setState( {menus: menus} )
 		}).fail( data => {
 			console.log('Get menus failed')
 		});
@@ -24,11 +24,12 @@ class Menus extends React.Component {
 	displayMenus() {
 		let menus = this.state.menus.map( menu => {
 			return(
-				<li key={menu.id}>
-					<Link to={`menus/${menu.id}`}> {menu.name} </Link>
-				</li>
+				<li key={menu.menu.id}> <MenuListItem days={menu.days} 
+				recipes={menu.recipes} 
+				menu={menu.menu} /> </li>
 			)
 		});
+		return menus
 	};
 
 	render() {
