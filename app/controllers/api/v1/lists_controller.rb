@@ -19,8 +19,8 @@ class Api::V1::ListsController < ApiController
   end
 
   def update
-  	if @list.update
-  		render json: @list
+  	if @list.update(list_params)
+  		render :show
   	else
   		render json: { errors: @list_errors }, status: 401
   	end

@@ -90,7 +90,7 @@ class ListIngs extends Component {
 					<div className='col s3'>
 						<input type='number' ref='addQty' placeholder='QTY to Buy'/>
 					</div>
-					<button style={ styles.addBtn } type="submit">Add</button>
+					<button style={ styles.addBtn } type="submit">Add Ingredient</button>
 				</form>
 				<ul>
 					{ this.displayIngredients() }

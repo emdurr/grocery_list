@@ -14,7 +14,6 @@ class Lists extends Component {
 		this.handleAddList = this.handleAddList.bind(this);
 		this.toggleShowList = this.toggleShowList.bind(this);
 		this.listOn = this.listOn.bind(this);
-		this.deleteList = this.deleteList.bind(this);
 		this.state = { lists: [], showList: [] };
 	}
 
@@ -30,23 +29,6 @@ class Lists extends Component {
 		});
 	}
 
-	deleteList(id) {
-		let lists = this.state.lists;
-		$.ajax({
-			url: `/api/v1/lists/${id}`,
-			type: 'DELETE',
-			dataType: 'JSON'
-		}).done( () => {
-			let deleteIndex = lists.findIndex( list => list.id === id);
-			this.setState({
-				lists: [
-				  ...lists.slice(0, deleteIndex),
-				  ...lists.slice(deleteIndex + 1, lists.length)
-				]
-			});
-		});
-	}
-
 	toggleShowList(id) {
 		if (this.state.showList.indexOf(id) === -1) {
 			this.setState({ showList: [...this.state.showList, id]})
@@ -59,7 +41,7 @@ class Lists extends Component {
 		let list;
 		this.state.showList.map( listId => {
 			if (id === listId) {
-				list = <List id={listId} deleteList={this.deleteList} />
+				list = <List id={listId} deleteList={this.deleteList} handleChange={this.handleChange} />
 			} else {
 				return( null )
 			}
@@ -72,11 +54,10 @@ class Lists extends Component {
 			return(
 				<div className="row" key={list.id}>
 	        <div className="col s12">
-	          <div className="card yellow darken-1" style={ styles.lcard } >
+	          <div className="card" style={ styles.lcard } >
 	            <div className="card-content black-text">
 								<li>
-									<p onClick={ () => this.toggleShowList(list.id)}>{ list.name }</p>
-									{ this.listOn(list.id) }
+									<Link to={`/lists/${list.id}`} > { list.name }</Link>
 								</li>
 							</div>
 						</div>
@@ -89,6 +70,7 @@ class Lists extends Component {
 
 	handleAddList(e) {
 		e.preventDefault();
+		debugger
 		let name = this.refs.addName.value;
 		$.ajax({
 			url: '/api/v1/lists',
@@ -113,7 +95,7 @@ class Lists extends Component {
 			<div className='center container'>
 				<h1>Lists</h1>
 				<form id='addForm' onSubmit={this.handleAddList}>
-					<input type='text' ref='addName' />
+					<input type='text' ref='addName' required/>
 					<button type="submit">Add</button>
 				</form>
 				<ul>
