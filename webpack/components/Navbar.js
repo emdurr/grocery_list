@@ -57,7 +57,7 @@ class Navbar extends React.Component {
 	        	<Link to='/' style={ styles.logoName } className="right" >iLarder</Link>
 	        	<a className="button-collapse show-on-large" href="#!" data-activates="mobile-demo"><i className="material-icons" style={ styles.hamburger } >menu</i></a>
 	          <ul className="side-nav yellow darken-1 " id="mobile-demo" >
-	          	<li> <Link to='/recipe_search' style={ styles.aboutLink }>Recipe Search</Link> </li>
+	          	<li> <Link to='/recipes' style={ styles.aboutLink }>Recipe Box</Link> </li>
 	          	<li className="divider"></li>
 	       			<li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
 	       			<li className="divider"></li>

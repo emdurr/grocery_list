@@ -1,5 +1,5 @@
 import React from 'react';
-import ericImg from '../images/eric.png';
+import ericImg from '../images/ericdurr1.png';
 import lonnieImg from '../images/lonnie.jpeg';
 import joImg from '../images/jo.jpg';
 import githubImg from '../images/GithubImg.png';
