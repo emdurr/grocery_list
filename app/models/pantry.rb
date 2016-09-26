@@ -13,5 +13,6 @@
 
 class Pantry < ApplicationRecord
 	belongs_to :user
-	has_many :ingredients
+	has_many :pantry_ingredients, dependent: :destroy
+	has_many :ingredients, :through => :pantry_ingredients
 end

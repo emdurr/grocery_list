@@ -75,10 +75,11 @@ Rails.application.routes.draw do
       resources :menus, except: [:new, :edit]
       resources :recipes, except: [:new, :edit]
       resources :ingredients, except: [:new, :edit]
-      resources :pantry, only: [:create, :update, :destroy]
+      resources :pantries, except: [:new, :edit]
       resources :recipe_ings, only: [:create, :update, :destroy]
       resources :menu_recs, only: [:create, :update, :destroy]
       resources :list_ings, only: [:create, :update, :destroy]
+      resources :pantry_ingredients, only: [:create, :update, :destroy]
   	end
   end
 
