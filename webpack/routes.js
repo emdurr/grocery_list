@@ -10,7 +10,11 @@ import ListIngs from './components/ListIngs';
 import Login from './components/auth/Login';
 import Menu from './components/Menu';
 import Menus from './components/Menus';
+<<<<<<< HEAD
 import NewRecipe from './components/NewRecipe';
+=======
+import Pantry from './components/Pantry';
+>>>>>>> eric6
 import Recipe from './components/Recipe';
 import Recipes from './components/Recipes';
 import Signup from './components/auth/Signup';
@@ -38,6 +42,7 @@ export default (
     	<Route path='/lists/:id' component={List} />
     	<Route path='/lists/:id/ingrs' component={ListIngs} />
       <Route path='/recipes/new' component={NewRecipe} />
+      <Route path='/pantry' component={Pantry} />
       <Route path='/recipes' component={Recipes} />
       <Route path='/recipes/:id' component={Recipe} />
     	<Route path='/menus' component={Menus} />
