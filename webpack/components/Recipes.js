@@ -15,6 +15,7 @@ class Recipes extends Component {
     this.showRecipe = this.showRecipe.bind(this);
     this.recipeOn = this.recipeOn.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
+		this.displayRecipes = this.displayRecipes.bind(this);
     this.state = { recipes: [] };
   }
 
@@ -47,8 +48,10 @@ class Recipes extends Component {
             ...recipes.slice(0, deleteIndex),
             ...recipes.slice(deleteIndex + 1, recipes.length)
           ]
-        });
-      });
+        })
+      }).fail( data => {
+				console.log(data);
+			});
     }
 
     recipeOn(id) {
@@ -72,8 +75,9 @@ class Recipes extends Component {
                 <div className="card-content black-text">
                   <li>
                     <p onClick={ () => this.showRecipe(recipe.id)}>{ recipe.name }</p>
-                    { this.recipeOn(recipe.id) }
-
+                    <div>{ this.recipeOn(recipe.id) }
+								  	<button className="btn-small" onClick={() => this.deleteRecipe(recipe.id)}>Delete Recipe</button>
+										</div>
 									</li>
                 </div>
               </div>
@@ -109,7 +113,7 @@ class Recipes extends Component {
   		return(
   			<div className='center container'>
   				<h1>Recipe Box</h1>
-  				<Link to="/recipe" className='btn col s3 offset-s1 yellow' style={ styles.txt } onClick={this.newRecipe}>Add New Recipe</Link>
+  				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt } >Add New Recipe</Link>
   				<ul>
   					{ this.displayRecipes() }
   				</ul>

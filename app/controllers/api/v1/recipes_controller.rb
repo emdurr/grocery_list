@@ -2,8 +2,6 @@ class Api::V1::RecipesController < ApiController
   before_action :set_recipe, except: [:index, :create]
 
     def index
-      puts "HEY****************************************"
-      puts current_user
       recipes = Recipe.where(user_id: current_user.id)
       render json: recipes
     end
