@@ -24,7 +24,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :menus, dependent: :destroy
   has_many :lists, dependent: :destroy
-  has_one :pantry, dependent: :destroy
-  has_many :ingredients, :through => :pantry
+  has_many :pantries, dependent: :destroy
+  has_many :ingredients, :through => :pantries
 
 end

@@ -48,7 +48,7 @@ class Menus extends React.Component {
 			dataType: 'JSON'
 		}).done( data => {
 			let menus = this.state.menus;
-			let deleteIndex = menus.findIndex( menu => menu.menu.id === id );
+			let deleteIndex = menus.findIndex( menu => menu.menu.menu_rec_id === id );
 			this.setState({
 				menus: [...menus.slice(0, deleteIndex), ...menus.slice(deleteIndex + 1, menus.length)]
 			})

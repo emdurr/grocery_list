@@ -5,6 +5,7 @@ class CreatePantries < ActiveRecord::Migration[5.0]
       t.string :specifications
       t.integer :ingredient_id
       t.belongs_to :user
+      t.belongs_to :ingredient
 
       t.timestamps
     end

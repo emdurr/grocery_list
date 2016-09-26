@@ -4,6 +4,7 @@ import MenuRecipeListItem from './MenuRecipeListItem';
 class Menu extends React.Component {
 	constructor(props) {
 		super(props)
+		this.deleteMenuRec = this.deleteMenuRec.bind(this)
 		this.displayMenuRecipes = this.displayMenuRecipes.bind(this)
 		this.state = { id: '', name: '', recipes: [] }
 	}
@@ -23,12 +24,27 @@ class Menu extends React.Component {
 		});
 	};
 
+	deleteMenuRec(id) {
+		$.ajax({
+			url: `/api/v1/menu_recs/${id}`,
+			type: 'DELETE',
+			dataType: 'JSON'
+		}).done( data => {
+			let recipes = this.state.recipes;
+			let deleteIndex = recipes.findIndex( recipe => recipe.menu_rec_id === id );
+			this.setState({
+				recipes: [...recipes.slice(0, deleteIndex), ...recipes.slice(deleteIndex + 1, recipes.length)]
+			})
+		}).fail( data => {
+			console.log(data);
+		});
+	}
+
 	displayMenuRecipes() {
 		let recipes = this.state.recipes.map( recipe => {
-			debugger
 			return(
 				<li key={recipe.menu_rec_id}>
-					<MenuRecipeListItem recipe={recipe} />
+					<MenuRecipeListItem recipe={recipe} deleteMenuRec={this.deleteMenuRec} />
 				</li>
 			)
 		});

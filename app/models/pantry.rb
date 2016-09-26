@@ -13,5 +13,5 @@
 
 class Pantry < ApplicationRecord
 	belongs_to :user
-	has_many :ingredients
+	belongs_to :ingredients
 end

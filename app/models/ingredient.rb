@@ -9,10 +9,10 @@
 #
 
 class Ingredient < ApplicationRecord
-	has_one :pantry
-	has_one :user, :through => :pantry
-	has_many :recipe_ings
-	has_many :list_ings
+	has_many :pantries, dependent: :destroy
+	has_many :users, :through => :pantries
+	has_many :recipe_ings, dependent: :destroy
+	has_many :list_ings, dependent: :destroy
 	has_many :recipes, :through => :recipe_ings
 	has_many :lists, :through => :list_ings
 end

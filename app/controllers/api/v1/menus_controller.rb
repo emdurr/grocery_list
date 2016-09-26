@@ -19,7 +19,7 @@ class Api::V1::MenusController < ApiController
 		if menu.save
 			render json: menu
 		else
-			render json: { errors: list.errors }, status: 401
+			render json: { errors: menu.errors }, status: 401
 		end
 	end
 
@@ -27,7 +27,7 @@ class Api::V1::MenusController < ApiController
 		if @menu.update(menu_params)
 			render json: @menu
 		else
-			render json: { errors: list.errors }, status: 401
+			render json: { errors: menu.errors }, status: 401
 		end
 	end
 

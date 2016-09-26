@@ -11,7 +11,7 @@
 
 class Menu < ApplicationRecord
 	belongs_to :user
-	has_many :menu_recs
+	has_many :menu_recs, dependent: :destroy
 	has_many :recipes, :through => :menu_recs
 
 
