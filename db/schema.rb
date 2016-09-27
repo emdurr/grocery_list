@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926153358) do
+ActiveRecord::Schema.define(version: 20160926203005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20160926153358) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160926153358) do
   end
 
   create_table "lists", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",        null: false
     t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160926153358) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -70,12 +70,11 @@ ActiveRecord::Schema.define(version: 20160926153358) do
 
   create_table "pantries", force: :cascade do |t|
     t.string   "name"
-    t.integer  "qty"
-    t.string   "specifications"
-    t.integer  "ingredient_id"
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "ingredient_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["ingredient_id"], name: "index_pantries_on_ingredient_id", using: :btree
     t.index ["user_id"], name: "index_pantries_on_user_id", using: :btree
   end
 
@@ -90,25 +89,37 @@ ActiveRecord::Schema.define(version: 20160926153358) do
   end
 
   create_table "recipe_ings", force: :cascade do |t|
-    t.string   "specifications"
-    t.string   "prep"
+    t.string   "amount",          null: false
+    t.string   "unit",            null: false
+    t.text     "metaInformation",              array: true
     t.integer  "ingredient_id"
     t.integer  "recipe_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["ingredient_id"], name: "index_recipe_ings_on_ingredient_id", using: :btree
     t.index ["recipe_id"], name: "index_recipe_ings_on_recipe_id", using: :btree
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.text     "directions"
+    t.string   "title",          null: false
+    t.integer  "readyInMinutes"
+    t.string   "image"
+    t.integer  "servings"
+    t.string   "creditText"
     t.string   "type"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["user_id"], name: "index_recipes_on_user_id", using: :btree
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.integer  "number",     null: false
+    t.text     "step_text"
+    t.integer  "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_steps_on_recipe_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

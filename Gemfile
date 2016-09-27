@@ -14,6 +14,8 @@ gem 'materialize-sass'
 gem 'webpack-rails-react'
 gem 'paperclip'
 gem 'attachinary'
+gem 'dotenv-rails'
+gem 'spoonacular'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do

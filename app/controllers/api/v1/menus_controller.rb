@@ -2,7 +2,7 @@ class Api::V1::MenusController < ApiController
 	before_action :set_menu, except: [:index, :create]
 
 	def index
-		menu_list = Menu.where(user_id: 1)
+		menu_list = Menu.where(user_id: current_user.id)
 		menu_array = Menu.menu_full_list(menu_list)
 		render json: menu_array
 	end
