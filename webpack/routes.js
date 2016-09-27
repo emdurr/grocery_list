@@ -10,11 +10,8 @@ import ListIngs from './components/ListIngs';
 import Login from './components/auth/Login';
 import Menu from './components/Menu';
 import Menus from './components/Menus';
-<<<<<<< HEAD
 import NewRecipe from './components/NewRecipe';
-=======
 import Pantry from './components/Pantry';
->>>>>>> eric6
 import Recipe from './components/Recipe';
 import Recipes from './components/Recipes';
 import Signup from './components/auth/Signup';

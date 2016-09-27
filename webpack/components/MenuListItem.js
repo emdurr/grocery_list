@@ -50,7 +50,7 @@ class MenuListItem extends React.Component {
 				<h3> <Link to={`menus/${this.state.menu.id}`}> {this.state.menu.name} </Link> </h3>
 				<p> Days Included: {this.state.days} 
 				| Recipes Included: {this.state.recipes} </p>
-				<button onClick={() => this.props.deleteMenuRec(this.state.menu.id)} className='btn'>Delete</button>
+				<button onClick={() => this.props.deleteMenu(this.state.menu.id)} className='btn'>Delete</button>
 				<button onClick={this.toggleEdit} className='btn'>Edit</button>
 			</div>
 		)
