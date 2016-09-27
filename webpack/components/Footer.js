@@ -3,14 +3,14 @@ import { Link } from 'react-router';
 
 const styles = {
 	logoName: { paddingLeft: '10px', color: 'black', fontSize: '40px' },
-	aboutLink: { paddingLeft: '10px', fontSize: '16px', color: 'black' },
-  navFooter: { backgroundColor: '#F9E883' }
+	aboutLink: { paddingLeft: '10px', fontSize: '16px', color: 'white' },
+  navFooter: { backgroundColor: 'transparent' }
 }
 
 const Footer = () => (
-	<footer className="page-footer" style={ styles.navFooter }>
-    <div className="footer-copyright" style={ styles.aboutLink } >
-	      © 2014 Copyright Text
+	<footer  style={ styles.navFooter }>
+    <div  style={ styles.aboutLink } >
+	      © 2016 iLarder Copyright
     </div>
   </footer>
 )

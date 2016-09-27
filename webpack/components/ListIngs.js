@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 
 const styles = {
 	addBtn: { fontSize: '18px' },
-	cborder: { border: '1px solid grey', borderRadius: '10px', margin: '10px' },
-	strike: { textDecoration: 'line-through' }
+	cborder: { borderBottom: '1px solid grey', margin: '0 15px' },
+	strike: { textDecoration: 'line-through' },
+	ingInput: { margin: '0'},
+	input: { borderBottom: '2px solid #414E49', margin: '0 0 0 5px'}
 }
 
 class ListIngs extends Component {
@@ -28,7 +30,10 @@ class ListIngs extends Component {
 							<p>{ingredientData.ingredient.list_ing.qty_to_buy}</p>
 						</div>
 						<div className='col s1' >
-							<p onClick={ () => this.deleteIngredient(ingredientData)} style={{ border: '1px solid grey', borderRadius: '10px' }}>X</p>
+							<div>
+								<p className="btn-floating btn-xs grey">
+						    <i className="xs material-icons" onClick={ () => this.deleteIngredient(ingredientData)}>delete</i></p>
+							</div>
 						</div>
 					</li>
 				</div>
@@ -82,15 +87,17 @@ class ListIngs extends Component {
 
 	render() {
   	return (
-    	<div className='row'>
+    	<div className='row' >
     		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
-					<div className='col s9'>
-						<input type='text' ref='addName' placeholder='Ingredient Name' required/>
+					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
+					</button>
+					<div className='col s8 offset-s1' style={ styles.ingInput }>
+						<input style={ styles.input } type='text' ref='addName' placeholder='Ingredient Name' required/>
 					</div>
 					<div className='col s3'>
-						<input type='number' ref='addQty' placeholder='QTY to Buy'/>
+						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY to Buy'/>
 					</div>
-					<button style={ styles.addBtn } type="submit">Add Ingredient</button>
+
 				</form>
 				<ul>
 					{ this.displayIngredients() }

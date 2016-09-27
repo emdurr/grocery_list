@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import foodImg from '../images/food.jpg';
+import foodImg from '../images/banana-pancakes.jpg';
 import { connect } from 'react-redux';
+import logoImg from '../images/ilarder_logo.png'
+import logoBig from '../images/ilarder_logo_large.png'
 
 const styles = {
-	filler: { height: '350px' },
+	// filler: { height: '350px' },
 	txt: { color: 'black' },
-	food: { height: '739px',
+	food: { height: '900px',
 				  position: 'relative',
-				  backgroundImage: 'url(' + foodImg + ')', 
-				  backgroundRepeat: 'no-repeat', 
-				  backgroundSize: 'cover', 
-				  boxShadow: '10px 10px 5px #888888' },
-	overImg: { paddingLeft: '40px', textAlign: 'justify', position: 'absolute' },
-	emptyBlock: { height: '150px' },
+				  backgroundImage: 'url(' + foodImg + ')',
+				  backgroundRepeat: 'no-repeat',
+				  backgroundSize: 'cover',
+				  boxShadow: '10px 10px 5px #444444' },
+	overImg: { margin: '0 25%', textAlign: 'center', color:'white' },
+	emptyBlock: { height: '100px' },
 	emptyBlock1: { height: '15px' },
-	ptxt: { color: 'black', backgroundColor: 'rgba(238,238,238,.4)', padding: '10px', borderRadius: '8px'  },
-	wtxt: { color: 'white', backgroundColor: 'rgba(238,238,238,.2)', padding: '10px', borderRadius: '8px'  }
+	ctxt: { fontSize: '150%', color: 'white', backgroundColor: '#81D153',
+					borderRadius: '2px', padding: '8px', margin: '5px 45px'},
+	logo: { color: 'white'}
 }
 
 class Home extends Component {
@@ -33,7 +36,7 @@ class Home extends Component {
 		 				<div style={ styles.emptyBlock1} >
 		 				</div>
 		 				<div className='col s12' style={ styles.overImg } >
-		 					<Link className="col s3" to='/lists' style={ styles.wtxt } >Lists</Link> 
+		 					<Link className="col s3" to='/lists' style={ styles.wtxt } >Lists</Link>
 		 					<Link className="col s3" to='/menus' style={ styles.wtxt } >Menus</Link>
 		 					<Link className="col s3" to='/recipes' style={ styles.wtxt } >Recipes</Link>
 		 					<Link className="col s3" to='/pantry' style={ styles.wtxt } >Pantry</Link>
@@ -49,34 +52,41 @@ class Home extends Component {
 			return(this.userHome());
 		} else {
 			return(
-				<div>
-			 		<div className='center container'>
-			 			<div className='row' style={ styles.food } >
+			<div>
+				<div className='container'>
+					<div className='row' >
+						<div className='col s1 offset-s4'>
+							<img src={ logoImg }/>
+						</div>
+						<div>
+							<h2 style={ styles.logo }>iLarder</h2>
+						</div>
+			 			<div style={ styles.food } >
 			 				<div style={ styles.emptyBlock} >
 			 					<p></p>
 			 				</div>
+							<div>
 			 				<div className='col s6' style={ styles.overImg } >
-				 				<p style={ styles.ptxt} >
-				 					Proin eget tortor risus. Nulla porttitor accumsan tincidunt. 
-					 				Curabitur arcu erat, accumsan id imperdiet et, 
-					 				porttitor at sem. Curabitur non nulla sit 
-					 				amet nisl tempus convallis quis ac lectus. 
-					 				Vestibulum ante ipsum primis in faucibus 
-					 				orci luctus et ultrices posuere cubilia Curae; 
-					 				Donec velit neque, auctor sit amet aliquam vel, 
-					 				ullamcorper sit amet ligula. Cras ultricies ligula 
-					 				sed magna dictum porta. Sed porttitor lectus 
-					 				nibh. Vivamus magna justo, lacinia eget 
-					 				consectetur sed, convallis at tellus. Quisque 
-					 				velit nisi, pretium ut lacinia in, elementum id enim. 
-					 				Curabitur aliquet quam id dui posuere blandit.
-					 			</p>
-					 			<Link to="/signup" className='col s3 offset-s1 ' style={ styles.ptxt } >Sign Up</Link>
-					 			<Link to="/login" className='col s3 offset-s2' style={ styles.ptxt }>Login</Link>
-					 		</div>
-					 	</div>
+									<div>
+										<img src={ logoBig }/>
+									</div>
+					 					<h4>Create your pantry, make your shopping list, discover new recipes</h4>
+									<div style={ styles.emptyBlock } >
+									</div>
+									<div className='textAlign center'>
+										<div className='row'>
+								 			<Link to="/signup" className='col s8 m10' style={ styles.ctxt } >Create Account</Link>
+										</div>
+										<div className='row'>
+											<Link to="/login" className='col s8 m10' style={ styles.ctxt }>Sign In</Link>
+										</div>
+									</div>
+								</div>
+						 	</div>
+						</div>
 					</div>
 				</div>
+			</div>
 			)
 		}
 	}
