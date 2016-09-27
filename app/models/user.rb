@@ -24,7 +24,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :menus, dependent: :destroy
   has_many :lists, dependent: :destroy
-  has_many :pantries, dependent: :destroy
-  has_many :ingredients, :through => :pantries
+  has_one :pantry, dependent: :destroy
+  has_many :ingredients, :through => :pantry
 
+
+  def self.from_third_party_auth(provider, auth, first_name, last_name)
+  	where(provider: provider, uid: auth[:userID]).first_or_create do |user|
+  		user.email = auth[:email]
+  		user.first_name = first_name
+  		user.last_name = last_name
+  		user.password = Devise.friendly_token
+  	end
+  end
 end

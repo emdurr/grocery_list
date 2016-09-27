@@ -74,3 +74,24 @@ export const handleLogout = (history) => {
   }
 
 }
+
+export const handleFacebookLogin = (auth, firstName, lastName, history) => {
+  return(dispatch) => {
+    $.ajax({
+      url: '/facebook_login',
+      type: 'POST',
+      dataType: 'JSON',
+      type: { auth, firstName, lastName }
+    }).done( response => {
+      let { id } = response;
+      let api_key = getToken(); 
+
+      localStorage.setItem('apiKey', api_key);
+      localStorage.setItem('userId', id);
+      dispatch(loggedIn(id, api_key));
+      history.push(redirect);
+    }).fail( () => {
+      dispatch(logout());
+    })
+  }
+}

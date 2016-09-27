@@ -70,7 +70,6 @@ class Lists extends Component {
 
 	handleAddList(e) {
 		e.preventDefault();
-		debugger
 		let name = this.refs.addName.value;
 		$.ajax({
 			url: '/api/v1/lists',

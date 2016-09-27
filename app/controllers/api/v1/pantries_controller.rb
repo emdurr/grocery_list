@@ -37,6 +37,6 @@ class Api::V1::PantriesController < ApiController
   	end
 
   	def pantry_params
-  		params.require(:pantry).permit(:name, :qty, :user_id)
+  		params.require(:pantry).permit(:id, :name, :qty, :user_id)
   	end
 end

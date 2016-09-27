@@ -13,7 +13,9 @@ class Pantry extends Component {
 		super(props);
 		this.handleAddPantry = this.handleAddPantry.bind(this);
 		this.handleAddIngredient = this.handleAddIngredient.bind(this);
-		this.state = { pantries: [], pantryIngredients: [] };
+		this.addPantry = this.addPantry.bind(this);
+		this.showPantry = this.showPantry.bind(this);
+		this.state = { pantry: {} , pantryIngredients: [] };
 	}
 
 	componentWillMount() {
@@ -22,7 +24,7 @@ class Pantry extends Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( pantry => {
-			this.setState({ pantries: pantry });
+			this.setState({ pantry });
 		}).fail( data => {
 			console.log('Failed!!')
 		})
@@ -37,7 +39,7 @@ class Pantry extends Component {
 							<p> { ingredientData.ingredient.name } </p>
 						</div>
 						<div className='col s2'>
-							<p>{ingredientData.ingredient.pantryIngredients.qty}</p>
+							<p>{ingredientData.ingredient.pantry_ingredient.qty}</p>
 						</div>
 						<div className='col s1' >
 							<p onClick={ () => this.deleteIngredient(ingredientData)} style={{ border: '1px solid grey', borderRadius: '10px' }}>X</p>
@@ -83,9 +85,7 @@ class Pantry extends Component {
 			data: { pantry: { name }}
 		}).done( pantry => {
 			this.setState({
-				pantries: [
-					pantry
-				]
+				pantry
 			});
 			this.refs.addName.value = '';
 		}).fail( data =>{
@@ -93,40 +93,52 @@ class Pantry extends Component {
 		});
 	}
 
-	render() {
-		if (this.state.pantries === null) {
-			return(
-				<div className='container'>
-					<h1>Name your Pantry</h1>
-					<div style={ styles.inForm }>
-						<form id='addForm' onSubmit={this.handleAddPantry}>
-							<input type='text' ref='addName' placeholder='Pantry Name' required/>
-							<button type="submit">Add</button>
-						</form>
-					</div>
-				</div>
-			)
-		} else {
-			return(
-				<div className='center container'>
-					<h1> { this.state.pantries.name } </h1>
-					<div className='row'>
-	    		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
-						<div className='col s9'>
-							<input type='text' ref='addName' placeholder='Ingredient Name' required/>
-						</div>
-						<div className='col s3'>
-							<input type='number' ref='addQty' placeholder='QTY on Hand'/>
-						</div>
-						<button style={ styles.addBtn } type="submit">Add Ingredient</button>
+	addPantry() {
+		return(
+			<div className='container'>
+				<h1>Name your Pantry</h1>
+				<div style={ styles.inForm }>
+					<form id='addForm' onSubmit={this.handleAddPantry}>
+						<input type='text' ref='addName' placeholder='Pantry Name' required/>
+						<button type="submit">Add</button>
 					</form>
-					<ul>
-						{ this.displayIngredients() }
-					</ul>
-					</div>
 				</div>
-			)
-		}
+			</div>
+		)
+	}
+
+	showPantry() {
+		return(
+			<div className='center container'>
+				<h1> { this.state.pantry.name } </h1>
+				<div className='row'>
+    		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
+					<div className='col s9'>
+						<input type='text' ref='addName' placeholder='Ingredient Name' required/>
+					</div>
+					<div className='col s3'>
+						<input type='number' ref='addQty' placeholder='QTY on Hand'/>
+					</div>
+					<button style={ styles.addBtn } type="submit">Add Ingredient</button>
+				</form>
+				<ul>
+					{ this.displayIngredients() }
+				</ul>
+				</div>
+			</div>
+		)
+	}
+
+	render() {
+			if (this.state.pantry === {} || this.state.pantry === undefined ) {
+				return(
+					this.addPantry()
+				)
+			} else {
+				return( 
+					this.showPantry()
+				)
+			}
 	}
 }
 

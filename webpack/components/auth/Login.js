@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { handleLogin } from './actions';
+import { handleLogin, handleFacebookLogin } from './actions';
 import { Link } from 'react-router';
+import FacebookLogin from 'react-facebook-login';
+
+const styles = {
+  inForm: { border: '1px solid grey', borderRadius: '8px', padding: '15px', marginTop:' 15px', boxShadow: '10px 10px 5px #888888' }
+}
 
 class Login extends React.Component {
   constructor(props) {
@@ -21,16 +26,39 @@ class Login extends React.Component {
     );
   }
 
+  responseFacebook = (auth) => {
+    let name = auth.name.split(" ");
+    let firstName = [0];
+    let lastName = [1];
+    this.props.dispatch(handleFacebookLogin(auth, firstName, lastName, this.props.history));
+  }
+
   render() {
     return (
-      <div>
-        <h3>Login</h3>
-        <form onSubmit={ this.handleSubmit }>
-          <input ref="email" required placeholder="Email" />
-          <input ref="password" required placeholder="Password" type="password" />
-          <button className="btn" type="submit">Login</button>
-        </form>
-        <Link to='/signup'>Sign Up</Link>
+      <div className='container'>
+        <div className='row' style={ styles.inForm }>
+         <h3>Login</h3>
+          <div>
+            <form onSubmit={ this.handleSubmit }>
+              <input ref="email" required placeholder="Email" />
+              <input ref="password" required placeholder="Password" type="password" />
+              <button className="btn col s2" type="submit">Login</button>
+              <div className='col s3 offset-s1'>
+                <FacebookLogin
+                  appId='1175197775871367'
+                  autoLoad={false}
+                  fields='name, email'
+                  cssClass='btn blue'
+                  icon='fa-facebook'
+                  callback={this.responseFacebook}
+                />
+              </div>
+            </form>
+          </div>
+          <br />
+          <br />
+          <Link to='/signup'>Sign Up</Link>
+        </div>
       </div>
     )
   }
