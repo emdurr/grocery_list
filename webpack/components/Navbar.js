@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router';
 import { handleLogout } from './auth/actions';
 import { connect } from 'react-redux';
+import logoSmall from '../images/ilarder_logo_small.png';
 
 const styles = {
-	logoName: { paddingRight: '10px', color: 'black', fontSize: '40px' },
-	aboutLink: { fontSize: '20px', color: 'black' },
-  navBack: { backgroundColor: '#F9E883' },
-  dropDwn: { backgroundColor: '#F9E883', constrainWidth: 'false' },
-  hamburger: { color: 'black' }
+	logoName: { paddingRight: '10px', color: 'white', fontSize: '40px' },
+	aboutLink: { fontSize: '18px', color: 'black' },
+  navBack: { backgroundColor: '#81D153' },
+  dropDwn: { backgroundColor: '#414E49', constrainWidth: 'false' },
+  hamburger: { color: 'white', paddingLeft: '20px' }
+
 }
 
 
@@ -56,7 +58,7 @@ class Navbar extends React.Component {
 	        <div className="nav-wrapper" style={ styles.navBack }>
 	        	<Link to='/' style={ styles.logoName } className="right" >iLarder</Link>
 	        	<a className="button-collapse show-on-large" href="#!" data-activates="mobile-demo"><i className="material-icons" style={ styles.hamburger } >menu</i></a>
-	          <ul className="side-nav yellow darken-1 " id="mobile-demo" >
+	          <ul className="side-nav " id="mobile-demo" >
 	          	<li> <Link to='/recipes' style={ styles.aboutLink }>Recipe Box</Link> </li>
 	          	<li className="divider"></li>
 	       			<li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>

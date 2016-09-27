@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Recipes from './recipes';
+import Recipes from './Recipes';
 
 const styles = {
 	lcard: { fontSize: '40px' },

@@ -1,11 +1,29 @@
+@import "materialize/components/color";
+$secondary-color: color('blue-grey', 'darken-3') !default;
 @import 'materialize';
+
 
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: #919695;
+  font-family: 'Ubuntu', sans-serif;
 }
 
  main {
   flex: 1 0 auto;
  }
+
+.side-nav {
+  background-color: #F3F3F3;
+}
+
+a {
+  color: black;
+}
+
+.card .card-content p {
+  margin: 4px;
+  color: inherit;
+}

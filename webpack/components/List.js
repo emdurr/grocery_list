@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import ListIngs from './ListIngs';
+import logoImg from '../images/ilarder_logo.png';
 
 const styles = {
-	cbtn: { margin: '20px', border: '1px solid grey', borderRadius: '15px' },
+	cbtn: { margin: '20px', backgroundColor: 'transparent'},
+	lhead: { backgroundColor: '#3B4743', padding: '15px', color: 'white'},
+	logo: { paddingRight: '10px'}
+
 }
 
 class List extends Component {
@@ -12,7 +16,7 @@ class List extends Component {
 		this.listShow = this.listShow.bind(this);
 		this.toggleEditList = this.toggleEditList.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.deleteList = this.deleteList.bind(this);	
+		this.deleteList = this.deleteList.bind(this);
 		this.state = { list: null, showEdit: false };
 	}
 
@@ -35,41 +39,46 @@ class List extends Component {
   listShow() {
   	return(
 			<div className="row">
-        <div className="col s12">
-          <div className="card">
-          	<h4 className='center' >{this.state.list.name}</h4>
-            <div className="card-content black-text" onClick={this.revealListIng} >
-              <ListIngs list={this.state.list} />
-            </div>
-            <div className="card-action">
-            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
-            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
-            </div>
-          </div>
-        </div>
-      </div>
+				<div className="container">
+	        <div className="col s12">
+	          <div className="card">
+		          	<h4 style={ styles.lhead } className='center' >
+								<img src={ logoImg }/>{this.state.list.name}</h4>
+		            <div className="card-content black-text" onClick={this.revealListIng} >
+	              <ListIngs list={this.state.list} />
+	            </div>
+	            <div className="card-action">
+	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
+	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+			</div>
 		)
   }
 
   editView() {
   	return(
 			<div className="row">
-        <div className="col s12">
-          <div className="card">
-            <div className="card-content black-text" >
-            	<form onSubmit={(e) => this.handleChange(e, this.state.list.id)}>
-            		<input type='text' defaultValue={this.state.list.name} required  ref="editName" placeholder='List Name' />
-            		<br />
-            		<button className='btn black-text' style={ styles.cbtn } type='submit'>Save</button>
-            	</form>
-            </div>
-            <div className="card-action">
-            	<button className='btn black-text' style={ styles.cbtn } onClick={this.toggleEditList} >Cancel</button>
-            	
-            </div>
-          </div>
-        </div>
-      </div>
+				<div className="container">
+	        <div className="col s12">
+	          <div className="card" >
+							<h5 className='center' style={ styles.lhead }>Edit List Name</h5>
+	            <div className="card-content black-text" >
+	            	<form onSubmit={(e) => this.handleChange(e, this.state.list.id)}>
+	            		<input type='text' defaultValue={this.state.list.name} required  ref="editName" placeholder='List Name' />
+
+	            		<button className='btn black-text' style={ styles.cbtn } type='submit'>Save</button>
+									<button className='btn black-text' style={ styles.cbtn } onClick={this.toggleEditList} >Cancel</button>
+								</form>
+	            </div>
+	            <div className="card-action">
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+			</div>
 		)
   }
 
@@ -115,4 +124,3 @@ class List extends Component {
 }
 
 export default List;
-

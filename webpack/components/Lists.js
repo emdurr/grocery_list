@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import List from './List';
+import foodImg from '../images/banana-pancakes.jpg';
+import logoImg from '../images/ilarder_logo.png';
 
 const styles = {
-	lcard: { fontSize: '40px' },
+	lcard: { fontSize: '30px', color: 'black', backgroundColor: '#D0D7D5' },
 	aboutLink: { fontSize: '20px', color: 'black' },
-  navBack: { backgroundColor: '#F9E883' }
+  navBack: { backgroundColor: '#F9E883' },
+	food: { height: '900px',
+				  position: 'relative',
+				  backgroundImage: 'url(' + foodImg + ')',
+				  backgroundRepeat: 'no-repeat',
+				  backgroundSize: 'cover',
+				  boxShadow: '10px 10px 5px #444444' },
+	form: { textAlign: 'center', padding: '30px', color: 'white', backgroundColor: 'none'},
+	input: { borderBottom: '2px solid white', height: '65px', marginLeft: '5%'},
+	logo: { paddingTop: '10px', color: 'white'},
+	logoStyle: {margin: '18px'}
 }
 
 class Lists extends Component {
@@ -45,7 +57,7 @@ class Lists extends Component {
 			} else {
 				return( null )
 			}
-		})	
+		})
 		return list
 	}
 
@@ -92,15 +104,28 @@ class Lists extends Component {
 
 	render() {
 		return(
-			<div className='center container'>
-				<h1>Lists</h1>
-				<form id='addForm' onSubmit={this.handleAddList}>
-					<input type='text' ref='addName' required/>
-					<button type="submit">Add</button>
-				</form>
-				<ul>
-					{ this.displayLists() }
-				</ul>
+			<div className='container'>
+					<div className='row'>
+							<div className='col s1 offset-s4'>
+								<img src={ logoImg } style={ styles.logoStyle }/>
+							</div>
+							<div>
+								<h1 style={ styles.logo }> Lists</h1>
+							</div>
+							<div className='container' style={ styles.food }>
+								<div style={ styles.form }>
+									<form id='addForm' onSubmit={this.handleAddList}>
+										<input style={ styles.input } className='col s9 offset-s1' type='text' ref='addName' required/>
+										<button type="submit" className=" btn-floating btn-large waves-effect waves grey"><i className="material-icons">add</i>
+										</button>
+									</form>
+									<ul style={ styles.form }>
+										{ this.displayLists() }
+									</ul>
+								</div>
+						</div>
+
+				</div>
 			</div>
 		)
 	}
