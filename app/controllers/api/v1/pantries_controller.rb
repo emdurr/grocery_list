@@ -1,8 +1,8 @@
 class Api::V1::PantriesController < ApiController
 	before_action :set_pantry, except: [:index, :create]
   def index
-    pantry = current_user.pantry
-  	render json: pantry
+    
+
   end
 
   def show

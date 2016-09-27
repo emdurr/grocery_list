@@ -5,7 +5,10 @@ const styles = {
 	lcard: { fontSize: '40px' },
 	aboutLink: { fontSize: '20px', color: 'black' },
   navBack: { backgroundColor: '#F9E883' },
-  inForm: { border: '1px solid grey', borderRadius: '8px', padding: '15px', marginTop:' 15px', boxShadow: '10px 10px 5px #888888' }
+  inForm: { border: '1px solid grey', borderRadius: '8px', padding: '15px', marginTop:' 15px', boxShadow: '10px 10px 5px #888888' },
+  addBtn: { fontSize: '18px' },
+	cborder: { border: '1px solid grey', borderRadius: '10px', margin: '10px' },
+	strike: { textDecoration: 'line-through' }
 }
 
 class Pantry extends Component {
@@ -15,6 +18,7 @@ class Pantry extends Component {
 		this.handleAddIngredient = this.handleAddIngredient.bind(this);
 		this.addPantry = this.addPantry.bind(this);
 		this.showPantry = this.showPantry.bind(this);
+		this.displayIngredients = this.displayIngredients.bind(this);
 		this.state = { pantry: {} , pantryIngredients: [] };
 	}
 
@@ -24,7 +28,7 @@ class Pantry extends Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( pantry => {
-			this.setState({ pantry });
+			this.setState({ pantry, pantryIngredients: pantry.pantry.ingredients });
 		}).fail( data => {
 			console.log('Failed!!')
 		})
@@ -39,9 +43,9 @@ class Pantry extends Component {
 							<p> { ingredientData.ingredient.name } </p>
 						</div>
 						<div className='col s2'>
-							<p>{ingredientData.ingredient.pantry_ingredient.qty}</p>
+							<p>{ingredientData.ingredient.pantry_ingredients.qty}</p>
 						</div>
-						<div className='col s1' >
+						<div className='center col s1' >
 							<p onClick={ () => this.deleteIngredient(ingredientData)} style={{ border: '1px solid grey', borderRadius: '10px' }}>X</p>
 						</div>
 					</li>
@@ -59,7 +63,7 @@ class Pantry extends Component {
 		$.ajax({
 			url: `/api/v1/pantry_ingredients`,
 			type: 'POST',
-			data: { pantry_id: this.state.pantryId, ingredient: { name }, pantryIngredients: { qty }},
+			data: { pantry_id: this.state.pantry.pantry.id, ingredient: { name }, pantryIngredients: { qty }},
 			dataType: 'JSON'
 		}).done( data => {
 			console.log(data);
@@ -121,6 +125,17 @@ class Pantry extends Component {
 					</div>
 					<button style={ styles.addBtn } type="submit">Add Ingredient</button>
 				</form>
+				<div className="row" style={ styles.cborder } >
+					<div className='col s9'>
+						<p> Ingredient </p>
+					</div>
+					<div className='col s2'>
+						<p>Quantity</p>
+					</div>
+					<div className='col s1' >
+						<p>Delete</p>
+					</div>
+				</div>
 				<ul>
 					{ this.displayIngredients() }
 				</ul>
@@ -129,8 +144,29 @@ class Pantry extends Component {
 		)
 	}
 
+	deleteIngredient(ingredientData) {
+		let pantryIngredients = this.state.pantryIngredients;
+		let pantryId = this.state.pantry.pantry.id
+		$.ajax({
+			url: `/api/v1/pantry_ingredients/${ingredientData.ingredient.pantry_ingredients.id}`,
+			type: 'DELETE',
+			dataType: 'JSON',
+			data: { pantry_id: pantryId }
+		}).done( data => {
+			let deleteIndex = pantryIngredients.findIndex( pantryIngredient => pantryIngredient.ingredient.id === ingredientData.ingredient.id);
+			this.setState({
+				pantryIngredients: [
+					...pantryIngredients.slice(0, deleteIndex),
+					...pantryIngredients.slice(deleteIndex + 1, pantryIngredients.length)
+				]
+			});
+		}).fail( data => {
+			console.log(data);
+		});
+	}
+
 	render() {
-			if (this.state.pantry === {} || this.state.pantry === undefined ) {
+			if (this.state.pantry === {} || this.state.pantry === null ) {
 				return(
 					this.addPantry()
 				)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import Pantry from './Pantry';
 
 const styles = {
 	addBtn: { fontSize: '18px' },
@@ -15,6 +16,7 @@ class ListIngs extends Component {
 		this.handleAddIngredient = this.handleAddIngredient.bind(this);
 		this.displayIngredients = this.displayIngredients.bind(this);
 		this.deleteIngredient = this.deleteIngredient.bind(this);
+		this.addIngredientToPantry = this.addIngredientToPantry.bind(this);
 		this.state = { listIngredients: this.props.list.ingredients, listId: this.props.list.id };
 	}
 
@@ -85,6 +87,24 @@ class ListIngs extends Component {
 		})
 	}
 
+	addIngredientToPantry(e, ingredientData) {
+		e.preventDefault();
+		let qty = ingredientData.ingredient.list_ing.qty_to_buy;
+		let name = ingredientData.ingredient.name;
+		let ingId = ingredientData.ingredient.id;
+		$.ajax({
+			url: `/api/v1/pantry_ingredients`,
+			type: 'POST',
+			data: { pantry_id: this.state.pantryId, ingredient: { name }, pantryIngredients: { qty }},
+			dataType: 'JSON'
+		}).done( data => {
+			console.log(data);
+			console.log('for the win');
+		}).fail( data => {
+			console.log(data);
+		})
+	}
+
 	render() {
   	return (
     	<div className='row' >
@@ -99,6 +119,17 @@ class ListIngs extends Component {
 					</div>
 
 				</form>
+				<div className="row" style={ styles.cborder } >
+					<div className='col s9'>
+						<p> Ingredient </p>
+					</div>
+					<div className='col s2'>
+						<p>Quantity to Buy</p>
+					</div>
+					<div className='col s1' >
+						<p>Bought</p>
+					</div>
+				</div>
 				<ul>
 					{ this.displayIngredients() }
 				</ul>

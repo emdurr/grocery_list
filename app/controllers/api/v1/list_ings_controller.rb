@@ -28,8 +28,11 @@ class Api::V1::ListIngsController < ApiController
 	end
 
 	def destroy
-		list_ing = @list.list_ings.find(params[:id])
-		list_ing.destroy
+		pantry = Pantry.find(current_user.pantry.id)
+		l = @list.list_ings.find(params[:id])
+		pantry.pantry_ingredients.create(ingredient_id: l.ingredient_id,
+																		 qty: l.qty_to_buy)
+		l.destroy
 		render json: { message: "Destroyed!!" }
 	end
 
