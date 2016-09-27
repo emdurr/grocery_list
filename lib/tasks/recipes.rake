@@ -5,9 +5,13 @@ namespace :recipes do
 	  	recipes_added = 0
 	  	ingredients_added = 0
 	  	recipe_ings_added = 0
-		10.times do
+	  	# Update number of times and 'number' value in search_recipes function to get more or less results.
+	  	# Max 'number' is 100
+	  	# Max offset is 900, so if 'number' is 100, max times is 10.
+	  	# Thus, max number of recipes per task run is 1000
+		1.times do
 		  	api_client = Spoonacular::API.new(ENV['SPOONACULAR_API_KEY'])
-		  	results = api_client.search_recipes({'number'=>'10', 'offset'=>"#{pulled_recipes}" }).body['results']
+		  	results = api_client.search_recipes({'number'=>'100', 'offset'=>"#{pulled_recipes}" }).body['results']
 		  	results.each do |recipe|
 		  		# Set the recipe attributes
 		  		full_recipe = api_client.get_recipe_information(recipe['id']).body
