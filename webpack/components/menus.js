@@ -33,7 +33,7 @@ class Menus extends React.Component {
 			data: { menu: { name } }
 		}).done( menu => {
 			this.setState({
-			menus: [ {menu, days: 0, recpies: 0 }, ...this.state.menus ]
+			menus: [ {menu, days: 0, recipes: 0 }, ...this.state.menus ]
 			});
 			this.refs.menuForm.reset();
 		}).fail( data => {

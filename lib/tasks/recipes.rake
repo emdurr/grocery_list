@@ -11,12 +11,13 @@ namespace :recipes do
 	  	# Thus, max number of recipes per task run is 1000
 	  	dish_types = ['main course', 'side dish', 'dessert', 'appetizer', 'salad', 'bread', 'breakfast', 'soup', 'beverage', 'sauce', 'drink']
 	  	dish_types.each do |dish|
-			10.times do
+			1.times do
 			  	api_client = Spoonacular::API.new(ENV['SPOONACULAR_API_KEY'])
 			  	results = api_client.search_recipes({'number'=>'10', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
 			  	results.each do |recipe|
 			  		# Set the recipe attributes
 			  		full_recipe = api_client.get_recipe_information(recipe['id']).body
+			  		recipe_steps = api_client.
 			  		r = Recipe.where(title: full_recipe['title']).first_or_initialize
 			  		full_recipe.each do |key, value|
 			  			begin
@@ -33,14 +34,18 @@ namespace :recipes do
 			  		r.save
 			  		full_recipe['extendedIngredients'].each do |i|
 						ingredient = Ingredient.where(name: i['name']).first_or_initialize
-						recipe_ing = RecipeIng.where(recipe_id: r.id, ingredient_id: ingredient.id).first_or_initialize
+						
+						ingredients_added += 1 if ingredient.new_record?
+						ingredient.save
+
+						recipe_ing = RecipeIng.where("recipe_id = ? AND ingredient_id = ?", 
+							r.id, ingredient.id).first_or_initialize(
+								recipe_id: r.id, ingredient_id: ingredient.id)
 						recipe_ing.unit = i['unit']
 						recipe_ing.amount = i['amount']
 						recipe_ing.metaInformation = i['metaInformation']
 
-						ingredients_added += 1 if ingredient.new_record?
 						recipe_ings_added += 1 if recipe_ing.new_record?
-						ingredient.save
 						recipe_ing.save
 					end
 			  	end

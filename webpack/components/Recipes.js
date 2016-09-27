@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Recipe from './Recipe';
+import RecipeListItem from './RecipeListItem';
 
 const styles = {
 	lcard: { fontSize: '40px' },
@@ -12,8 +13,6 @@ class Recipes extends Component {
 	constructor(props) {
 		super(props);
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
-    this.showRecipe = this.showRecipe.bind(this);
-    this.recipeOn = this.recipeOn.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
 		this.displayRecipes = this.displayRecipes.bind(this);
     this.state = { recipes: [] };
@@ -25,15 +24,11 @@ class Recipes extends Component {
   			type: 'GET',
   			dataType: 'JSON'
   		}).done( recipes => {
-  			this.setState({ recipes });
+  			this.setState({ recipes: recipes.recipesArray });
   		}).fail( data => {
-  			console.log(data);
+  			console.log('get recipes failed');
   		});
   	}
-
-    showRecipe(id) {
-  		this.props.history.push(`/recipes/${id}`)
-    }
 
     deleteRecipe(id) {
       let recipes = this.state.recipes;
@@ -54,37 +49,14 @@ class Recipes extends Component {
 			});
     }
 
-    recipeOn(id) {
-  		let recipe;
-  		this.state.recipes.map( recipeId => {
-  			if (id === recipeId) {
-  				recipe = <Recipe id={recipeId} deleteRecipe={this.deleteRecipe} />
-  			} else {
-  				return( null )
-  			}
-  		})
-  		return recipe
-  	}
-
     displayRecipes() {
       let recipes = this.state.recipes.map( recipe => {
         return(
-          <div className="row" key={recipe.id}>
-            <div className="col s12">
-              <div className="card yellow darken-1" style={ styles.lcard } >
-                <div className="card-content black-text">
-                  <li>
-                    <p onClick={ () => this.showRecipe(recipe.id)}>{ recipe.name }</p>
-                    <div>{ this.recipeOn(recipe.id) }
-								  	<button className="btn-small" onClick={() => this.deleteRecipe(recipe.id)}>Delete Recipe</button>
-										</div>
-									</li>
-                </div>
-              </div>
-            </div>
-          </div>
+          <RecipeListItem key={recipe.id} {...recipe} />
         )
       })
+      console.log(recipes)
+      console.log(this.state.recipes)
       return recipes;
     }
 
@@ -112,10 +84,12 @@ class Recipes extends Component {
     render() {
   		return(
   			<div className='center container'>
-  				<h1>Recipe Box</h1>
-  				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt } >Add New Recipe</Link>
+          <div>
+    				<h1>Recipe Box</h1>
+    				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt }>Add New Recipe</Link>
+          </div>
   				<ul>
-  					{ this.displayRecipes() }
+            {this.displayRecipes()}
   				</ul>
   			</div>
   		)

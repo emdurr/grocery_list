@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Recipe extends Component {
+class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { recipe: {} };
@@ -23,9 +23,8 @@ class Recipe extends Component {
 		let { name, description, directions} = this.state.recipe;
 		return (
 			<div>
-			 <span>{ name }</span>
-			 <p>{ description }</p>
-			 <p>{ directions }</p>
+				<h3>{recipe.title}</h3>
+				
 			</div>
 		)
 	}

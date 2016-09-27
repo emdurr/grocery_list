@@ -2,8 +2,7 @@ class Api::V1::RecipesController < ApiController
   before_action :set_recipe, except: [:index, :create]
 
     def index
-      recipes = Recipe.where(user_id: current_user.id)
-      render json: recipes
+      @recipes = Recipe.where(id: [1,2,3,4,5])
     end
 
     def show
