@@ -10,7 +10,8 @@ const styles = {
             marginTop:' 15px', boxShadow: '10px 10px 5px #888888' },
   cbtn: { margin: '20px', backgroundColor: 'transparent'},
   lhead: { backgroundColor: '#3B4743', padding: '15px', color: 'white'},
-  formstyle: { margin: '25px'}
+  formstyle: { margin: '25px' },
+  signstyle: { margin: '25px', padding: '10px'}
 
 }
 
@@ -42,7 +43,6 @@ class Login extends React.Component {
   render() {
     return (
       <div className='container'>
-        <div className='row' style={ styles.inForm }>
           <div className='card'>
             <h3 style={ styles.lhead }><img src={ logoImg }/> Log In</h3>
             <div>
@@ -62,11 +62,13 @@ class Login extends React.Component {
                 </div>
               </form>
             </div>
-            <br />
-            <br />
-            <Link to='/signup'>Sign Up</Link>
+            <div>
+              <Link style={ styles.formstyle } to='/signup'>Sign Up</Link>
+              <div style={ styles.signstyle}>
+              </div>
+            </div>
           </div>
-        </div>
+
       </div>
     )
   }

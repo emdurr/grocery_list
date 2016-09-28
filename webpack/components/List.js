@@ -43,7 +43,7 @@ class List extends Component {
 	        <div className="col s12">
 	          <div className="card">
 		          	<h4 style={ styles.lhead } className='center' >
-								<img src={ logoImg }/>{this.state.list.name}</h4>
+								<img src={ logoImg }/> {this.state.list.name}</h4>
 		            <div className="card-content black-text" onClick={this.revealListIng} >
 	              <ListIngs list={this.state.list} />
 	            </div>

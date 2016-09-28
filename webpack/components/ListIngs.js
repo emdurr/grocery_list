@@ -34,7 +34,7 @@ class ListIngs extends Component {
 						<div className='col s1' >
 							<div>
 								<p className="btn-floating btn-xs grey">
-						    <i className="xs material-icons" onClick={ () => this.deleteIngredient(ingredientData)}>delete</i></p>
+						    <i className="xs material-icons" onClick={ () => this.deleteIngredient(ingredientData)}>check</i></p>
 							</div>
 						</div>
 					</li>
