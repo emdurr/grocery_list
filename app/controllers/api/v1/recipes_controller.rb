@@ -5,6 +5,11 @@ class Api::V1::RecipesController < ApiController
       @recipes = Recipe.where(id: [1,2,3,4,5])
     end
 
+    def search
+      # accepting two params: 'search term', 'field name'
+      # return search queries
+    end
+
     def show
     end
 

@@ -1,0 +1,27 @@
+json.recipeHeaderInfo do
+	json.title @recipe.title
+	json.ingredientCount @recipe.recipe_ings.count
+	json.readyInMinutes @recipe.readyInMinutes
+	json.servings @recipe.servings
+	json.creditText @recipe.creditText
+	json.imageUrl @recipe.image
+end
+
+recipe_ings = @recipe.recipe_ings.sort_by { |x| x['id']}
+
+json.recipeIngredients recipe_ings do |recipe_ing|
+	ingredient = recipe_ing.ingredient
+	json.id recipe_ing.id
+	json.name ingredient.name
+	json.amount recipe_ing.amount
+	json.unit recipe_ing.unit
+	json.metaInformation recipe_ing.metaInformation
+end
+
+steps = @recipe.steps.sort_by { |x| x['number']}
+
+json.recipeSteps steps do |step|
+	json.number step.number
+	json.stepText step.step_text
+	json.id step.id
+end

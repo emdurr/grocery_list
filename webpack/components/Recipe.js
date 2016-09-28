@@ -1,10 +1,13 @@
 import React from 'react';
+import RecipeHeader from './RecipeHeader';
+import RecipeIngredients from './RecipeIngredients';
+import RecipeSteps from './RecipeSteps';
 
 class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { recipe: {} };
-  }
+		this.state = { recipeHeaderInfo: null, recipeIngredients: null, recipeSteps: null };
+	}
 
 	componentWillMount() {
 		$.ajax({
@@ -12,7 +15,10 @@ class Recipe extends React.Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( data => {
-			this.setState({recipe: data.recipe});
+			this.setState({recipeHeaderInfo: data.recipeHeaderInfo, 
+				recipeIngredients: data.recipeIngredients,
+				recipeSteps: data.recipeSteps
+			});
 		}).fail( data => {
 			console.log('Get recipe failed')
 		});
@@ -20,13 +26,19 @@ class Recipe extends React.Component {
 
 
 	render() {
-		let { name, description, directions} = this.state.recipe;
-		return (
-			<div>
-				<h3>{recipe.title}</h3>
-				
-			</div>
-		)
+		console.log('1')
+		console.log(this.state.recipeIngredients)
+		if(this.state.recipeIngredients) {
+			return (
+				<div>
+					<RecipeHeader {...this.state.recipeHeaderInfo} />
+					<RecipeIngredients recipeIngs={this.state.recipeIngredients} />
+					<RecipeSteps steps={this.state.recipeSteps} />
+				</div>
+			)
+		} else {
+			return null
+		}
 	}
 }
 

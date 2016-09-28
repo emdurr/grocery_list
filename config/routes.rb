@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   		resources :lists, except: [:new, :edit]
       resources :menus, except: [:new, :edit]
       resources :recipes, except: [:new, :edit]
+      get '/recipes/search', to: 'recipes#search'
       resources :ingredients, except: [:new, :edit]
       resources :pantries, except: [:new, :edit]
       resources :recipe_ings, only: [:create, :update, :destroy]
@@ -82,6 +83,8 @@ Rails.application.routes.draw do
       resources :pantry_ingredients, only: [:create, :update, :destroy]
   	end
   end
+
+  get '/recipes/search', to: 'recipes#search'
 
   get '*unmatched_route', to: 'home#index'
 end

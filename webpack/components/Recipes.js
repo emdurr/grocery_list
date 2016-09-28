@@ -55,8 +55,6 @@ class Recipes extends Component {
           <RecipeListItem key={recipe.id} {...recipe} />
         )
       })
-      console.log(recipes)
-      console.log(this.state.recipes)
       return recipes;
     }
 
