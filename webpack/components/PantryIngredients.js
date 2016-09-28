@@ -7,7 +7,7 @@ class PantryIngredients extends Component {
 	render() {
 		return(
 			<div className='center container'>
-				<h1>{ }s Pantry</h1>
+				<h1>{ }s Larder</h1>
 				<div className='row'>
     		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
 					<div className='col s9'>

@@ -171,7 +171,7 @@ class Pantry extends Component {
 					this.addPantry()
 				)
 			} else {
-				return( 
+				return(
 					this.showPantry()
 				)
 			}

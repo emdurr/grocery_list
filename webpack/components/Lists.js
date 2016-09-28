@@ -66,13 +66,15 @@ class Lists extends Component {
 			return(
 				<div className="row" key={list.id}>
 	        <div className="col s12">
-	          <div className="card" style={ styles.lcard } >
-	            <div className="card-content black-text">
-								<li>
-									<Link to={`/lists/${list.id}`} > { list.name }</Link>
-								</li>
+						<Link to={`/lists/${list.id}`} >
+		          <div className="card" style={ styles.lcard } >
+		            <div className="card-content black-text">
+									<li>
+										{ list.name }
+									</li>
+								</div>
 							</div>
-						</div>
+						</Link>
 					</div>
 				</div>
 			)

@@ -15,7 +15,7 @@ class Recipe extends React.Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( data => {
-			this.setState({recipeHeaderInfo: data.recipeHeaderInfo, 
+			this.setState({recipeHeaderInfo: data.recipeHeaderInfo,
 				recipeIngredients: data.recipeIngredients,
 				recipeSteps: data.recipeSteps
 			});
@@ -30,10 +30,13 @@ class Recipe extends React.Component {
 		console.log(this.state.recipeIngredients)
 		if(this.state.recipeIngredients) {
 			return (
-				<div>
-					<RecipeHeader {...this.state.recipeHeaderInfo} />
-					<RecipeIngredients recipeIngs={this.state.recipeIngredients} />
-					<RecipeSteps steps={this.state.recipeSteps} />
+
+				<div className='container'>
+					<div className='card'>
+						<RecipeHeader {...this.state.recipeHeaderInfo} />
+						<RecipeIngredients recipeIngs={this.state.recipeIngredients} />
+						<RecipeSteps steps={this.state.recipeSteps} />
+					</div>
 				</div>
 			)
 		} else {

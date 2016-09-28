@@ -8,7 +8,7 @@ import logoBig from '../images/ilarder_logo_large.png'
 const styles = {
 	// filler: { height: '350px' },
 	txt: { color: 'black' },
-	food: { height: '900px',
+	food: { height: '1200px',
 				  position: 'relative',
 				  backgroundImage: 'url(' + foodImg + ')',
 				  backgroundRepeat: 'no-repeat',

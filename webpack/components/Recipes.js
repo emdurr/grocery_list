@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Recipe from './Recipe';
 import RecipeListItem from './RecipeListItem';
+import logoImg from '../images/ilarder_logo.png';
 
 const styles = {
 	lcard: { fontSize: '40px' },
 	aboutLink: { fontSize: '20px', color: 'black' },
-  navBack: { backgroundColor: '#F9E883' }
+  navBack: { backgroundColor: '#F9E883' },
+	title: { color: 'white'}
 }
 
 class Recipes extends Component {
@@ -83,7 +85,7 @@ class Recipes extends Component {
   		return(
   			<div className='center container'>
           <div>
-    				<h1>Recipe Box</h1>
+    				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
     				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt }>Add New Recipe</Link>
           </div>
   				<ul>
