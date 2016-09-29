@@ -140,6 +140,7 @@ class Pantry extends Component {
 			} else {
 				return( 
 					<div>Loading...</div>
+					
 				)
 			}
 	}
