@@ -11,15 +11,15 @@ const styles = {
   lonnie: { width: 'auto', height: '200px', borderRadius: '50%', backgroundImage: 'url(' + lonnieImg + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' },
   jo: { width: 'auto', height: '200px', borderRadius: '50%', backgroundImage: 'url(' + joImg + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' },
 	github: { height: '40px', width: '40px', padding: '5px', backgroundSize: 'cover'},
-
+	about: { backgroundColor: '#D0D7D5', padding: '30px'}
 }
 
 const About = () => (
-
+<div className='container' style={ styles.about }>
 <div className="row">
   <div className='center container'>
-    <div style={{backgroundColor: "#E8E8E8"}}>
-       <h3>Basket Case the App</h3>
+    <div>
+       <h3>The App</h3>
        <p style={{textAlign: "left"}}>
 			 		 This app is amazing you will love having it.
            more and more words here to see if it works
@@ -62,12 +62,13 @@ const About = () => (
        <br/>
     </div>
   </div>
+	</div>
 
 	<div className='row'>
-		<div className='center container'>
+		<div className='center'>
 			<h3>The Team</h3>
 
-			<div style={{backgroundColor: "#E8E8E8", padding: "40px 0 40px 0"}}>
+			<div style={{ padding: "40px 0 40px 0"}}>
 				<div className="container">
 			    <div className='row'>
 						<div className='icon-block'>

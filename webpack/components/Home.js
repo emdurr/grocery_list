@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import foodImg from '../images/banana-pancakes.jpg';
 import { connect } from 'react-redux';
-import logoImg from '../images/ilarder_logo.png'
-import logoBig from '../images/ilarder_logo_large.png'
+import logoImg from '../images/ilarder_logo.png';
+import logoBig from '../images/ilarder_logo_large.png';
 
 const styles = {
 	// filler: { height: '350px' },
