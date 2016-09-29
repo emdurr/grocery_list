@@ -33,7 +33,6 @@ class Pantry extends Component {
 	}
 
 	displayIngredients() {
-		debugger
 		let pantryIngredients = this.state.pantryIngredients.map( ingredientData => {
 			return(
 				<div className="row" key={ingredientData.ingredient.id} style={ styles.cborder } >
@@ -140,7 +139,7 @@ class Pantry extends Component {
 			} else {
 				return( 
 					<div>Loading...</div>
-					
+
 				)
 			}
 	}
