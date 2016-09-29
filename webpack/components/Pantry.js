@@ -14,9 +14,7 @@ const styles = {
 class Pantry extends Component {
 	constructor(props) {
 		super(props);
-		this.handleAddPantry = this.handleAddPantry.bind(this);
 		this.handleAddIngredient = this.handleAddIngredient.bind(this);
-		this.addPantry = this.addPantry.bind(this);
 		this.showPantry = this.showPantry.bind(this);
 		this.displayIngredients = this.displayIngredients.bind(this);
 		this.state = { pantry: {} , pantryIngredients: [] };
@@ -35,6 +33,7 @@ class Pantry extends Component {
 	}
 
 	displayIngredients() {
+		debugger
 		let pantryIngredients = this.state.pantryIngredients.map( ingredientData => {
 			return(
 				<div className="row" key={ingredientData.ingredient.id} style={ styles.cborder } >
@@ -66,7 +65,6 @@ class Pantry extends Component {
 			data: { pantry_id: this.state.pantry.pantry.id, ingredient: { name }, pantryIngredients: { qty }},
 			dataType: 'JSON'
 		}).done( data => {
-			console.log(data);
 			this.setState({
 				pantryIngredients: [
 				   data,
@@ -79,42 +77,11 @@ class Pantry extends Component {
 		})
 	}
 
-	handleAddPantry(e) {
-		e.preventDefault();
-		let name = this.refs.addName.value;
-		$.ajax({
-			url: '/api/v1/pantries',
-			type: 'POST',
-			dataType: 'JSON',
-			data: { pantry: { name }}
-		}).done( pantry => {
-			this.setState({
-				pantry
-			});
-			this.refs.addName.value = '';
-		}).fail( data =>{
-			console.log(data);
-		});
-	}
-
-	addPantry() {
-		return(
-			<div className='container'>
-				<h1>Name your Pantry</h1>
-				<div style={ styles.inForm }>
-					<form id='addForm' onSubmit={this.handleAddPantry}>
-						<input type='text' ref='addName' placeholder='Pantry Name' required/>
-						<button type="submit">Add</button>
-					</form>
-				</div>
-			</div>
-		)
-	}
 
 	showPantry() {
 		return(
 			<div className='center container'>
-				<h1> { this.state.pantry.name } </h1>
+				<h1> { this.state.pantry.pantry.name } </h1>
 				<div className='row'>
     		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
 					<div className='col s9'>
@@ -166,13 +133,13 @@ class Pantry extends Component {
 	}
 
 	render() {
-			if (this.state.pantry === {} || this.state.pantry === null ) {
-				return(
-					this.addPantry()
-				)
-			} else {
+			if (this.state.pantry.pantry) {
 				return(
 					this.showPantry()
+				)
+			} else {
+				return( 
+					<div>Loading...</div>
 				)
 			}
 	}

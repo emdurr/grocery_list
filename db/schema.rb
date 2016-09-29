@@ -99,15 +99,15 @@ ActiveRecord::Schema.define(version: 20160927160345) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string   "title",          null: false
-    t.integer  "readyInMinutes"
+    t.string   "title",            null: false
+    t.integer  "ready_in_minutes"
     t.string   "image"
     t.integer  "servings"
-    t.string   "creditText"
+    t.string   "credit_text"
     t.string   "type"
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["user_id"], name: "index_recipes_on_user_id", using: :btree
   end
 

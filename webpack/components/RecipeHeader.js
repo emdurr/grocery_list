@@ -8,7 +8,7 @@ const styles = {
 
 }
 
-const RecipeHeader = ({title, servings, ingredientCount, readyInMinutes, creditText, imageUrl}) => {
+const RecipeHeader = ({title, servings, ingredientCount, ready_in_minutes, credit_text, imageUrl}) => {
 	return(
 		<div>
 			<h3 style={ styles.title }><img src={ logoImg }/> {title} </h3>
@@ -16,9 +16,9 @@ const RecipeHeader = ({title, servings, ingredientCount, readyInMinutes, creditT
 				<div style={ styles.cardmargin }className='container'>
 					<div  className='col s5'>
 						<h5> Ingredients: {ingredientCount} </h5>
-						<h5> {readyInMinutes ? ("Prep Time: " + readyInMinutes) : null } </h5>
+						<p> {ready_in_minutes ? ("Prep Time: " + ready_in_minutes) : null } </p>
 						<h5> {servings ? ("Servings: " + servings) : null } </h5>
-						<h5> {creditText ? ("By: " + creditText) : null } </h5>
+						<p> {credit_text ? ("By: " + credit_text) : null } </p>
 					</div>
 					<div>
 						<img style={ styles.imgstyle } src={imageUrl} alt={title} />

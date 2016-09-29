@@ -3,8 +3,8 @@
 		json.id recipe.id
 		json.title recipe.title
 		json.ingredientCount recipe.recipe_ings.count
-		json.readyInMinutes recipe.readyInMinutes
+		json.ready_in_minutes recipe.ready_in_minutes
 		json.servings recipe.servings
-		json.creditText recipe.creditText
+		json.credit_text recipe.credit_text
 		json.imageUrl recipe.image
 	end

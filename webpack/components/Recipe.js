@@ -23,7 +23,7 @@ class Recipe extends React.Component {
 			console.log('Get recipe failed')
 		});
 	};
-
+ 
 
 	render() {
 		console.log('1')

@@ -27,6 +27,10 @@ class User < ApplicationRecord
   has_one :pantry, dependent: :destroy
   has_many :ingredients, :through => :pantry
 
+  after_create do
+    Pantry.create({ name: 'Pantry', user_id: id })
+  end
+
 
   def self.from_third_party_auth(provider, auth, first_name, last_name)
   	where(provider: provider, uid: auth[:userID]).first_or_create do |user|
@@ -36,4 +40,5 @@ class User < ApplicationRecord
   		user.password = Devise.friendly_token
   	end
   end
+
 end

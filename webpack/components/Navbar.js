@@ -14,7 +14,6 @@ const styles = {
 }
 
 
-
 class Navbar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -22,7 +21,7 @@ class Navbar extends React.Component {
 	}
 
 	componentDidMount() {
-		$('.button-collapse').sideNav({closeOnClick: true});
+    $('.button-collapse').sideNav({closeOnClick: true});
 	}
 
 	logout(e) {
@@ -36,6 +35,12 @@ class Navbar extends React.Component {
 				<div>
 					<li> <Link to='/lists' href='#!' style={ styles.aboutLink }>Lists</Link> </li>
 					<li className="divider"></li>
+					<li> <Link to='/recipes' style={ styles.aboutLink }>Recipe Box</Link> </li>
+	        <li className="divider"></li>
+	        <li> <Link to='/pantry' style={ styles.aboutLink }>Pantry</Link> </li>
+	        <li className="divider"></li>
+	        <li> <Link to='/menus' style={ styles.aboutLink }>Menus</Link> </li>
+	        <li className="divider"></li>
 					<li key='auth-link-0'><a  style={ styles.aboutLink } href='#' onClick={this.logout}>Logout</a></li>
 				</div>
 			)
@@ -59,8 +64,6 @@ class Navbar extends React.Component {
 	        	<Link to='/' style={ styles.logoName } className="right" >iLarder</Link>
 	        	<a className="button-collapse show-on-large" href="#!" data-activates="mobile-demo"><i className="material-icons" style={ styles.hamburger } >menu</i></a>
 	          <ul className="side-nav " id="mobile-demo" >
-	          	<li> <Link to='/recipes' style={ styles.aboutLink }>Recipe Box</Link> </li>
-	          	<li className="divider"></li>
 	       			<li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
 	       			<li className="divider"></li>
 	      			<li> <Link to='/contact' style={ styles.aboutLink }>Contact Us</Link> </li>

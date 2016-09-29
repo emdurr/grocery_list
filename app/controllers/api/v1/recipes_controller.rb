@@ -19,6 +19,7 @@ class Api::V1::RecipesController < ApiController
 
     def create
       recipe = Recipe.new(recipe_params)
+
       recipe.user_id = current_user.id
       if recipe.save
         render json: recipe
@@ -47,6 +48,6 @@ class Api::V1::RecipesController < ApiController
     end
 
     def recipe_params
-      params.require(:recipe).permit(:name, :description, :directions, :type, :user_id)
+      params.require(:recipe).permit(:title, :ready_in_minutes, :image, :servings, :credit_text, :user_id)
     end
 end

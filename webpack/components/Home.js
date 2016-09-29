@@ -36,10 +36,6 @@ class Home extends Component {
 		 				<div style={ styles.emptyBlock1} >
 		 				</div>
 		 				<div className='col s12' style={ styles.overImg } >
-		 					<Link className="col s3" to='/lists' style={ styles.wtxt } >Lists</Link>
-		 					<Link className="col s3" to='/menus' style={ styles.wtxt } >Menus</Link>
-		 					<Link className="col s3" to='/recipes' style={ styles.wtxt } >Recipes</Link>
-		 					<Link className="col s3" to='/pantry' style={ styles.wtxt } >Pantry</Link>
 		 				</div>
 				 	</div>
 				</div>
