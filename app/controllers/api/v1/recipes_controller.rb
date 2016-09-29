@@ -2,7 +2,11 @@ class Api::V1::RecipesController < ApiController
   before_action :set_recipe, except: [:index, :create]
 
     def index
-      @recipes = Recipe.where(id: [1,2,3,4,5])
+      if params[:searchType] && params[:searchQuery]
+        @recipes = Recipe.decipher_search_params(params[:searchType], params[:searchQuery])
+      else
+        nil
+      end
     end
 
     def search

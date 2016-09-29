@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import RecipeListItem from './RecipeListItem';
-<<<<<<< 702e2017e5d2f7b0e192e8a585dddca340b94277
 import logoImg from '../images/ilarder_logo.png';
-=======
 import RecipeSearch from './RecipeSearch';
->>>>>>> recipe search bar component
 
 const styles = {
 	lcard: { fontSize: '40px' },
@@ -46,7 +43,7 @@ class Recipes extends Component {
         type: 'GET',
         dataType: 'JSON'
       }).done( recipes => {
-        console.log(recipes)
+        this.setState( { recipes: recipes.recipesArray})
       }).fail( data => {
         console.log(data)
       })

@@ -13,6 +13,8 @@ const RecipeSearch = ({setSearchQuery, setSearchType, defaultType, defaultQuery,
 					<option value="title">Title Only</option>
 					<option value="ingredients">Ingredients Only</option>
 				</select>
+				<input type='radio' name='filter' value='On Hand'/>
+				<input type='radio' name='filter' value='Quick'/>
 				<br />
 				<input type='submit' />
 			</form>

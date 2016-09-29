@@ -18,4 +18,30 @@ class Recipe < ApplicationRecord
 	has_many :menus, :through => :menu_recs
 	has_many :ingredients, :through => :recipe_ings
 	has_many :steps, dependent: :destroy
+
+	class << self
+
+		def decipher_search_params(search_type, search_query)
+			case search_type
+			when 'title'
+				run_title_search(search_query)
+			when 'ingredients'
+				run_ingredients_search(search_query)
+			else
+				run_title_search(search_query)
+			end
+		end
+
+		def ready_search_string(query)
+			"%#{query.strip.downcase}%"
+		end
+
+		def run_title_search(query)
+			phrase_match_results = Recipe.where("lower(title) LIKE ?", ready_search_string(query))
+		end
+
+		def run_ingredients_search(query)
+			phrase_match_results = Recipe.joins(:ingredients).where("lower(ingredients.name) LIKE ?", ready_search_string(query))
+		end
+	end
 end
