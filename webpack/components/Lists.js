@@ -15,7 +15,7 @@ const styles = {
 				  backgroundSize: 'cover',
 				  boxShadow: '10px 10px 5px #444444' },
 	form: { textAlign: 'center', padding: '30px', color: 'white', backgroundColor: 'none'},
-	input: { borderBottom: '2px solid white', height: '65px', marginLeft: '5%'},
+	input: { borderBottom: '2px solid #414E49', height: '65px', marginLeft: '5%'},
 	logo: { paddingTop: '10px', color: 'white'},
 	logoStyle: {margin: '18px'}
 }
@@ -117,7 +117,7 @@ class Lists extends Component {
 								<div style={ styles.form }>
 									<form id='addForm' onSubmit={this.handleAddList}>
 										<input style={ styles.input } className='col s9 offset-s1' type='text' ref='addName' required/>
-										<button type="submit" className=" btn-floating btn-large waves-effect waves grey"><i className="material-icons">add</i>
+										<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
 										</button>
 									</form>
 									<ul style={ styles.form }>

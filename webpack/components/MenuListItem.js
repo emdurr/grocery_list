@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+const styles = {
+	lcard: { fontSize: '20px', color: 'black',
+					 backgroundColor: '#D0D7D5', margin: '10px 50px'},
+	btnstyle: { margin: '8px 10px'},
+}
+
 class MenuListItem extends React.Component {
 	constructor(props) {
 		super(props)
@@ -8,8 +14,8 @@ class MenuListItem extends React.Component {
 		this.editView = this.editView.bind(this)
 		this.editMenu = this.editMenu.bind(this)
 		this.toggleEdit = this.toggleEdit.bind(this)
-		this.state = { menu: this.props.menu.menu, 
-			days: this.props.menu.days, 
+		this.state = { menu: this.props.menu.menu,
+			days: this.props.menu.days,
 			recipes: this.props.menu.recipes,
 			edit: false }
 	}
@@ -46,12 +52,23 @@ class MenuListItem extends React.Component {
 
 	displayView() {
 		return(
-			<div className='card-panel hoverable'>
-				<h3> <Link to={`menus/${this.state.menu.id}`}> {this.state.menu.name} </Link> </h3>
-				<p> Days Included: {this.state.days} 
-				| Recipes Included: {this.state.recipes} </p>
-				<button onClick={() => this.props.deleteMenu(this.state.menu.id)} className='btn'>Delete</button>
-				<button onClick={this.toggleEdit} className='btn'>Edit</button>
+			<div >
+				<div >
+					<div className='row'>
+					<div className='col s12'>
+					<div className='card' style={ styles.lcard }>
+					<div className='card-content'>
+						<Link to={`menus/${this.state.menu.id}`}><h3> {this.state.menu.name} </h3>
+						<p> Days Included: {this.state.days}
+						| Recipes Included: {this.state.recipes} </p>
+						<button style={ styles.btnstyle } onClick={() => this.props.deleteMenu(this.state.menu.id)} className='btn'>Delete</button>
+						<button style={ styles.btnstyle } onClick={this.toggleEdit} className='btn'>Edit</button>
+						</Link>
+						</div>
+						</div>
+					</div>
+					</div>
+				</div>
 			</div>
 		)
 	}

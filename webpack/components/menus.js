@@ -1,6 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router';
 import MenuListItem from './MenuListItem';
+import logoImg from '../images/ilarder_logo.png';
+import foodImg from '../images/banana-pancakes.jpg';
+
+const styles = {
+	title: { color: 'white'},
+	input: { borderBottom: '2px solid #414E49', height: '80px', marginLeft: '70px'},
+	food: { height: '900px',
+					position: 'relative',
+					backgroundImage: 'url(' + foodImg + ')',
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: 'cover',
+					boxShadow: '10px 10px 5px #444444' },
+	form: { textAlign: 'center', padding: '20px', color: 'white'},
+	logoStyle: {margin: '15px', color: 'white'},
+	logo: { paddingTop: '10px', color: 'white'},
+}
 
 class Menus extends React.Component {
 	constructor(props) {
@@ -61,25 +77,38 @@ class Menus extends React.Component {
 		let menus = this.state.menus.map( menu => {
 			return(
 				<li key={menu.menu.id}> <MenuListItem menu={menu}
-				deleteMenu={this.deleteMenu} /> 
+					deleteMenu={this.deleteMenu} />
 				</li>
 			)
 		});
 		return menus
 	};
 
+
 	render() {
 		return(
-			<div>
-				<div>
-					<form onSubmit={this.handleCreate} ref='menuForm'>
-						<input type='text' ref='menuName' required placeholder='Menu Name' />
-						<input type='submit' className='btn' />
-					</form>
+			<div className='container'>
+					<div className='row'>
+							<div className='col s1 offset-s4'>
+								<img src={ logoImg } style={ styles.logoStyle }/>
+							</div>
+							<div>
+								<h1 style={ styles.logo }> Menu Lists</h1>
+							</div>
+							<div className='container' style={ styles.food }>
+								<div style={ styles.form }>
+									<form id='addForm' onSubmit={this.handleCreate}>
+										<input style={ styles.input } className='col s9 offset-s1' type='text' ref='menuName' required placeholder='Menu Name'/>
+										<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
+										</button>
+									</form>
+									<ul style={ styles.form }>
+										{ this.displayMenus() }
+									</ul>
+								</div>
+						</div>
+
 				</div>
-				<ul>
-					{ this.displayMenus() }
-				</ul>
 			</div>
 		)
 	};
