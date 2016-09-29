@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Recipe from './Recipe';
 import RecipeListItem from './RecipeListItem';
+<<<<<<< 702e2017e5d2f7b0e192e8a585dddca340b94277
 import logoImg from '../images/ilarder_logo.png';
+=======
+import RecipeSearch from './RecipeSearch';
+>>>>>>> recipe search bar component
 
 const styles = {
 	lcard: { fontSize: '40px' },
@@ -17,7 +20,11 @@ class Recipes extends Component {
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
 		this.displayRecipes = this.displayRecipes.bind(this);
-    this.state = { recipes: [] };
+    this.setSearchType = this.setSearchType.bind(this)
+    this.setSearchQuery = this.setSearchQuery.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+
+    this.state = { recipes: [], searchType: 'general', searchQuery: '' };
   }
 
     componentWillMount() {
@@ -31,6 +38,28 @@ class Recipes extends Component {
   			console.log('get recipes failed');
   		});
   	}
+
+    handleSearch(e) {
+      e.preventDefault()
+      $.ajax({
+        url: `/api/v1/recipes?searchType=${this.state.searchType}&searchQuery=${this.state.searchQuery}`,
+        type: 'GET',
+        dataType: 'JSON'
+      }).done( recipes => {
+        console.log(recipes)
+      }).fail( data => {
+        console.log(data)
+      })
+    }
+
+    setSearchType(e) {
+      console.log(e.target.value)
+      this.setState({ searchType: e.target.value})
+    }
+
+    setSearchQuery(e) {
+      this.setState({ searchQuery: e.target.value})
+    }
 
     deleteRecipe(id) {
       let recipes = this.state.recipes;
@@ -82,17 +111,22 @@ class Recipes extends Component {
     }
 
     render() {
-  		return(
-  			<div className='center container'>
-          <div>
-    				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
-    				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt }>Add New Recipe</Link>
-          </div>
-  				<ul>
-            {this.displayRecipes()}
-  				</ul>
-  			</div>
-  		)
+      if(this.state.recipes) {
+    		return(
+    			<div className='center container'>
+            <div>
+      				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
+              <RecipeSearch setSearchQuery={this.setSearchQuery} setSearchType={this.setSearchType} handleSearch={this.handleSearch}
+                defaultType={this.state.searchType} defaultQuery={this.state.searchQuery} />
+      				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt }>Add New Recipe</Link>
+            </div>
+    				<ul>
+              {this.displayRecipes()}
+    				</ul>
+    			</div>
+    		)
+      } else 
+        return null
   	}
 
 	}

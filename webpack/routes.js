@@ -14,6 +14,7 @@ import NewRecipe from './components/NewRecipe';
 import Pantry from './components/Pantry';
 import Recipe from './components/Recipe';
 import Recipes from './components/Recipes';
+import RecipeSearch from './components/RecipeSearch'
 import Signup from './components/auth/Signup';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
