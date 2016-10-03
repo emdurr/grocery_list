@@ -49,19 +49,26 @@ class Navbar extends React.Component {
 		}
 	}
 
+	logoLink() {
+		if (this.props.auth) {
+			return(
+				<Link to='/lists' style={ styles.logoName } className="right" >iLarder</Link>
+			)
+		} else {
+			return(
+				<Link to='/' style={ styles.logoName } className="right" >iLarder</Link>
+			)
+		}
+	}
+
 
 
   render() {
     return(
     	<div className='navbar-fixed'>
-
-    		<ul id="dropdown1" className="dropdown-content" style={ styles.dropDwn } >
-
-
-	      </ul>
 	    	<nav>
 	        <div className="nav-wrapper" style={ styles.navBack }>
-	        	<Link to='/' style={ styles.logoName } className="right" >iLarder</Link>
+	        	{ this.logoLink() }
 	        	<a className="button-collapse show-on-large" href="#!" data-activates="mobile-demo"><i className="material-icons" style={ styles.hamburger } >menu</i></a>
 	          <ul className="side-nav " id="mobile-demo" >
 	       			<li> <Link to='/about' style={ styles.aboutLink }>About</Link> </li>
