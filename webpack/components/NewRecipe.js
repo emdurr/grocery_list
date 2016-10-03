@@ -23,7 +23,7 @@ class NewRecipe extends Component {
   }
 
   displayRecipe(id) {
-  		this.props.history.push(`/recipe/${id}`)
+  		this.props.history.push(`/recipes/${id}/edit`)
     }
 
 
@@ -39,9 +39,7 @@ class NewRecipe extends Component {
       dataType: 'JSON',
       data: { recipe: { title, ready_in_minutes, servings, credit_text}}
     }).done( recipe => {
-      this.setState({ showAddIngredients: true,
-                      recipeHeaderInfo: { recipe }
-      })
+      this.displayRecipe(recipe.id);
     }).fail( data => {
       console.log(data);
     });

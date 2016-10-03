@@ -13,6 +13,7 @@ import Menus from './components/Menus';
 import NewRecipe from './components/NewRecipe';
 import Pantry from './components/Pantry';
 import Recipe from './components/Recipe';
+import EditRecipe from './components/EditRecipe';
 import Recipes from './components/Recipes';
 import RecipeSearch from './components/RecipeSearch'
 import Signup from './components/auth/Signup';
@@ -43,6 +44,7 @@ export default (
       <Route path='/pantry' component={Pantry} />
       <Route path='/recipes' component={Recipes} />
       <Route path='/recipes/:id' component={Recipe} />
+      <Route path='/recipes/:id/edit' component={EditRecipe} />
     	<Route path='/menus' component={Menus} />
       <Route path='/menus/:id' component={Menu} />
     	<Route path="*" status={404} component={NoMatch}/>

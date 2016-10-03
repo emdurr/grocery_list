@@ -53,7 +53,6 @@ class ListIngs extends Component {
 			data: { list_id: this.state.listId }
 		}).done( () => {
 			let deleteIndex = listIngredients.findIndex( listIngredient => listIngredient.ingredient.id === ingredientData.ingredient.id);
-			debugger
 			this.setState({
 				listIngredients: [
 					...listIngredients.slice(0, deleteIndex),

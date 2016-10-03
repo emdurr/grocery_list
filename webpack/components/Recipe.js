@@ -26,16 +26,14 @@ class Recipe extends React.Component {
  
 
 	render() {
-		console.log('1')
-		console.log(this.state.recipeIngredients)
 		if(this.state.recipeIngredients) {
 			return (
-
 				<div className='container'>
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
-						<RecipeIngredients recipeIngs={this.state.recipeIngredients} />
-						<RecipeSteps steps={this.state.recipeSteps} />
+						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
+						<RecipeSteps steps={this.state.recipeSteps} edit={null} />
+						<a href={'/recipes/' + this.props.params.id + '/edit'}>Edit</a>
 					</div>
 				</div>
 			)

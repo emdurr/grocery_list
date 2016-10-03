@@ -84,7 +84,7 @@ class Recipes extends Component {
         )
       })
       return recipes;
-    }
+    } 
 
     handleAddRecipe(e) {
       e.preventDefault();

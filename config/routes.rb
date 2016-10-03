@@ -81,6 +81,7 @@ Rails.application.routes.draw do
       resources :menu_recs, only: [:create, :update, :destroy]
       resources :list_ings, only: [:create, :update, :destroy]
       resources :pantry_ingredients, only: [:create, :update, :destroy]
+      resources :steps, only: [:create, :update, :destroy]
   	end
   end
 

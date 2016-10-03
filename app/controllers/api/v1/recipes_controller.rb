@@ -5,7 +5,7 @@ class Api::V1::RecipesController < ApiController
       if params[:searchType] && params[:searchQuery]
         @recipes = Recipe.decipher_search_params(params[:searchType], params[:searchQuery])
       else
-        nil
+        @recipes = Recipe.all
       end
     end
 
