@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListIngs from './ListIngs';
 import logoImg from '../images/ilarder_logo.png';
+import { Link } from 'react-router';
 
 const styles = {
 	cbtn: { margin: '20px', backgroundColor: 'transparent'},
@@ -50,6 +51,7 @@ class List extends Component {
 	            <div className="card-action">
 	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
 	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
+	            	<Link to={'/pantry'} >Pantry</Link>
 	            </div>
 	          </div>
 	        </div>
@@ -111,7 +113,9 @@ class List extends Component {
 			if (this.state.showEdit) {
 				return(this.editView())
 			} else {
-			return(this.listShow())
+			return(
+				this.listShow()
+			)
 			}
 		} else {
 			return(
