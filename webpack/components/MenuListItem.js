@@ -5,6 +5,7 @@ const styles = {
 	lcard: { fontSize: '20px', color: 'black',
 					 backgroundColor: '#D0D7D5', margin: '10px 50px'},
 	btnstyle: { margin: '8px 10px'},
+	input: { color: 'black' },
 }
 
 class MenuListItem extends React.Component {
@@ -39,9 +40,9 @@ class MenuListItem extends React.Component {
 
 	editView() {
 		return(
-			<div className='card-panel hoverable'>
+			<div className='card-panel'>
 				<form onSubmit={this.editMenu}>
-					<input type='text' defaultValue={this.state.menu.name} required  ref="editMenuName" placeholder='Menu Name' />
+					<input style={ styles.input } type='text' defaultValue={this.state.menu.name} required  ref="editMenuName" placeholder='Menu Name' />
 					<br />
 					<button type='submit' className='btn'>Save</button>
 				</form>
@@ -61,9 +62,9 @@ class MenuListItem extends React.Component {
 						<Link to={`menus/${this.state.menu.id}`}><h3> {this.state.menu.name} </h3>
 						<p> Days Included: {this.state.days}
 						| Recipes Included: {this.state.recipes} </p>
+						</Link>
 						<button style={ styles.btnstyle } onClick={() => this.props.deleteMenu(this.state.menu.id)} className='btn'>Delete</button>
 						<button style={ styles.btnstyle } onClick={this.toggleEdit} className='btn'>Edit</button>
-						</Link>
 						</div>
 						</div>
 					</div>

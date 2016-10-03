@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import logoImg from '../images/ilarder_logo.png';
 
 const styles = {
-	lcard: { fontSize: '40px' },
-	aboutLink: { fontSize: '20px', color: 'black' },
-  navBack: { backgroundColor: '#F9E883' },
-  inForm: { border: '1px solid grey', borderRadius: '8px', padding: '15px', marginTop:' 15px', boxShadow: '10px 10px 5px #888888' },
-  addBtn: { fontSize: '18px' },
-	cborder: { border: '1px solid grey', borderRadius: '10px', margin: '10px' },
-	strike: { textDecoration: 'line-through' }
+	cborder: { borderBottom: '1px solid grey', margin: '5px' },
+	tborder: { margin: '35px 6px 0 0 ', backgroundColor: '#e7ebea', fontSize: '120%' },
+	heading: { backgroundColor: '#414E49', padding: '10px', color: 'white'},
+	backing: { backgroundColor: '#f3f3f3'},
+	input: { borderBottom: '2px solid #414E49'},
+	pbody: { margin: '10px'},
 }
 
 class Pantry extends Component {
@@ -37,14 +37,17 @@ class Pantry extends Component {
 			return(
 				<div className="row" key={ingredientData.ingredient.id} style={ styles.cborder } >
 					<li>
-						<div className='col s9'>
+						<div className='col s8'>
 							<p> { ingredientData.ingredient.name } </p>
 						</div>
-						<div className='col s2'>
+						<div className='center col s3'>
 							<p>{ingredientData.ingredient.pantry_ingredients.qty}</p>
 						</div>
 						<div className='center col s1' >
-							<p onClick={ () => this.deleteIngredient(ingredientData)} style={{ border: '1px solid grey', borderRadius: '10px' }}>X</p>
+							<p className="btn-floating btn-xs grey">
+							<i className="xs material-icons" onClick={ () => this.deleteIngredient(ingredientData)}>delete</i></p>
+
+
 						</div>
 					</li>
 				</div>
@@ -58,6 +61,7 @@ class Pantry extends Component {
 		e.preventDefault();
 		let name = this.refs.addName.value;
 		let qty = this.refs.addQty.value;
+
 		$.ajax({
 			url: `/api/v1/pantry_ingredients`,
 			type: 'POST',
@@ -71,6 +75,8 @@ class Pantry extends Component {
 				]
 			});
 			this.refs.addIngredientForm.reset();
+			this.refs.addName.focus();
+
 		}).fail( data => {
 			console.log(data);
 		})
@@ -79,19 +85,24 @@ class Pantry extends Component {
 
 	showPantry() {
 		return(
-			<div className='center container'>
-				<h1> { this.state.pantry.pantry.name } </h1>
-				<div className='row'>
+
+			<div style={ styles.backing } className='container'>
+				<div className='center' >
+					<h3 style={ styles.heading }><img src={ logoImg }/> { this.state.pantry.pantry.name } </h3>
+				</div>
+				<div style={ styles.pbody } className='row'>
     		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
-					<div className='col s9'>
-						<input type='text' ref='addName' placeholder='Ingredient Name' required/>
+				<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
+				</button>
+					<div className='col s8'>
+						<input autoFocus={ true } style={ styles.input } type='text' ref='addName' placeholder='Ingredient Name' required />
 					</div>
 					<div className='col s3'>
-						<input type='number' ref='addQty' placeholder='QTY on Hand'/>
+						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY on Hand'/>
 					</div>
-					<button style={ styles.addBtn } type="submit">Add Ingredient</button>
+
 				</form>
-				<div className="row" style={ styles.cborder } >
+				<div className="row" style={ styles.tborder } >
 					<div className='col s9'>
 						<p> Ingredient </p>
 					</div>
@@ -103,7 +114,9 @@ class Pantry extends Component {
 					</div>
 				</div>
 				<ul>
-					{ this.displayIngredients() }
+					<div>
+						{ this.displayIngredients() }
+					</div>
 				</ul>
 				</div>
 			</div>
@@ -137,7 +150,7 @@ class Pantry extends Component {
 					this.showPantry()
 				)
 			} else {
-				return( 
+				return(
 					<div>Loading...</div>
 
 				)

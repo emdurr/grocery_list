@@ -13,7 +13,6 @@ class Api::V1::PantryIngredientsController < ApiController
 		qty = params[:pantryIngredients][:qty]
 		if @ingredient.save
 			if @pantry_ingredient = @pantry.pantry_ingredients.find_by(ingredient_id: @ingredient.id)
-				binding.pry
 				if @pantry_ingredient.qty
 				  @pantry_ingredient.update(qty: @pantry_ingredient.qty += qty.to_i)
 				else

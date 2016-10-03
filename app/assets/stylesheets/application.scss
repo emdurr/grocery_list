@@ -7,7 +7,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: #919695;
+  background-color: #6E7874;
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -26,4 +26,8 @@ a {
 .card .card-content p {
   margin: 4px;
   color: inherit;
+}
+
+.card-content:hover {
+  background-color: white;
 }

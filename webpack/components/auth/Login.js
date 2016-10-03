@@ -52,7 +52,7 @@ class Login extends React.Component {
                 <button style={ styles.cbtn } className="btn black-text"  type="submit">Login</button>
                 <div className='col s3 offset-s1'>
                   <FacebookLogin
-                    appId='1175197775871367'
+                    appId='.env'
                     autoLoad={false}
                     fields='name, email'
                     cssClass='btn blue'

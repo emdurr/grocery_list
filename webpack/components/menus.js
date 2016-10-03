@@ -6,7 +6,7 @@ import foodImg from '../images/banana-pancakes.jpg';
 
 const styles = {
 	title: { color: 'white'},
-	input: { borderBottom: '2px solid #414E49', height: '80px', marginLeft: '70px'},
+	input: { borderBottom: '2px solid #414E49', height: '80px', marginLeft: '70px', fontSize: '180%'},
 	food: { height: '900px',
 					position: 'relative',
 					backgroundImage: 'url(' + foodImg + ')',
@@ -14,7 +14,7 @@ const styles = {
 					backgroundSize: 'cover',
 					boxShadow: '10px 10px 5px #444444' },
 	form: { textAlign: 'center', padding: '20px', color: 'white'},
-	logoStyle: {margin: '15px', color: 'white'},
+	logoStyle: { color: 'white'},
 	logo: { paddingTop: '10px', color: 'white'},
 }
 
@@ -51,7 +51,7 @@ class Menus extends React.Component {
 			this.setState({
 			menus: [ {menu, days: 0, recipes: 0 }, ...this.state.menus ]
 			});
-			this.refs.menuForm.reset();
+			this.refs.addForm.reset();
 		}).fail( data => {
 			console.log('this failed')
 		})
@@ -67,7 +67,7 @@ class Menus extends React.Component {
 			let deleteIndex = menus.findIndex( menu => menu.menu.id === id );
 			this.setState({
 				menus: [...menus.slice(0, deleteIndex), ...menus.slice(deleteIndex + 1, menus.length)]
-			})
+			});
 		}).fail( data => {
 			console.log(data);
 		});
@@ -87,18 +87,18 @@ class Menus extends React.Component {
 
 	render() {
 		return(
-			<div className='container'>
+			<div className='container center'>
 					<div className='row'>
-							<div className='col s1 offset-s4'>
-								<img src={ logoImg } style={ styles.logoStyle }/>
+							<div>
+
 							</div>
 							<div>
-								<h1 style={ styles.logo }> Menu Lists</h1>
+								<h1 style={ styles.logo }><img src={ logoImg } style={ styles.logoStyle }/> Menu Lists</h1>
 							</div>
 							<div className='container' style={ styles.food }>
 								<div style={ styles.form }>
-									<form id='addForm' onSubmit={this.handleCreate}>
-										<input style={ styles.input } className='col s9 offset-s1' type='text' ref='menuName' required placeholder='Menu Name'/>
+									<form ref='addForm' id='addForm' onSubmit={this.handleCreate}>
+										<input style={ styles.input } className='col s9 offset-s1' type='text' ref='menuName' required placeholder='Enter Menu Name'/>
 										<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
 										</button>
 									</form>
