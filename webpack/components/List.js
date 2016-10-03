@@ -4,7 +4,7 @@ import logoImg from '../images/ilarder_logo.png';
 
 const styles = {
 	cbtn: { margin: '20px', backgroundColor: 'transparent'},
-	lhead: { backgroundColor: '#3B4743', padding: '15px', color: 'white'},
+	lhead: { backgroundColor: '#3B4743', padding: '10px', color: 'white'},
 	logo: { paddingRight: '10px'}
 
 }
@@ -42,8 +42,8 @@ class List extends Component {
 				<div className="container">
 	        <div className="col s12">
 	          <div className="card">
-		          	<h4 style={ styles.lhead } className='center' >
-								<img src={ logoImg }/> {this.state.list.name}</h4>
+		          	<h3 style={ styles.lhead } className='center' >
+								<img src={ logoImg }/> {this.state.list.name}</h3>
 		            <div className="card-content black-text" onClick={this.revealListIng} >
 	              <ListIngs list={this.state.list} />
 	            </div>
