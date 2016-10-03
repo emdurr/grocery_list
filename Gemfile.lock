@@ -242,6 +242,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   attachinary
+  cloudinary
   coffee-rails (~> 4.2)
   database_cleaner
   devise
