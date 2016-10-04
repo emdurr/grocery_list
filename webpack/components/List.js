@@ -43,9 +43,9 @@ class List extends Component {
 				<div className="container">
 	        <div className="col s12">
 	          <div className="card">
-		          	<h3 style={ styles.lhead } className='center' >
-								<img src={ logoImg }/> {this.state.list.name}</h3>
-		            <div className="card-content black-text" onClick={this.revealListIng} >
+		          <h3 style={ styles.lhead } className='center' >
+							<img src={ logoImg }/> {this.state.list.name}</h3>
+		          <div className="card-content black-text" onClick={this.revealListIng} >
 	              <ListIngs list={this.state.list} />
 	            </div>
 	            <div className="card-action">
@@ -70,7 +70,6 @@ class List extends Component {
 	            <div className="card-content black-text" >
 	            	<form onSubmit={(e) => this.handleChange(e, this.state.list.id)}>
 	            		<input type='text' defaultValue={this.state.list.name} required  ref="editName" placeholder='List Name' />
-
 	            		<button className='btn black-text' style={ styles.cbtn } type='submit'>Save</button>
 									<button className='btn black-text' style={ styles.cbtn } onClick={this.toggleEditList} >Cancel</button>
 								</form>
@@ -113,9 +112,7 @@ class List extends Component {
 			if (this.state.showEdit) {
 				return(this.editView())
 			} else {
-			return(
-				this.listShow()
-			)
+				return(this.listShow())
 			}
 		} else {
 			return(

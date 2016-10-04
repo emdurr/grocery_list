@@ -20,7 +20,8 @@ class ListIngs extends Component {
 		this.deleteIngredient = this.deleteIngredient.bind(this);
 		this.removeIngredient = this.removeIngredient.bind(this);
 		this.addIngredientToPantry = this.addIngredientToPantry.bind(this);
-		this.state = { listIngredients: this.props.list.ingredients, listId: this.props.list.id };
+		this.toggleEdit = this.toggleEdit.bind(this);
+		this.state = { listIngredients: this.props.list.ingredients, listId: this.props.list.id, edit: false };
 	}
 
 	displayIngredients() {
@@ -38,11 +39,11 @@ class ListIngs extends Component {
 					
 							<div className='col s1' >
 								<p className="btn-floating btn-xs grey">
-								<i className="xs material-icons" onClick={ () => this.removeIngredient(ingredientData)}>delete</i></p>
+								<i className="xs material-icons" onClick={ () => this.deleteIngredient(ingredientData)}>delete</i></p>
 							</div>
 							<div className='col s1 offset-s1' >
 								<p className="btn-floating btn-xs grey">
-						    <i className="xs material-icons" onClick={ () => this.deleteIngredient(ingredientData)}>check</i></p>
+						    <i className="xs material-icons" onClick={ () => this.removeIngredient(ingredientData)}>check</i></p>
 							</div>
 						</div>
 					</li>
@@ -87,6 +88,8 @@ class ListIngs extends Component {
 					...listIngredients.slice(removeIndex + 1, listIngredients.length)
 				]
 			});
+			let e = event
+			this.addIngredientToPantry(e, ingredientData);
 		}).fail( data => {
 			console.log(data);
 		});
@@ -97,19 +100,21 @@ class ListIngs extends Component {
 		e.preventDefault();
 		let name = this.refs.addName.value;
 		let qty_to_buy = this.refs.addQty.value;
+		let listIngredients = this.state.listIngredients
 		$.ajax({
 			url: `/api/v1/list_ings`,
 			type: 'POST',
 			data: { list_id: this.state.listId, ingredient: { name }, list_ing: { qty_to_buy }},
 			dataType: 'JSON'
 		}).done( data => {
-			console.log(data);
-			this.setState({
-				listIngredients: [
-				   data,
-				   ...this.state.listIngredients
-				]
-			});
+			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.id );
+      if (findIngredient === -1) { 
+        this.setState({ listIngredients: [...listIngredients, data] })
+      } else {
+        this.setState({ listIngredients: [...listIngredients.slice(0, findIngredient),
+                                          data,
+                                          ...listIngredients.slice(findIngredient + 1, listIngredients.length)]})
+      }
 			this.refs.addIngredientForm.reset();
 			this.refs.addName.focus();
 
@@ -130,27 +135,35 @@ class ListIngs extends Component {
 			dataType: 'JSON'
 		}).done( data => {
 			console.log(data);
-			console.log('for the win');
 		}).fail( data => {
 			console.log(data);
 		})
 	}
 
-	editIngredient(e) {
+	editIngredient(e, listObject) {
 		e.preventDefault();
-		let qty = ingredientData.ingredient.list_ing.qty_to_buy;
-		let name = ingredientData.ingredient.name;
-		let ingId = ingredientData.ingredient.id;
+		let id = listObject.listId;
+		let list_ing_id = listObject.listIngredients[0].ingredient.list_ing.id;
+		let ingredient = listObject.listIngredients[0].ingredient;
+		let qty_to_buy = this.refs.editIngredientToBuy.value;
+		let listIngredients = this.state.listIngredients;
 		$.ajax({
-			url: `/api/v1/pantry_ingredients`,
-			type: 'POST',
+			url: `/api/v1/list_ings/${list_ing_id}`,
+			type: 'PUT',
 			dataType: 'JSON',
-			data: { listIngredients: {data} }
+			data: { list_id: id, list_ing: { id: list_ing_id, qty_to_buy: qty_to_buy }, ingredient: { id: ingredient.id, name: ingredient.name } }
 		}).done( data => {
-			console.log(data)
-			this.setState( { listIngredients: data })
+			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.id );
+      if (findIngredient === -1) { 
+        this.setState({ listIngredients: [...listIngredients, data] })
+      } else {
+        this.setState({ listIngredients: [...listIngredients.slice(0, findIngredient),
+                                          data,
+                                          ...listIngredients.slice(findIngredient + 1, listIngredients.length)],
+                        edit: false})
+      }
 		}).fail( data => {
-			console.log(data);
+			console.log('failed');
 		});
 	}
 
@@ -164,11 +177,12 @@ class ListIngs extends Component {
 			else
 				return(this.displayView());
 	}
+
 	editView() {
 		return(
 			<div className='card-panel'>
-				<form onSubmit={this.editIngredient}>
-					<input style={ styles.input } type='text' defaultValue={this.state.listIngredient.name} required  ref="editIngredient" placeholder='Menu Name' />
+				<form onSubmit={(e) => this.editIngredient(e, this.state)}>
+					<input style={ styles.input } type='text' defaultValue={this.state.listIngredients[0].ingredient.list_ing.qty_to_buy} required  ref="editIngredientToBuy" placeholder='QTY to Buy' />
 					<br />
 					<button type='submit' className='btn'>Save</button>
 				</form>

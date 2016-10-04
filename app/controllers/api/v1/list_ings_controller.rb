@@ -27,11 +27,19 @@ class Api::V1::ListIngsController < ApiController
 		end
 	end
 
+	def update
+		@ingredient = Ingredient.find_by(name: params[:ingredient][:name])
+		@list_ing = @list.list_ings.find(params[:list_ing][:id])
+		if @list_ing.update(list_ing_params)
+			render :show
+		else
+			render json: {errors: @ingredient.errors}, status: 404
+		end
+	end
+
 	def destroy
 		pantry = Pantry.find(current_user.pantry.id)
 		l = @list.list_ings.find(params[:id])
-		pantry.pantry_ingredients.create(ingredient_id: l.ingredient_id,
-																		 qty: l.qty_to_buy)
 		l.destroy
 		render json: { message: "Destroyed!!" }
 	end
@@ -39,5 +47,9 @@ class Api::V1::ListIngsController < ApiController
 	private
 		def set_list
 			@list = current_user.lists.find(params[:list_id])
+		end
+
+		def list_ing_params
+			params.require(:list_ing).permit(:ingredient_id, :qty_to_buy, :list_id, :ingredient)
 		end
 end

@@ -14,6 +14,7 @@ import NewRecipe from './components/NewRecipe';
 import Pantry from './components/Pantry';
 import Recipe from './components/Recipe';
 import EditRecipe from './components/EditRecipe';
+import EditPantryIngredient from './components/EditPantryIngredient';
 import Recipes from './components/Recipes';
 import RecipeSearch from './components/RecipeSearch'
 import Signup from './components/auth/Signup';
@@ -42,6 +43,7 @@ export default (
     	<Route path='/lists/:id/ingrs' component={ListIngs} />
       <Route path='/recipes/new' component={NewRecipe} />
       <Route path='/pantry' component={Pantry} />
+      <Route path='/pantry_ingredients/:id/edit' component={EditPantryIngredient} />
       <Route path='/recipes' component={Recipes} />
       <Route path='/recipes/:id' component={Recipe} />
       <Route path='/recipes/:id/edit' component={EditRecipe} />
