@@ -7,6 +7,7 @@ class CreateRecipes < ActiveRecord::Migration[5.0]
       t.integer :servings
       t.string :credit_text
       t.string :type
+      t.integer :recipe_ings_count, default: 0
       t.belongs_to :user
 
       t.timestamps

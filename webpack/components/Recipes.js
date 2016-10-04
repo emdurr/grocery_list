@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import RecipeListItem from './RecipeListItem';
@@ -17,11 +18,9 @@ class Recipes extends Component {
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
 		this.displayRecipes = this.displayRecipes.bind(this);
-    this.setSearchType = this.setSearchType.bind(this)
-    this.setSearchQuery = this.setSearchQuery.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
 
-    this.state = { recipes: [], searchType: 'general', searchQuery: '' };
+    this.state = { recipes: [] };
   }
 
     componentWillMount() {
@@ -36,26 +35,17 @@ class Recipes extends Component {
   		});
   	}
 
-    handleSearch(e) {
-      e.preventDefault()
+    handleSearch(query, type, sort) {
       $.ajax({
-        url: `/api/v1/recipes?searchType=${this.state.searchType}&searchQuery=${this.state.searchQuery}`,
+        url: `/api/v1/recipes`,
         type: 'GET',
-        dataType: 'JSON'
+        dataType: 'JSON',
+        data: { searchType: type, searchQuery: query, searchSort: sort } 
       }).done( recipes => {
-        this.setState( { recipes: recipes.recipesArray})
+        this.setState( { recipes: recipes.recipesArray })
       }).fail( data => {
         console.log(data)
       })
-    }
-
-    setSearchType(e) {
-      console.log(e.target.value)
-      this.setState({ searchType: e.target.value})
-    }
-
-    setSearchQuery(e) {
-      this.setState({ searchQuery: e.target.value})
     }
 
     deleteRecipe(id) {
@@ -113,8 +103,7 @@ class Recipes extends Component {
     			<div className='center container'>
             <div>
       				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
-              <RecipeSearch setSearchQuery={this.setSearchQuery} setSearchType={this.setSearchType} handleSearch={this.handleSearch}
-                defaultType={this.state.searchType} defaultQuery={this.state.searchQuery} />
+              <RecipeSearch handleSearch={this.handleSearch} />
       				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt }>Add New Recipe</Link>
             </div>
     				<ul>

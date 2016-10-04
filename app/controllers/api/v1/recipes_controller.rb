@@ -2,8 +2,8 @@ class Api::V1::RecipesController < ApiController
   before_action :set_recipe, except: [:index, :create]
 
     def index
-      if params[:searchType] && params[:searchQuery]
-        @recipes = Recipe.decipher_search_params(params[:searchType], params[:searchQuery])
+      if params[:searchType] && params[:searchQuery] && params[:searchSort]
+        @recipes = Recipe.distribute_params(params[:searchType], params[:searchQuery], params[:searchSort])
       else
         @recipes = Recipe.all
       end
