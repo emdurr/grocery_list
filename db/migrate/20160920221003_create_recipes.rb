@@ -6,6 +6,12 @@ class CreateRecipes < ActiveRecord::Migration[5.0]
       t.string :image
       t.integer :servings
       t.string :credit_text
+      t.text :cuisines, array: true, default: []
+      t.text :dish_types, array: true, default: []
+      t.boolean :cheap
+      t.boolean :very_healthy
+      t.boolean :vegetarian
+      t.boolean :vegan
       t.string :type
       t.integer :recipe_ings_count, default: 0
       t.belongs_to :user

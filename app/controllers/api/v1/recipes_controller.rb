@@ -48,6 +48,6 @@ class Api::V1::RecipesController < ApiController
     end
 
     def recipe_params
-      params.require(:recipe).permit(:title, :ready_in_minutes, :image, :servings, :credit_text, :user_id)
+      params.require(:recipe).permit(:title, :ready_in_minutes, :image, :servings, :credit_text, :vegetarian, :vegan, :cuisines, :dish_types, :very_healthy, :cheap, :user_id)
     end
 end

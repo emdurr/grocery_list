@@ -3,7 +3,7 @@ class CreateRecipeIngs < ActiveRecord::Migration[5.0]
     create_table :recipe_ings do |t|
       t.string :amount, null: false
       t.string :unit, null: false
-      t.text :metaInformation, array: true
+      t.text :metaInformation, array: true, default: []
       t.belongs_to :ingredient
       t.belongs_to :recipe
 

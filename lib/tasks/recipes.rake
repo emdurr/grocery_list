@@ -22,7 +22,7 @@ namespace :recipes do
 	  	dish_types.each do |dish|
 			1.times do
 			  	api_client = Spoonacular::API.new(ENV['SPOONACULAR_API_KEY'])
-			  	results = api_client.search_recipes({'number'=>'10', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
+			  	results = api_client.search_recipes({'number'=>'1', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
 			  	results.each do |recipe|
 			  		begin
 				  		full_recipe = api_client.get_recipe_information(recipe['id']).body
@@ -33,46 +33,54 @@ namespace :recipes do
 				  		recipes_skipped += 1
 				  		next
 				  	end
-				  		full_recipe.each do |key, value|
-				  			begin
-				  				# r.send could cause no method error if recipe
-				  				# doesn't have the key as an attribute
-				  				next if key == 'id'
-				  				r.send("#{key}=", value)
-				  			rescue
-				  				puts "Error adding #{key}....continuing"
-				  			end
-				  		end
-				  		recipes_added += 1 if r.new_record?
-				  		pulled_recipes += 1
-				  		r.save
-				  		full_recipe['extendedIngredients'].each do |i|
-							ingredient = Ingredient.where(name: i['name']).first_or_initialize
-							
-							ingredients_added += 1 if ingredient.new_record?
-							ingredient.save
 
-							recipe_ing = RecipeIng.where("recipe_id = ? AND ingredient_id = ?", 
-								r.id, ingredient.id).first_or_initialize(
-									recipe_id: r.id, ingredient_id: ingredient.id)	
-							recipe_ing.unit = i['unit']
-							recipe_ing.amount = i['amount']
-							recipe_ing.metaInformation = i['metaInformation']
+				  	r.title = full_recipe['title'].titleize
+				  	r.ready_in_minutes = full_recipe['readyInMinutes']
+				  	r.image = full_recipe['image']
+				  	r.servings = full_recipe['servings']
+				  	r.credit_text = full_recipe['creditText']
+				  	r.cuisines = full_recipe['cuisines']
+				  	r.vegetarian = full_recipe['vegetarian']
+				  	r.vegan = full_recipe['vegan']
+				  	unless r.dish_types.include?(dish) 
+				  		r.dish_types << dish
+					end
+				  	r.cheap = full_recipe['cheap']
+				  	r.very_healthy = full_recipe['veryHealthy']
 
-							recipe_ings_added += 1 if recipe_ing.new_record?
-							recipe_ing.save
-						end
-						recipe_steps.each do |s|
-							step = Step.where("recipe_id = ? AND number = ? AND step_text = ?",
-								r.id, s['number'], s['step']).first_or_initialize(
-									recipe_id: r.id, 
-									number: s['number'],
-									step_text: s['step']
-							)
-							
-							steps_added += 1 if step.new_record?
-							step.save
-						end
+			  		recipes_added += 1 if r.new_record?
+			  		pulled_recipes += 1
+			  		r.save
+
+			  		full_recipe['extendedIngredients'].each do |i|
+						ingredient = Ingredient.where(name: i['name']).first_or_initialize
+						
+						ingredients_added += 1 if ingredient.new_record?
+						ingredient.save
+
+						recipe_ing = RecipeIng.where("recipe_id = ? AND ingredient_id = ?", 
+							r.id, ingredient.id).first_or_initialize(
+								recipe_id: r.id, ingredient_id: ingredient.id)	
+						recipe_ing.unit = i['unit']
+						recipe_ing.amount = i['amount']
+						recipe_ing.metaInformation = i['metaInformation']
+
+						recipe_ings_added += 1 if recipe_ing.new_record?
+						recipe_ing.save
+					end
+
+					recipe_steps.each do |s|
+						step = Step.where("recipe_id = ? AND number = ? AND step_text = ?",
+							r.id, s['number'], s['step']).first_or_initialize(
+								recipe_id: r.id, 
+								number: s['number'],
+								step_text: s['step']
+						)
+						
+						steps_added += 1 if step.new_record?
+						step.save
+					end
+					puts "Recipe #{r.title} added"
 			  	end
 			end
 		end
