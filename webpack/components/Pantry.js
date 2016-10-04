@@ -18,6 +18,9 @@ class Pantry extends Component {
 		this.handleAddIngredient = this.handleAddIngredient.bind(this);
 		this.showPantry = this.showPantry.bind(this);
 		this.displayIngredients = this.displayIngredients.bind(this);
+		this.editIngredient = this.editIngredient.bind(this);
+		this.removeIngredient = this.removeIngredient.bind(this);
+		this.deleteIngredient = this.deleteIngredient.bind(this);
 		this.state = { pantry: {} , pantryIngredients: [] };
 	}
 
@@ -38,34 +41,34 @@ class Pantry extends Component {
 		let pantryIngredients = this.state.pantryIngredients.map( ingredientData => {
 			return(
 				<div key={ingredientData.ingredient.id}>
-					<EditPantryIngredient ingredientData={ingredientData} editIngredient={this.editIngredient} />
+					<EditPantryIngredient ingredientData={ingredientData} 
+																editIngredient={this.editIngredient} 
+																deleteIngredient={this.deleteIngredient}
+																removeIngredient={this.removeIngredient} />
 				</div>
 			)
 		})
 		return pantryIngredients;
 	}
 
-	editIngredient(e, listObject) {
-		e.preventDefault();
-		let id = listObject.listId;
-		let list_ing_id = listObject.listIngredients[0].ingredient.list_ing.id;
-		let ingredient = listObject.listIngredients[0].ingredient;
-		let qty_to_buy = this.refs.editIngredientToBuy.value;
-		let listIngredients = this.state.listIngredients;
+	editIngredient(refs, listObject) {
+		let pantry_ingredient_id = listObject.ingredient.pantry_ingredients.id;
+		let ingredient = listObject.ingredient;
+		let qty = refs.editQty.value;
+		let pantryIngredients = this.state.pantryIngredients;
 		$.ajax({
-			url: `/api/v1/list_ings/${list_ing_id}`,
+			url: `/api/v1/pantry_ingredients/${pantry_ingredient_id}`,
 			type: 'PUT',
 			dataType: 'JSON',
-			data: { list_id: id, list_ing: { id: list_ing_id, qty_to_buy: qty_to_buy }, ingredient: { id: ingredient.id, name: ingredient.name } }
+			data: { pantry_ingredient: { id: pantry_ingredient_id, qty: qty }, ingredient: { id: ingredient.id, name: ingredient.name } }
 		}).done( data => {
-			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.id );
+			let findIngredient = pantryIngredients.findIndex( ingredient => ingredient.ingredient.id === data.ingredient.id );
       if (findIngredient === -1) { 
-        this.setState({ listIngredients: [...listIngredients, data] })
+        this.setState({ pantryIngredients: [...pantryIngredients, data]})
       } else {
-        this.setState({ listIngredients: [...listIngredients.slice(0, findIngredient),
+        this.setState({ pantryIngredients: [...pantryIngredients.slice(0, findIngredient),
                                           data,
-                                          ...listIngredients.slice(findIngredient + 1, listIngredients.length)],
-                        edit: false})
+                                          ...pantryIngredients.slice(findIngredient + 1, pantryIngredients.length)]})
       }
 		}).fail( data => {
 			console.log('failed');
@@ -156,6 +159,47 @@ class Pantry extends Component {
 		}).fail( data => {
 			console.log(data);
 		});
+	}
+
+	removeIngredient(ingredientData, listId) {
+		let pantryIngredients = this.state.pantryIngredients;
+		let pantryId = this.state.pantry.pantry.id
+		let list_id = listId
+		$.ajax({
+			url: `/api/v1/pantry_ingredients/${ingredientData.ingredient.pantry_ingredients.id}`,
+			type: 'DELETE',
+			dataType: 'JSON',
+			data: { pantry_id: pantryId }
+		}).done( data => {
+			let deleteIndex = pantryIngredients.findIndex( pantryIngredient => pantryIngredient.ingredient.id === ingredientData.ingredient.id);
+			this.setState({
+				pantryIngredients: [
+					...pantryIngredients.slice(0, deleteIndex),
+					...pantryIngredients.slice(deleteIndex + 1, pantryIngredients.length)
+				]
+			});
+			let e = event
+			this.addIngredientToList(e, ingredientData, list_id);
+		}).fail( data => {
+			console.log(data);
+		});
+	}
+
+	addIngredientToList(e, ingredientData, list_id) {
+		e.preventDefault();
+		let qty_to_buy = ingredientData.ingredient.pantry_ingredients.qty;
+		let name = ingredientData.ingredient.name;
+		let ingId = ingredientData.ingredient.id;
+		$.ajax({
+			url: `/api/v1/list_ings`,
+			type: 'POST',
+			data: { list_id: list_id, ingredient: { name }, list_ing: { qty_to_buy }},
+			dataType: 'JSON'
+		}).done( data => {
+			console.log(data);
+		}).fail( data => {
+			console.log(data);
+		})
 	}
 
 	render() {

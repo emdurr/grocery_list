@@ -27,6 +27,16 @@ class Api::V1::PantryIngredientsController < ApiController
 		end
 	end
 
+	def update
+		@ingredient = Ingredient.find_by(name: params[:ingredient][:name])
+		@pantry_ingredient = @pantry.pantry_ingredients.find(params[:pantry_ingredient][:id])
+		if @pantry_ingredient.update(pantry_ingredient_params)
+			render :show
+		else
+			render json: {errors: @pantry_ingredient.errors}, status: 404
+		end
+	end
+
 	def destroy
 		pantry_ingredient = @pantry.pantry_ingredients.find(params[:id])
 		pantry_ingredient.destroy
@@ -36,5 +46,9 @@ class Api::V1::PantryIngredientsController < ApiController
 	private
 		def set_pantry
 			@pantry = current_user.pantry
+		end
+
+		def pantry_ingredient_params
+			params.require(:pantry_ingredient).permit(:qty, :ingredient_id, :pantry_id, :ingredient)
 		end
 end

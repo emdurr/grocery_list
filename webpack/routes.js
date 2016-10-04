@@ -7,6 +7,7 @@ import Contact from './components/Contact';
 import Lists from './components/Lists';
 import List from './components/List';
 import ListIngs from './components/ListIngs';
+import ListIng from './components/ListIng';
 import Login from './components/auth/Login';
 import Menu from './components/Menu';
 import Menus from './components/Menus';
@@ -41,6 +42,7 @@ export default (
     	<Route path='/lists' component={Lists} />
     	<Route path='/lists/:id' component={List} />
     	<Route path='/lists/:id/ingrs' component={ListIngs} />
+      <Route path='/list_ings/:id' component={ListIng} />
       <Route path='/recipes/new' component={NewRecipe} />
       <Route path='/pantry' component={Pantry} />
       <Route path='/pantry_ingredients/:id/edit' component={EditPantryIngredient} />

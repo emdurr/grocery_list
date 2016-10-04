@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Pantry from './Pantry';
+import ListIng from './ListIng';
 
 const styles = {
 	addBtn: { fontSize: '18px' },
@@ -20,33 +21,17 @@ class ListIngs extends Component {
 		this.deleteIngredient = this.deleteIngredient.bind(this);
 		this.removeIngredient = this.removeIngredient.bind(this);
 		this.addIngredientToPantry = this.addIngredientToPantry.bind(this);
-		this.toggleEdit = this.toggleEdit.bind(this);
-		this.state = { listIngredients: this.props.list.ingredients, listId: this.props.list.id, edit: false };
+		this.state = { listIngredients: this.props.list.ingredients, listId: this.props.list.id};
 	}
 
 	displayIngredients() {
 		let listIngredients = this.state.listIngredients.map( ingredientData => {
 			return(
 				<div className="row" key={ingredientData.ingredient.id} style={ styles.cborder } >
-					<li>
-						<div className='col s6'>
-							<p> { ingredientData.ingredient.name } </p>
-						</div>
-						<div className='col s3 center'>
-							<p>{ingredientData.ingredient.list_ing.qty_to_buy}</p>
-						</div>
-						<div>
-					
-							<div className='col s1' >
-								<p className="btn-floating btn-xs grey">
-								<i className="xs material-icons" onClick={ () => this.deleteIngredient(ingredientData)}>delete</i></p>
-							</div>
-							<div className='col s1 offset-s1' >
-								<p className="btn-floating btn-xs grey">
-						    <i className="xs material-icons" onClick={ () => this.removeIngredient(ingredientData)}>check</i></p>
-							</div>
-						</div>
-					</li>
+					<ListIng 	ingredientData={ingredientData} 
+									 	editIngredient={this.editIngredient} 
+										deleteIngredient={this.deleteIngredient}
+										removeIngredient={this.removeIngredient} />
 				</div>
 			)
 		})
@@ -140,12 +125,11 @@ class ListIngs extends Component {
 		})
 	}
 
-	editIngredient(e, listObject) {
-		e.preventDefault();
-		let id = listObject.listId;
-		let list_ing_id = listObject.listIngredients[0].ingredient.list_ing.id;
-		let ingredient = listObject.listIngredients[0].ingredient;
-		let qty_to_buy = this.refs.editIngredientToBuy.value;
+	editIngredient(refs, listObject) {
+		let id = this.props.list.id;
+		let list_ing_id = listObject.ingredient.list_ing.id;
+		let ingredient = listObject.ingredient;
+		let qty_to_buy = refs.editQty.value;
 		let listIngredients = this.state.listIngredients;
 		$.ajax({
 			url: `/api/v1/list_ings/${list_ing_id}`,
@@ -167,28 +151,8 @@ class ListIngs extends Component {
 		});
 	}
 
-	toggleEdit() {
-		this.setState( { edit: !this.state.edit } );
-	}
-
 	render() {
-			if(this.state.edit)
-				return(this.editView());
-			else
-				return(this.displayView());
-	}
-
-	editView() {
-		return(
-			<div className='card-panel'>
-				<form onSubmit={(e) => this.editIngredient(e, this.state)}>
-					<input style={ styles.input } type='text' defaultValue={this.state.listIngredients[0].ingredient.list_ing.qty_to_buy} required  ref="editIngredientToBuy" placeholder='QTY to Buy' />
-					<br />
-					<button type='submit' className='btn'>Save</button>
-				</form>
-				<button onClick={this.toggleEdit} className='btn'>Cancel</button>
-			</div>
-		)
+		return(this.displayView());
 	}
 
 	displayView() {
