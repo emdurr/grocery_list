@@ -6,6 +6,7 @@ const styles = {
 					 backgroundColor: '#D0D7D5', margin: '10px 50px'},
 	btnstyle: { margin: '8px 10px'},
 	input: { color: 'black' },
+	buttons: { margin: '5px', backgroundColor: 'transparent', color: 'black'},
 }
 
 class MenuListItem extends React.Component {
@@ -33,6 +34,7 @@ class MenuListItem extends React.Component {
 			console.log(data)
 			this.toggleEdit();
 			this.setState( { menu: data } )
+			this.refs.editMenuName.focus();
 		}).fail( data => {
 			console.log(data);
 		});
@@ -44,9 +46,8 @@ class MenuListItem extends React.Component {
 				<form onSubmit={this.editMenu}>
 					<input style={ styles.input } type='text' defaultValue={this.state.menu.name} required  ref="editMenuName" placeholder='Menu Name' />
 					<br />
-					<button type='submit' className='btn'>Save</button>
+					<button style={ styles.buttons } type='submit' className='btn'>Save</button>	<button style={ styles.buttons } onClick={this.toggleEdit} className='btn'>Cancel</button>
 				</form>
-				<button onClick={this.toggleEdit} className='btn'>Cancel</button>
 			</div>
 		)
 	}
@@ -60,8 +61,8 @@ class MenuListItem extends React.Component {
 					<div className='card' style={ styles.lcard }>
 					<div className='card-content'>
 						<Link to={`menus/${this.state.menu.id}`}><h3> {this.state.menu.name} </h3>
-						<p> Days Included: {this.state.days}
-						| Recipes Included: {this.state.recipes} </p>
+						<h6> Days Included: {this.state.days}</h6>
+						<h6>Recipes Included: {this.state.recipes} </h6>
 						</Link>
 						<button style={ styles.btnstyle } onClick={() => this.props.deleteMenu(this.state.menu.id)} className='btn'>Delete</button>
 						<button style={ styles.btnstyle } onClick={this.toggleEdit} className='btn'>Edit</button>

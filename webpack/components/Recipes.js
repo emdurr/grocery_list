@@ -6,7 +6,6 @@ import logoImg from '../images/ilarder_logo.png';
 import RecipeSearch from './RecipeSearch';
 
 const styles = {
-	lcard: { fontSize: '40px' },
 	aboutLink: { fontSize: '20px', color: 'black' },
   navBack: { backgroundColor: '#F9E883' },
 	title: { color: 'white'}
@@ -40,7 +39,7 @@ class Recipes extends Component {
         url: `/api/v1/recipes`,
         type: 'GET',
         dataType: 'JSON',
-        data: { searchType: type, searchQuery: query, searchSort: sort } 
+        data: { searchType: type, searchQuery: query, searchSort: sort }
       }).done( recipes => {
         this.setState( { recipes: recipes.recipesArray })
       }).fail( data => {
@@ -74,7 +73,7 @@ class Recipes extends Component {
         )
       })
       return recipes;
-    } 
+    }
 
     handleAddRecipe(e) {
       e.preventDefault();
@@ -104,14 +103,14 @@ class Recipes extends Component {
             <div>
       				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
               <RecipeSearch handleSearch={this.handleSearch} />
-      				<Link to="/recipes/new" className='btn col s3 offset-s1 yellow' style={ styles.txt }>Add New Recipe</Link>
-            </div>
+							<Link to="/recipes/new" className='btn col s3 offset-s1' style={ styles.txt }>Add New Recipe</Link>            
+						</div>
     				<ul>
               {this.displayRecipes()}
     				</ul>
     			</div>
     		)
-      } else 
+      } else
         return null
   	}
 

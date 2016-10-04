@@ -51,16 +51,17 @@ class RecipeIngredients extends React.Component {
 				<div className='row'>
 					<form id='addRecipeIngredientForm' onSubmit={ this.handlePreventDefault }>
 			      <div className='col s1'>
-			  			<input type='text' ref='addIngredientAmount' placeholder='Amount' required />
+			  			<input type='text' ref='addIngredientAmount' placeholder='Amnt' required />
 			      </div>
 			      <div className='col s2'>
-			      	<input type='text' ref='addIngredientUnit' placeholder='Cup, Tsp, TBSP?' required />
+			      	<input type='text' ref='addIngredientUnit' placeholder='Cup, Tsp, etc' required />
 			   		</div>
 						<div className='col s8'>
 			      	<input type='text' ref='addAnotherIngredient' placeholder='Ingredient Name' required />
 			   		</div>
 			   		<div className='col s1'>
-			   			<button className='btn' type='submit'>Add</button>
+							<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
+							</button>
 			  		</div>
 			   	</form>
 				</div>

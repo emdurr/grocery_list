@@ -3,6 +3,11 @@ import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
 import RecipeSteps from './RecipeSteps';
 
+const styles = {
+	cardstyle: { backgroundColor: 'red'},
+	buttons: { margin: '30px'},
+}
+
 class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
@@ -23,17 +28,19 @@ class Recipe extends React.Component {
 			console.log('Get recipe failed')
 		});
 	};
- 
+
 
 	render() {
 		if(this.state.recipeIngredients) {
 			return (
-				<div className='container'>
+				<div style={ styles.cardstyle } className='container'>
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
 						<RecipeSteps steps={this.state.recipeSteps} edit={null} />
-						<a href={'/recipes/' + this.props.params.id + '/edit'}>Edit</a>
+						<div className='center' >
+							<a className='btn' style={ styles.buttons } href={'/recipes/' + this.props.params.id + '/edit'}>Edit</a>
+						</div>
 					</div>
 				</div>
 			)

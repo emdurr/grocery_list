@@ -8,7 +8,8 @@ import RecipeSteps from './RecipeSteps';
 const styles = {
 	lcard: { fontSize: '40px' },
 	aboutLink: { fontSize: '20px', color: 'black' },
-  navBack: { backgroundColor: '#F9E883' }
+  navBack: { backgroundColor: '#F9E883' },
+	buttons: { margin: '30px'},
 }
 
 class EditRecipe extends Component {
@@ -54,7 +55,7 @@ class EditRecipe extends Component {
                                id: recipe.ingredient.id
                               }
       let findIngredient = recipeIngredients.findIndex( ingredient => ingredient.id === recipeIngredient.id );
-      if (findIngredient === -1) { 
+      if (findIngredient === -1) {
         this.setState({ recipeIngredients: [recipeIngredient, ...recipeIngredients] })
       } else {
         this.setState({ recipeIngredients: [...recipeIngredients.slice(0, findIngredient),
@@ -129,14 +130,17 @@ class EditRecipe extends Component {
   	    <div className='container'>
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
-						<RecipeIngredients recipeIngs={this.state.recipeIngredients} 
+						<RecipeIngredients recipeIngs={this.state.recipeIngredients}
                                handleAddNewIngredient ={ this.handleAddNewIngredient }
-                               deleteIngredient ={ this.deleteIngredient } 
+                               deleteIngredient ={ this.deleteIngredient }
                                edit ={ true } />
 						<RecipeSteps steps={this.state.recipeSteps}
                          handleAddNewStep ={ this.handleAddNewStep }
-                         deleteStep ={ this.deleteStep } />
-            <a href={'/recipes/' + this.props.params.id}>Done</a>
+                         deleteStep ={ this.deleteStep }
+												 edit ={ true }/>
+						<div className='center'>
+            	<a className='btn' style={ styles.buttons } href={'/recipes/' + this.props.params.id}>Done</a>
+						</div>
 					</div>
 				</div>
       )

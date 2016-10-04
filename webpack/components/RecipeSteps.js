@@ -25,7 +25,7 @@ class RecipeSteps extends React.Component {
 						<button className='col s1' onClick={ () => this.props.deleteStep(step)}>x</button>
 					</div>
 				)
-			} else { 
+			} else {
 				return(
 					<div key={step.id}>
 						<RecipeStep  {...step} />
@@ -56,7 +56,8 @@ class RecipeSteps extends React.Component {
 				 			<input type='text' ref='addStepText' placeholder='Step Directions' required />
 			  		</div>
 				    <div className='col s1'>
-		     			<button className='btn' type='submit'>Add</button>
+						<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
+						</button>
 				 		</div>
 			 		</form>
 				</div>
@@ -72,7 +73,7 @@ class RecipeSteps extends React.Component {
 				<div style={ styles.spacing }>
 					<h5 style={ styles.heading }>Directions</h5>
 					<div>
-						
+						{ this.addStep() }
 						<div>
 							<ul className='row'>
 								{this.displaySteps()}

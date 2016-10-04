@@ -8,7 +8,7 @@ const styles = {
 	lcard: { fontSize: '30px', color: 'black', backgroundColor: '#D0D7D5' },
 	aboutLink: { fontSize: '20px', color: 'black' },
   navBack: { backgroundColor: '#F9E883' },
-	food: { height: '900px',
+	food: { height: 'auto',
 				  position: 'relative',
 				  backgroundImage: 'url(' + foodImg + ')',
 				  backgroundRepeat: 'no-repeat',

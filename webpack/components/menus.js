@@ -7,7 +7,7 @@ import foodImg from '../images/banana-pancakes.jpg';
 const styles = {
 	title: { color: 'white'},
 	input: { borderBottom: '2px solid #414E49', height: '80px', marginLeft: '70px', fontSize: '180%'},
-	food: { height: '900px',
+	food: { height: 'auto',
 					position: 'relative',
 					backgroundImage: 'url(' + foodImg + ')',
 					backgroundRepeat: 'no-repeat',

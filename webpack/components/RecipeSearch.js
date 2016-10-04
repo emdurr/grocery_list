@@ -1,5 +1,11 @@
 import React from 'react';
 
+const styles = {
+	stylesearch: { backgroundColor: '#f3f3f3', padding: '20px', margin: '50px 0', boxShadow: '10px 10px 5px #686b6a'},
+	buttons: { backgroundColor: 'transparent', color: 'black'},
+
+}
+
 var timeElapsed;
 
 class RecipeSearch extends React.Component {
@@ -24,7 +30,7 @@ class RecipeSearch extends React.Component {
 		}
 	}
 
-	
+
 	render() {
 		return(
 			<div>
@@ -48,7 +54,10 @@ class RecipeSearch extends React.Component {
 			</div>
 		)
 	}
-}
+
+
+
+
 
 
 export default RecipeSearch;
