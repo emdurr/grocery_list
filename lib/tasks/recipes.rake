@@ -22,7 +22,7 @@ namespace :recipes do
 	  	dish_types.each do |dish|
 			1.times do
 			  	api_client = Spoonacular::API.new(ENV['SPOONACULAR_API_KEY'])
-			  	results = api_client.search_recipes({'number'=>'50', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
+			  	results = api_client.search_recipes({'number'=>'10', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
 			  	results.each do |recipe|
 			  		begin
 				  		full_recipe = api_client.get_recipe_information(recipe['id']).body
@@ -42,7 +42,7 @@ namespace :recipes do
 				  	r.cuisines = full_recipe['cuisines']
 				  	r.vegetarian = full_recipe['vegetarian']
 				  	r.vegan = full_recipe['vegan']
-				  	unless r.dish_types.include?(dish) 
+				  	unless r.dish_types.include?(dish)
 				  		r.dish_types << dish
 					end
 				  	r.cheap = full_recipe['cheap']
@@ -54,13 +54,13 @@ namespace :recipes do
 
 			  		full_recipe['extendedIngredients'].each do |i|
 						ingredient = Ingredient.where(name: i['name']).first_or_initialize
-						
+
 						ingredients_added += 1 if ingredient.new_record?
 						ingredient.save
 
-						recipe_ing = RecipeIng.where("recipe_id = ? AND ingredient_id = ?", 
+						recipe_ing = RecipeIng.where("recipe_id = ? AND ingredient_id = ?",
 							r.id, ingredient.id).first_or_initialize(
-								recipe_id: r.id, ingredient_id: ingredient.id)	
+								recipe_id: r.id, ingredient_id: ingredient.id)
 						recipe_ing.unit = i['unit']
 						recipe_ing.amount = i['amount']
 						recipe_ing.metaInformation = i['metaInformation']
@@ -72,11 +72,11 @@ namespace :recipes do
 					recipe_steps.each do |s|
 						step = Step.where("recipe_id = ? AND number = ? AND step_text = ?",
 							r.id, s['number'], s['step']).first_or_initialize(
-								recipe_id: r.id, 
+								recipe_id: r.id,
 								number: s['number'],
 								step_text: s['step']
 						)
-						
+
 						steps_added += 1 if step.new_record?
 						step.save
 					end

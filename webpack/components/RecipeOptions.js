@@ -1,7 +1,7 @@
 import React from 'react';
-import MenuSelect from './MenuSelect'
-import AddRecipeIngredients from './AddRecipeIngredients'
-
+import MenuSelect from './MenuSelect';
+import AddRecipeIngredients from './AddRecipeIngredients';
+import AddToFavorites from './AddToFavorites';
 
 class RecipeOptions extends React.Component {
 	constructor(props) {
@@ -11,6 +11,7 @@ class RecipeOptions extends React.Component {
 		this.addToFavorites = this.addToFavorites.bind(this)
 		this.createCustom = this.createCustom.bind(this)
 		this.closeModal = this.closeModal.bind(this)
+		this.addToFavorites = this.addToFavorites.bind(this)
 
 		this.state = { modal: null }
 	}
@@ -34,6 +35,12 @@ class RecipeOptions extends React.Component {
 	}
 
 	addToFavorites() {
+		if(this.state.modal === 'addToFavorites') {
+			return(
+				<AddToFavorites closeModal={this.closeModal} recipeId={this.props.id} title={this.props.title} />
+			)
+		} else
+			return null
 	}
 
 	createCustom() {
@@ -51,13 +58,14 @@ class RecipeOptions extends React.Component {
 				<div>
 					<button className='btn' onClick={ () => this.setState( {modal: 'addToMenu' } ) }>Add to Menu</button>
 					<button className='btn' onClick={ () => this.setState( {modal: 'addIngredients' } ) }>Add Ingredients to Shopping List</button>
-					<button className='btn' onClick={this.addToFavorites}>Favorite</button>
+					<button className='btn' onClick={ () => this.setState( {modal: 'addToFavorites' } ) }>Favorite</button>
 					<button className='btn' onClick={this.createCustom}>Create Custom Version</button>
 				</div>
 				<div>
 					<div>
 						{this.addToMenu()}
 						{this.addIngredients()}
+						{this.addToFavorites()}
 					</div>
 				</div>
 			</div>

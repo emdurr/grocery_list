@@ -85,6 +85,7 @@ Rails.application.routes.draw do
       resources :list_ings, only: [:create, :update, :destroy]
       resources :pantry_ingredients, only: [:create, :update, :destroy]
       resources :steps, only: [:create, :update, :destroy]
+      resources :favorites, except: [:new, :edit, :show]
   	end
   end
 

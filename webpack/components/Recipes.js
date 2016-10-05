@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import RecipeListItem from './RecipeListItem';
 import logoImg from '../images/ilarder_logo.png';
 import RecipeSearch from './RecipeSearch';
+import RecipesViews from './RecipesViews';
 
 const styles = {
 	aboutLink: { fontSize: '20px', color: 'black' },
@@ -17,9 +18,10 @@ class Recipes extends Component {
     this.handleAddRecipe = this.handleAddRecipe.bind(this);
     this.deleteRecipe = this.deleteRecipe.bind(this);
 		this.displayRecipes = this.displayRecipes.bind(this);
-    this.handleSearch = this.handleSearch.bind(this)
+    this.handleSearch = this.handleSearch.bind(this);
+		this.changeView = this.changeView.bind(this);
 
-    this.state = { recipes: [] };
+    this.state = { recipes: [], view: "favorites" };
   }
 
     componentWillMount() {
@@ -33,6 +35,10 @@ class Recipes extends Component {
   			console.log('get recipes failed');
   		});
   	}
+
+		changeView(view) {
+			this.setState({view: view })
+		}
 
     handleSearch(query, type, sort) {
       $.ajax({
@@ -97,13 +103,15 @@ class Recipes extends Component {
     }
 
     render() {
+			debugger
       if(this.state.recipes) {
     		return(
     			<div className='center container'>
             <div>
       				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
+							<RecipesViews changeView={ this.changeView }/>
               <RecipeSearch handleSearch={this.handleSearch} />
-							<Link to="/recipes/new" className='btn col s3 offset-s1' style={ styles.txt }>Add New Recipe</Link>            
+							<Link to="/recipes/new" className='btn col s3 offset-s1' style={ styles.txt }>Add New Recipe</Link>
 						</div>
     				<ul>
               {this.displayRecipes()}
