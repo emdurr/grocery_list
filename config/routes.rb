@@ -75,6 +75,7 @@ Rails.application.routes.draw do
       resources :menus, except: [:new, :edit]
       resources :recipes, except: [:new, :edit]
       get '/recipes/search', to: 'recipes#search'
+      post '/recipes/:id/image', to: 'recipes#image'
       resources :ingredients, except: [:new, :edit]
       resources :pantries, except: [:new, :edit]
       resources :recipe_ings, only: [:create, :update, :destroy]

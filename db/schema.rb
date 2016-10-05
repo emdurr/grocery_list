@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927160345) do
+ActiveRecord::Schema.define(version: 20161004202112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachinary_files", force: :cascade do |t|
+    t.string   "attachinariable_type"
+    t.integer  "attachinariable_id"
+    t.string   "scope"
+    t.string   "public_id"
+    t.string   "version"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "format"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "recipe_id"
@@ -25,10 +40,9 @@ ActiveRecord::Schema.define(version: 20160927160345) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.string   "name",                          null: false
-    t.integer  "recipe_ings_count", default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "list_ings", force: :cascade do |t|
@@ -88,34 +102,27 @@ ActiveRecord::Schema.define(version: 20160927160345) do
   end
 
   create_table "recipe_ings", force: :cascade do |t|
-    t.string   "amount",                       null: false
-    t.string   "unit",                         null: false
-    t.text     "metaInformation", default: [],              array: true
+    t.string   "amount",          null: false
+    t.string   "unit",            null: false
+    t.text     "metaInformation",              array: true
     t.integer  "ingredient_id"
     t.integer  "recipe_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["ingredient_id"], name: "index_recipe_ings_on_ingredient_id", using: :btree
     t.index ["recipe_id"], name: "index_recipe_ings_on_recipe_id", using: :btree
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string   "title",                          null: false
+    t.string   "title",            null: false
     t.integer  "ready_in_minutes"
     t.string   "image"
     t.integer  "servings"
     t.string   "credit_text"
-    t.text     "cuisines",          default: [],              array: true
-    t.text     "dish_types",        default: [],              array: true
-    t.boolean  "cheap"
-    t.boolean  "very_healthy"
-    t.boolean  "vegetarian"
-    t.boolean  "vegan"
     t.string   "type"
-    t.integer  "recipe_ings_count", default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["user_id"], name: "index_recipes_on_user_id", using: :btree
   end
 

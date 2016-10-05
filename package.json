@@ -15,7 +15,9 @@
     "image-webpack-loader": "^2.0.0",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.3.2",
+    "react-cloudinary": "^0.4.0",
     "react-dom": "^15.1.0",
+    "react-dropzone": "^3.6.0",
     "react-facebook-login": "^3.2.0",
     "react-popout": "^0.5.3",
     "react-redux": "^4.4.5",
@@ -25,6 +27,8 @@
     "redux-auth-wrapper": "^0.8.0",
     "redux-thunk": "^2.1.0",
     "stats-webpack-plugin": "^0.2.1",
+    "superagent": "^2.3.0",
+    "superagent-rails-csrf": "0.0.2",
     "webpack": "^1.9.11",
     "webpack-dev-middleware": "1.7.0"
   },

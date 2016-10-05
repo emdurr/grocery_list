@@ -82,6 +82,7 @@ class ListIngs extends Component {
 
 
 	handleAddIngredient(e) {
+
 		e.preventDefault();
 		let name = this.refs.addName.value;
 		let qty_to_buy = this.refs.addQty.value;
@@ -92,7 +93,7 @@ class ListIngs extends Component {
 			data: { list_id: this.state.listId, ingredient: { name }, list_ing: { qty_to_buy }},
 			dataType: 'JSON'
 		}).done( data => {
-			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.id );
+			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.ingredient.id );
       if (findIngredient === -1) { 
         this.setState({ listIngredients: [...listIngredients, data] })
       } else {
@@ -165,7 +166,7 @@ class ListIngs extends Component {
 						<input style={ styles.input } type='text' ref='addName' placeholder='Item To Purchase' required/>
 					</div>
 					<div className='col s4'>
-						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY to Buy'/>
+						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY to Buy' required/>
 					</div>
 				</form>
 				<div className="row" style={ styles.tborder } >

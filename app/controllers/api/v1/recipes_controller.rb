@@ -28,6 +28,11 @@ class Api::V1::RecipesController < ApiController
       end
     end
 
+    def image
+      recipe_image = Cloudinary::Uploader.upload(params[:image])
+      @recipe.update(image: recipe_image['url'])
+    end
+
     def update
       if @recipe.update
         render json: @recipe
