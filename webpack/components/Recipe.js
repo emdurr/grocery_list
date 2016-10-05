@@ -37,7 +37,7 @@ class Recipe extends React.Component {
 				<div style={ styles.cardstyle } className='container'>
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
-						<RecipeOptions id={this.state.recipeHeaderInfo.id} />
+						<RecipeOptions id={this.state.recipeHeaderInfo.id} title={this.state.recipeHeaderInfo.title} />
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
 						<RecipeSteps steps={this.state.recipeSteps} edit={null} />
 						<div className='center' >
