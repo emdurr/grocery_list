@@ -51,7 +51,7 @@ class List extends Component {
 	            <div className="card-action">
 	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
 	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
-	            	<Link to={'/pantry'} >Pantry</Link>
+	            	<Link className= 'btn black-text' style={ styles.cbtn } to={'/pantry'} >Pantry</Link>
 	            </div>
 	          </div>
 	        </div>

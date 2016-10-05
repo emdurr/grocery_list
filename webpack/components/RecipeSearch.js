@@ -54,9 +54,8 @@ class RecipeSearch extends React.Component {
 			</div>
 		)
 	}
-
-
 }
+
 
 
 

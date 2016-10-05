@@ -10,6 +10,8 @@ const styles = {
 	backing: { backgroundColor: '#f3f3f3'},
 	input: { borderBottom: '2px solid #414E49'},
 	pbody: { margin: '10px'},
+	qtystyle: { marginLeft: '55px', border: '1px solid #6e7874', borderRadius: '3px', padding: '5px'},
+	cbtn: { margin: '20px', backgroundColor: 'transparent'},
 }
 
 class Pantry extends Component {
@@ -41,8 +43,8 @@ class Pantry extends Component {
 		let pantryIngredients = this.state.pantryIngredients.map( ingredientData => {
 			return(
 				<div key={ingredientData.ingredient.id}>
-					<EditPantryIngredient ingredientData={ingredientData} 
-																editIngredient={this.editIngredient} 
+					<EditPantryIngredient ingredientData={ingredientData}
+																editIngredient={this.editIngredient}
 																deleteIngredient={this.deleteIngredient}
 																removeIngredient={this.removeIngredient} />
 				</div>
@@ -64,7 +66,7 @@ class Pantry extends Component {
 			data: { pantry_ingredient: { id: pantry_ingredient_id, qty: qty }, ingredient: { id: ingredient.id, name: ingredient.name } }
 		}).done( data => {
 			let findIngredient = pantryIngredients.findIndex( ingredient => ingredient.ingredient.id === data.ingredient.id );
-      if (findIngredient === -1) { 
+      if (findIngredient === -1) {
         this.setState({ pantryIngredients: [...pantryIngredients, data]})
       } else {
         this.setState({ pantryIngredients: [...pantryIngredients.slice(0, findIngredient),
@@ -121,14 +123,17 @@ class Pantry extends Component {
 						</div>
 						</form>
 					<div className="row" style={ styles.tborder } >
-						<div className='col s9'>
+						<div className='col s6'>
 							<p> Ingredient </p>
 						</div>
-						<div className='col s2'>
+						<div className='col s2 center'>
 							<p>Quantity</p>
 						</div>
-						<div className='col s1' >
+						<div className='col s2 center' >
 							<p>Delete</p>
+						</div>
+						<div className='col s2 center' >
+							<p>Add to List</p>
 						</div>
 					</div>
 					<ul>
@@ -137,6 +142,7 @@ class Pantry extends Component {
 						</div>
 					</ul>
 					</div>
+						<Link className= 'btn black-text' style={ styles.cbtn } to={'/lists'} >Grocery Lists</Link>
 				</div>
 			)
 	}

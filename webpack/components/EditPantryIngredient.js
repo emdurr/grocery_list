@@ -5,7 +5,9 @@ import PopoutComponent from './PopoutComponent';
 
 const styles = {
 	cborder: { borderBottom: '1px solid grey', margin: '5px' },
-	input: { borderBottom: '2px solid #414E49'}
+	input: { borderBottom: '2px solid #414E49'},
+	qtystyle: {margin: '16px 25px', border: '1px solid #6e7874', borderRadius: '3px', padding: '5px'}
+
 }
 
 class EditPantryIngredient extends Component {
@@ -51,7 +53,7 @@ class EditPantryIngredient extends Component {
 		} else {
 			return(
 				null
-			)	
+			)
 		}
 	}
 
@@ -59,7 +61,7 @@ class EditPantryIngredient extends Component {
 		let ingredientData = this.props.ingredientData
 		this.props.removeIngredient(ingredientData, listId);
 	}
-	
+
 	render() {
 		let ingredientData = this.props.ingredientData
 		if (this.state.edit) {
@@ -88,17 +90,17 @@ class EditPantryIngredient extends Component {
 				<div className="row" style={ styles.cborder } >
 					{ this.popoutContent() }
 					<li>
-						<div className='col s8'>
+						<div className='col s6'>
 							<p> { ingredientData.ingredient.name } </p>
 						</div>
-						<div className='center col s3'>
-							<p onClick={ () => this.toggleEdit()} >{ingredientData.ingredient.pantry_ingredients.qty}</p>
+						<div className='center col s2'>
+							<p style={ styles.qtystyle } onClick={ () => this.toggleEdit()} >{ingredientData.ingredient.pantry_ingredients.qty}</p>
 						</div>
-						<div className='center col s1' >
+						<div className='center col s2' >
 							<p className="btn-floating btn-xs grey">
 							<i className="xs material-icons" onClick={ () => this.props.deleteIngredient(ingredientData)}>delete</i></p>
 						</div>
-						<div className='col s1 offset-s1' >
+						<div className='center col s2' >
 							<p className="btn-floating btn-xs grey">
 					    <i className="xs material-icons" onClick={this.popout}>check</i></p>
 						</div>
