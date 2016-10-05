@@ -7,7 +7,8 @@ const styles = {
 	tborder: { margin: '25px 6px 0 0 ', backgroundColor: '#e7ebea', padding: '10px', fontSize: '120%' },
 	strike: { textDecoration: 'line-through' },
 	ingInput: { margin: '0'},
-	input: { borderBottom: '2px solid #414E49'}
+	input: { borderBottom: '2px solid #414E49'},
+	qtystyle: { marginLeft: '55px', border: '1px solid #6e7874', borderRadius: '3px', padding: '5px'}
 }
 
 class ListIng extends Component {
@@ -62,12 +63,12 @@ class ListIng extends Component {
 						<div className='col s6'>
 							<p> { ingredientData.ingredient.name } </p>
 						</div>
-						<div className='col s3 center'>
-							<p onClick={ () => this.toggleEdit()} >{ingredientData.ingredient.list_ing.qty_to_buy}</p>
+						<div className='col s2 center'>
+							<p style={ styles.qtystyle } onClick={ () => this.toggleEdit()} >{ingredientData.ingredient.list_ing.qty_to_buy}</p>
 						</div>
 						<div>
-					
-							<div className='col s1' >
+
+							<div className='col s1 offset-s1' >
 								<p className="btn-floating btn-xs grey">
 								<i className="xs material-icons" onClick={ () => this.props.deleteIngredient(ingredientData)}>delete</i></p>
 							</div>

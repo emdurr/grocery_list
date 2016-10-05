@@ -21,7 +21,6 @@ class MenuRecipeListItem extends React.Component {
 			data: { menu_rec: { day } }
 		}).done( data => {
 			console.log(data)
-			debugger
 			this.toggleEdit();
 			this.setState( { recipe_info: data.recipe_info } )
 		}).fail( data => {
