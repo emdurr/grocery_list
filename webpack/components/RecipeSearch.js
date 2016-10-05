@@ -56,7 +56,7 @@ class RecipeSearch extends React.Component {
 	}
 
 
-
+}
 
 
 
