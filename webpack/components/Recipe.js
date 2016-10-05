@@ -2,6 +2,7 @@ import React from 'react';
 import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
 import RecipeSteps from './RecipeSteps';
+import RecipeOptions from './RecipeOptions';
 
 const styles = {
 	cardstyle: { backgroundColor: 'red'},
@@ -36,6 +37,7 @@ class Recipe extends React.Component {
 				<div style={ styles.cardstyle } className='container'>
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
+						<RecipeOptions id={this.state.recipeHeaderInfo.id} />
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
 						<RecipeSteps steps={this.state.recipeSteps} edit={null} />
 						<div className='center' >

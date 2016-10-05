@@ -6,7 +6,7 @@ def get_analyzed_steps(id)
 end
 
 namespace :recipes do
-	desc "Fetch the first 10 recipes from spoonacular api"
+	desc "For each dish type, fetch X recipes Y times"
 	task fetch: :environment do
 		pulled_recipes = 0
 	  	recipes_added = 0
@@ -22,7 +22,7 @@ namespace :recipes do
 	  	dish_types.each do |dish|
 			1.times do
 			  	api_client = Spoonacular::API.new(ENV['SPOONACULAR_API_KEY'])
-			  	results = api_client.search_recipes({'number'=>'1', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
+			  	results = api_client.search_recipes({'number'=>'50', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
 			  	results.each do |recipe|
 			  		begin
 				  		full_recipe = api_client.get_recipe_information(recipe['id']).body

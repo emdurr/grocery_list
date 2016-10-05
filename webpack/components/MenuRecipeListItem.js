@@ -21,7 +21,6 @@ class MenuRecipeListItem extends React.Component {
 			data: { menu_rec: { day } }
 		}).done( data => {
 			console.log(data)
-			debugger
 			this.toggleEdit();
 			this.setState( { recipe_info: data.recipe_info } )
 		}).fail( data => {
@@ -39,7 +38,7 @@ class MenuRecipeListItem extends React.Component {
 				</form>
 				<button onClick={this.toggleEdit} className='btn'>Cancel</button>
 				<h3> {recipe_info.name} </h3>
-				<p>Ingredients: {recipe_info.ingredient_count ? recipe_info.ingredient_count : '0' } </p>
+				<p>Ingredients: {recipe_info.ingredients_count ? recipe_info.ingredients_count : '0' } </p>
 			</div>
 		)
 	}
@@ -50,7 +49,7 @@ class MenuRecipeListItem extends React.Component {
 			<div className='card-panel hoverable'>
 				<p> Day: {recipe_info.day} </p>
 				<h3> <Link to={`recipes/${this.state.recipe_info.recipe_id}`}> {recipe_info.name} </Link> </h3>
-				<p>Ingredients: {recipe_info.ingredient_count}</p>
+				<p>Ingredients: {recipe_info.ingredients_count ? recipe_info.ingredients_count : '0' } </p>
 				<button onClick={() => this.props.deleteMenuRec(recipe_info.menu_rec_id)} className='btn'>Delete</button>
 				<button onClick={this.toggleEdit} className='btn'>Edit</button>
 			</div>

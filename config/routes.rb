@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   namespace :api do
 		namespace :v1 do
   		resources :lists, except: [:new, :edit]
+      get '/menus/simple_list', to: 'menus#simple_list'
       resources :menus, except: [:new, :edit]
       resources :recipes, except: [:new, :edit]
       get '/recipes/search', to: 'recipes#search'
@@ -79,6 +80,7 @@ Rails.application.routes.draw do
       resources :ingredients, except: [:new, :edit]
       resources :pantries, except: [:new, :edit]
       resources :recipe_ings, only: [:create, :update, :destroy]
+      get 'menu_recs/days_list', to: 'menu_recs#days_list'
       resources :menu_recs, only: [:create, :update, :destroy]
       resources :list_ings, only: [:create, :update, :destroy]
       resources :pantry_ingredients, only: [:create, :update, :destroy]

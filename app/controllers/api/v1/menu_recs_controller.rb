@@ -1,13 +1,18 @@
 class Api::V1::MenuRecsController < ApiController
-	before_action :set_menu_rec
+	before_action :set_menu_rec, except: [:create, :days_list]
 	def create
 		menu_rec = MenuRec.new(menu_rec_params)
 
-		if menu_rec.save?
+		if menu_rec.save
 			render json: menu_rec
 		else
 			render json: {errors: menu_rec.errors }, status: 401
 		end
+	end
+
+	def days_list
+		days = MenuRec.generate_menu_days_list(params[:menu_id])
+		render json: days
 	end
 
 	def update
