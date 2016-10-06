@@ -15,7 +15,12 @@ class Recipe extends React.Component {
 		this.updateFavorite = this.updateFavorite.bind(this)
 		this.getUser = this.getUser.bind(this);
 		this.duplicateRecipe = this.duplicateRecipe.bind(this);
-		this.state = { recipeHeaderInfo: null, recipeIngredients: null, recipeSteps: null, favorite: null, favoriteId: null};
+		this.state = { recipeHeaderInfo: null,
+									 recipeIngredients: null,
+									 recipeSteps: null,
+									 favorite: null,
+									 favoriteId: null,
+								 	 favoriteComment: null};
 	}
 
 	componentWillMount() {
@@ -28,14 +33,20 @@ class Recipe extends React.Component {
 				recipeIngredients: data.recipeIngredients,
 				recipeSteps: data.recipeSteps,
 				favorite: data.favoriteInfo.favorite,
-				favoriteId: data.favoriteInfo.favoriteId
+				favoriteId: data.favoriteInfo.favoriteId,
+				favoriteComment: data.favoriteInfo.favoriteComment
 			});
 		}).fail( data => {
 			console.log('Get recipe failed')
 		});
 	};
 
-	updateFavorite(favoriteId) {
+	updateFavorite(favoriteId, favoriteComment) {
+		if (this.state.favorite) {
+			this.setState( {favoriteComment: null} )
+		} else {
+			this.setState( {favoriteComment: favoriteComment})
+		}
 		this.setState( {favorite: !this.state.favorite, favoriteId: favoriteId} )
 	}
 
@@ -74,9 +85,9 @@ class Recipe extends React.Component {
 			return (
 				<div style={ styles.cardstyle } className='container'>
 					<div className='card'>
-						<RecipeHeader {...this.state.recipeHeaderInfo} />
+						<RecipeHeader {...this.state.recipeHeaderInfo} favoriteComment={this.state.favoriteComment} />
 						<RecipeOptions favoriteId={this.state.favoriteId} id={this.state.recipeHeaderInfo.id} title={this.state.recipeHeaderInfo.title}
-							favorite={this.state.favorite} updateFavorite={this.updateFavorite} user={this.state.recipeHeaderInfo.user} 
+							favorite={this.state.favorite} updateFavorite={this.updateFavorite} user={this.state.recipeHeaderInfo.user}
 							duplicateRecipe={this.duplicateRecipe}/>
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
 						<RecipeSteps steps={this.state.recipeSteps} edit={null} />

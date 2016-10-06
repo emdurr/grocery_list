@@ -9,7 +9,9 @@ import RecipesViews from './RecipesViews';
 const styles = {
 	aboutLink: { fontSize: '20px', color: 'black' },
   navBack: { backgroundColor: '#F9E883' },
-	title: { color: 'white'}
+	backing: { backgroundColor: '#f3f3f3'},
+	heading: { backgroundColor: '#414E49', padding: '10px', color: 'white'},
+	recipecard: { backgroundColor: '#6e7874'},
 }
 
 class Recipes extends Component {
@@ -145,18 +147,25 @@ class Recipes extends Component {
     render() {
       if(this.state.recipes) {
     		return(
-    			<div className='center container'>
-            <div>
-      				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
-							<RecipesViews changeView={ this.changeView }/>
-							{ this.instructSuggest() }
-							{ this.displaySearch() }
-							{ this.addNewRecipe() }
+    			<div className='container'>
+						<div style={ styles.backing } >
+							<div className='center' >
+			            <div>
+			      				<h1 style={ styles.heading }><img src={ logoImg }/> Recipe Box</h1>
+										<RecipesViews changeView={ this.changeView }/>
+										{ this.instructSuggest() }
+										{ this.displaySearch() }
+										{ this.addNewRecipe() }
+									</div>
+							</div>
 						</div>
-    				<ul>
-              {this.displayRecipes()}
-    				</ul>
-    			</div>
+							<div>
+		    				<ul style={ styles.recipecard }>
+		              {this.displayRecipes()}
+		    				</ul>
+							</div>
+					</div>
+
     		)
       } else
         return null

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 let backdropStyle = {
-  position: 'absolute',
+  position: 'fixed',
   width: '100%',
   height: '100%',
   top: '0px',
@@ -12,15 +12,14 @@ let backdropStyle = {
 }
 
 let modalStyle = {
-  position: 'absolute',
-  height: '80vh',
-  width: '80vw',
-  top: '30%',
+  position: 'fixed',
+  width: '75%',
+  top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   zIndex: '9999',
   background: '#fff',
-  padding: '50px'
+  padding: '20px'
 }
 
 class MenuSelect extends React.Component {
@@ -58,7 +57,7 @@ class MenuSelect extends React.Component {
 						<h5> Menus Available: </h5>
 						 {menus}
 					 </div>
-				)	 
+				)
 			} else {
 				return(
 					<div>
@@ -147,7 +146,7 @@ class MenuSelect extends React.Component {
 				<div style={modalStyle}>
 					<div>
 						{this.menuSelectOptions()} <br />
-						{this.daySelectOptions()} 
+						{this.daySelectOptions()}
 						{this.addNewDay()} <br />
 						<button className='btn' onClick={this.props.closeModal}>Cancel</button>
 					</div>

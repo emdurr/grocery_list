@@ -16,12 +16,12 @@ const getToken = () => {
   return Math.random().toString(36).substring(7);
 }
 
-export const handleSignup = (first_name, last_name, email, password, redirect, history) => {
+export const handleSignup = (first_name, last_name, email, password, password_confirmation, redirect, history) => {
   return(dispatch) => {
     $.ajax({
       url: '/users',
       type: 'POST',
-      data: { user: { first_name, last_name, email, password }},
+      data: { user: { first_name, last_name, email, password, password_confirmation }},
       dataType: 'JSON'
     }).done( user => {
       let { id } = user;
@@ -33,7 +33,7 @@ export const handleSignup = (first_name, last_name, email, password, redirect, h
       Materialize.toast('Successfull Sign up', 4000);
     }).fail( res => {
       console.log(res);
-      Materialize.toast('Email has already been used', 4000);
+      Materialize.toast('Fail to sign up check email and password', 4000);
     });
   }
 }
@@ -84,7 +84,7 @@ export const handleFacebookLogin = (auth, firstName, lastName, history) => {
       type: { auth, firstName, lastName }
     }).done( response => {
       let { id } = response;
-      let api_key = getToken(); 
+      let api_key = getToken();
 
       localStorage.setItem('apiKey', api_key);
       localStorage.setItem('userId', id);

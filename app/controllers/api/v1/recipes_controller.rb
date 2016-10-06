@@ -15,7 +15,7 @@ class Api::V1::RecipesController < ApiController
     end
 
     def show
-      @favorite, @favorite_id = Recipe.is_favorite?(@recipe.id, current_user.id)
+      @favorite, @favorite_id, @favorite_comment = Recipe.is_favorite?(@recipe.id, current_user.id)
     end
 
     def create

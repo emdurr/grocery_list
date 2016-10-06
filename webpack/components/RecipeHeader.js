@@ -8,7 +8,9 @@ const styles = {
 
 }
 
-const RecipeHeader = ({title, servings, ingredientCount, ready_in_minutes, credit_text, imageUrl}) => {
+const RecipeHeader = ({title, servings, ingredientCount, ready_in_minutes, credit_text, imageUrl, favoriteComment}) => {
+
+
 	return(
 		<div>
 			<h3 style={ styles.title }><img src={ logoImg }/> {title} </h3>
@@ -19,6 +21,7 @@ const RecipeHeader = ({title, servings, ingredientCount, ready_in_minutes, credi
 						<p> {ready_in_minutes ? ("Prep Time: " + ready_in_minutes) : null } </p>
 						<h5> {servings ? ("Servings: " + servings) : null } </h5>
 						<p> {credit_text ? ("By: " + credit_text) : null } </p>
+						<p> {favoriteComment} </p>
 					</div>
 					<div>
 						<img style={ styles.imgstyle } src={imageUrl} alt={title} />

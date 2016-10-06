@@ -144,7 +144,7 @@ class Recipe < ApplicationRecord
 		def is_favorite?(recipe_id, user_id)
 			favorite = Favorite.where(user_id: user_id).where(recipe_id: recipe_id)
 			if favorite.any?
-				return true, favorite[0].id
+				return true, favorite[0].id, favorite[0].comment
 			else
 				return false, nil
 			end

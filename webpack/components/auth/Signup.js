@@ -25,8 +25,9 @@ class Signup extends React.Component {
     let lastName = this.refs.lastName.value;
     let email = this.refs.email.value;
     let password = this.refs.password.value;
+    let passwordConf = this.refs.passwordConf.value;
     this.props.dispatch(
-      handleSignup(firstName, lastName, email, password, this.state.redirectRoute, this.props.history)
+      handleSignup(firstName, lastName, email, password, passwordConf, this.state.redirectRoute, this.props.history)
     )
   }
 
@@ -40,6 +41,7 @@ class Signup extends React.Component {
             <input ref="lastName" required placeholder="Last Name (Required)" />
             <input ref="email" required placeholder="Email (Required)" />
             <input ref="password" type="password" required placeholder="Password (Required)" />
+            <input ref="passwordConf" type="password" required placeholder="Re-Enter Password" />
             <button style={ styles.cbtn } type="submit" className="btn black-text">Sign Up</button>
           </form>
         </div>

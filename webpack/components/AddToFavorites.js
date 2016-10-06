@@ -1,7 +1,7 @@
 import React from 'react';
 
 let backdropStyle = {
-  position: 'absolute',
+  position: 'fixed',
   width: '100%',
   height: '100%',
   top: '0px',
@@ -11,15 +11,15 @@ let backdropStyle = {
 }
 
 let modalStyle = {
-  position: 'absolute',
-  height: '50vh',
-  width: '80vw',
+  position: 'fixed',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   zIndex: '9999',
-  background: '#fff'
+  background: '#fff',
+  padding: '20px',
 }
+
 
 class addToFavorites extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class addToFavorites extends React.Component {
     }).done( data => {
       console.log(data)
       this.props.closeModal()
-      this.props.updateFavorite(data.id)
+      this.props.updateFavorite(data.id, data.comment)
     }).fail(data =>{
       console.log(data)
     })
@@ -47,11 +47,11 @@ class addToFavorites extends React.Component {
     return (
       <div style={ backdropStyle }>
         <div style={ modalStyle }>
-          <h3>Adding To Favorites</h3>
-          <p>{ this.props.title }</p>
-          <input ref='favoriteComment' type='text' placeholder='Comments'/>
-          <button className='btn' onClick={ this.handleAddFavorite }>Confirm</button>
-          <button className='btn' onClick={ this.props.closeModal }>Cancel</button>
+          <h5>Adding Recipe To Favorites</h5>
+          <h4>{ this.props.title }</h4>
+            <input ref='favoriteComment' type='text' placeholder='Comments'/>
+            <button className='btn' onClick={ this.handleAddFavorite }>Confirm</button>
+            <button className='btn' onClick={ this.props.closeModal }>Cancel</button>
         </div>
       </div>
     )

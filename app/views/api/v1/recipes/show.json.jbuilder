@@ -31,4 +31,5 @@ end
 json.favoriteInfo do
 	json.favorite @favorite
 	json.favoriteId @favorite_id
+	json.favoriteComment @favorite_comment
 end

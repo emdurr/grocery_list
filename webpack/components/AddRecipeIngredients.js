@@ -1,7 +1,7 @@
 import React from 'react';
 
 let backdropStyle = {
-  position: 'absolute',
+  position: 'fixed',
   width: '100%',
   height: '100%',
   top: '0px',
@@ -11,14 +11,14 @@ let backdropStyle = {
 }
 
 let modalStyle = {
-  position: 'absolute',
-  height: '50vh',
-  width: '80vw',
+  position: 'fixed',
+  width: '75%',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   zIndex: '9999',
-  background: '#fff'
+  background: '#fff',
+  padding: '20px'
 }
 
 class AddRecipeIngredients extends React.Component {
