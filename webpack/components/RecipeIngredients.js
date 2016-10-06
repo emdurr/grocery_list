@@ -15,8 +15,6 @@ class RecipeIngredients extends React.Component {
 	}
 
 	displayIngredients() {
-		console.log('displayIngredients')
-		console.log(this.props.recipeIngs)
 		let ingredients = this.props.recipeIngs.map( ingredient => {
 			if (this.props.edit) {
 				return(

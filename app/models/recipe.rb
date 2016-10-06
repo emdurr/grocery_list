@@ -18,9 +18,11 @@ class Recipe < ApplicationRecord
 	has_many :menus, :through => :menu_recs
 	has_many :ingredients, :through => :recipe_ings
 	has_many :steps, dependent: :destroy
-	
+
 
 	class << self
+
+		# SEARCH FUNCTIONALITY
 
 		def distribute_params(search_type, search_query, search_sort)
 			results = set_type(search_type, search_query)
@@ -86,7 +88,7 @@ class Recipe < ApplicationRecord
 			end
 			where_statement
 		end
-			
+
 		def title_search(query_array)
 			where_statement = Recipe
 			query_array.each do |word|
@@ -98,6 +100,26 @@ class Recipe < ApplicationRecord
 		def apply_pantry_filter
 			pantry = Pantry.ingredients.all
 			select { |i| (i.ingredients - pantry).count <= 3 }
+		end
+
+		# FAVORITES FUNCTIONS
+
+		def find_favorites(user_id)
+			favorites = Favorite.where(user_id: user_id)
+			recipes = []
+			favorites.each do |fav|
+				recipes << Recipe.find(fav.recipe_id)
+			end
+			recipes.uniq
+		end
+
+		def is_favorite?(recipe_id, user_id)
+			favorite = Favorite.where(user_id: user_id).where(recipe_id: recipe_id)
+			if favorite.any?
+				return true, favorite[0].id
+			else
+				return false, nil
+			end
 		end
 	end
 end

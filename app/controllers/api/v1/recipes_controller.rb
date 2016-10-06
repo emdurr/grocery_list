@@ -5,7 +5,7 @@ class Api::V1::RecipesController < ApiController
       if params[:searchType] && params[:searchQuery] && params[:searchSort]
         @recipes = Recipe.distribute_params(params[:searchType], params[:searchQuery], params[:searchSort])
       else
-        @recipes = Recipe.all
+        @recipes = Recipe.find_favorites(current_user.id)
       end
     end
 
@@ -15,6 +15,7 @@ class Api::V1::RecipesController < ApiController
     end
 
     def show
+      @favorite, @favorite_id = Recipe.is_favorite?(@recipe.id, current_user.id)
     end
 
     def create

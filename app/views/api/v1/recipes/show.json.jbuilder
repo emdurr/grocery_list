@@ -26,3 +26,8 @@ json.recipeSteps steps do |step|
 	json.stepText step.step_text
 	json.id step.id
 end
+
+json.favoriteInfo do
+	json.favorite @favorite
+	json.favoriteId @favorite_id
+end

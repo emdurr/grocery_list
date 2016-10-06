@@ -12,8 +12,35 @@ class RecipeOptions extends React.Component {
 		this.createCustom = this.createCustom.bind(this)
 		this.closeModal = this.closeModal.bind(this)
 		this.addToFavorites = this.addToFavorites.bind(this)
+		this.chooseFavoriteButton = this.chooseFavoriteButton.bind(this)
+		this.deleteFavorite = this.deleteFavorite.bind(this)
+
 
 		this.state = { modal: null }
+	}
+
+	chooseFavoriteButton() {
+		if(this.props.favorite) {
+			return(
+				<button onClick={ () => this.deleteFavorite(this.props.favoriteId)} className='btn'>Unfavorite</button>
+			)
+		} else {
+			return(
+				<button className='btn' onClick={ () => this.setState( {modal: 'addToFavorites' } ) }>Favorite</button>
+			)
+		}
+	}
+
+	deleteFavorite(favoriteId) {
+		$.ajax({
+			url: `/api/v1/favorites/${favoriteId}`,
+			type: 'DELETE',
+			dataType: 'JSON'
+		}).done(data => {
+			this.props.updateFavorite()
+		}).fail(data => {
+			console.log(data)
+		})
 	}
 
 	addToMenu() {
@@ -37,7 +64,8 @@ class RecipeOptions extends React.Component {
 	addToFavorites() {
 		if(this.state.modal === 'addToFavorites') {
 			return(
-				<AddToFavorites closeModal={this.closeModal} recipeId={this.props.id} title={this.props.title} />
+				<AddToFavorites closeModal={this.closeModal} recipeId={this.props.id}
+				title={this.props.title} updateFavorite={this.props.updateFavorite} />
 			)
 		} else
 			return null
@@ -58,7 +86,7 @@ class RecipeOptions extends React.Component {
 				<div>
 					<button className='btn' onClick={ () => this.setState( {modal: 'addToMenu' } ) }>Add to Menu</button>
 					<button className='btn' onClick={ () => this.setState( {modal: 'addIngredients' } ) }>Add Ingredients to Shopping List</button>
-					<button className='btn' onClick={ () => this.setState( {modal: 'addToFavorites' } ) }>Favorite</button>
+					{this.chooseFavoriteButton()}
 					<button className='btn' onClick={this.createCustom}>Create Custom Version</button>
 				</div>
 				<div>

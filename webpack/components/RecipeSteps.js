@@ -15,9 +15,7 @@ class RecipeSteps extends React.Component {
 	}
 
 	displaySteps() {
-		console.log('displaySteps')
-		console.log(this.props.steps)
-		let steps = this.props.steps.map( step => {
+			let steps = this.props.steps.map( step => {
 			if (this.props.edit) {
 				return(
 					<div key={step.id}>

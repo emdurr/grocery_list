@@ -34,7 +34,9 @@ class addToFavorites extends React.Component {
       dataType: 'JSON',
       data: { favorite: {comment: this.refs.favoriteComment.value, recipe_id: this.props.recipeId }}
     }).done( data => {
+      console.log(data)
       this.props.closeModal()
+      this.props.updateFavorite(data.id)
     }).fail(data =>{
       console.log(data)
     })

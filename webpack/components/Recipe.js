@@ -12,7 +12,9 @@ const styles = {
 class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { recipeHeaderInfo: null, recipeIngredients: null, recipeSteps: null };
+		this.updateFavorite = this.updateFavorite.bind(this)
+
+		this.state = { recipeHeaderInfo: null, recipeIngredients: null, recipeSteps: null, favorite: null, favoriteId: null};
 	}
 
 	componentWillMount() {
@@ -23,13 +25,18 @@ class Recipe extends React.Component {
 		}).done( data => {
 			this.setState({recipeHeaderInfo: data.recipeHeaderInfo,
 				recipeIngredients: data.recipeIngredients,
-				recipeSteps: data.recipeSteps
+				recipeSteps: data.recipeSteps,
+				favorite: data.favoriteInfo.favorite,
+				favoriteId: data.favoriteInfo.favoriteId
 			});
 		}).fail( data => {
 			console.log('Get recipe failed')
 		});
 	};
 
+	updateFavorite(favoriteId) {
+		this.setState( {favorite: !this.state.favorite, favoriteId: favoriteId} )
+	}
 
 	render() {
 		if(this.state.recipeIngredients) {
@@ -37,7 +44,8 @@ class Recipe extends React.Component {
 				<div style={ styles.cardstyle } className='container'>
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
-						<RecipeOptions id={this.state.recipeHeaderInfo.id} title={this.state.recipeHeaderInfo.title} />
+						<RecipeOptions favoriteId={this.state.favoriteId} id={this.state.recipeHeaderInfo.id} title={this.state.recipeHeaderInfo.title}
+							favorite={this.state.favorite} updateFavorite={this.updateFavorite} />
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
 						<RecipeSteps steps={this.state.recipeSteps} edit={null} />
 						<div className='center' >

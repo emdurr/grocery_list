@@ -38,6 +38,15 @@ class Recipes extends Component {
 
 		changeView(view) {
 			this.setState({view: view })
+			$.ajax({
+				url: '/api/v1/recipes',
+				type: 'GET',
+				dataType: 'JSON'
+			}).done( recipes => {
+				this.setState({ recipes: recipes.recipesArray });
+			}).fail( data => {
+				console.log('get recipes failed');
+			});
 		}
 
     handleSearch(query, type, sort) {
@@ -102,16 +111,47 @@ class Recipes extends Component {
       });
     }
 
+	displaySearch() {
+		if (this.state.view !== 'favorites') {
+			return(
+		 		<RecipeSearch handleSearch={this.handleSearch} />
+	 		)
+		} else {
+				return null
+		}
+	}
+
+	addNewRecipe(){
+		if (this.state.view === 'favorites') {
+			return(
+				<Link to="/recipes/new" className='btn col s3 offset-s1' style={ styles.txt }>Add New Recipe</Link>
+			)
+		} else {
+			  return null
+		}
+	}
+
+	instructSuggest() {
+		if (this.state.view === 'suggest') {
+			return(
+				<h5>Enter a keyword for Recipe suggestions using your Pantry</h5>
+			)
+		} else {
+				return null
+		}
+	}
+
+
     render() {
-			debugger
       if(this.state.recipes) {
     		return(
     			<div className='center container'>
             <div>
       				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
 							<RecipesViews changeView={ this.changeView }/>
-              <RecipeSearch handleSearch={this.handleSearch} />
-							<Link to="/recipes/new" className='btn col s3 offset-s1' style={ styles.txt }>Add New Recipe</Link>
+							{ this.instructSuggest() }
+							{ this.displaySearch() }
+							{ this.addNewRecipe() }
 						</div>
     				<ul>
               {this.displayRecipes()}
