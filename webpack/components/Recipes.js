@@ -21,7 +21,7 @@ class Recipes extends Component {
     this.handleSearch = this.handleSearch.bind(this);
 		this.changeView = this.changeView.bind(this);
 
-    this.state = { recipes: [], view: "favorites" };
+    this.state = { recipes: [], view: "favorites"};
   }
 
     componentWillMount() {
@@ -49,12 +49,12 @@ class Recipes extends Component {
 			});
 		}
 
-    handleSearch(query, type, sort) {
+    handleSearch(query, type, sort, page) {
       $.ajax({
         url: `/api/v1/recipes`,
         type: 'GET',
         dataType: 'JSON',
-        data: { searchType: type, searchQuery: query, searchSort: sort }
+        data: { searchType: type, searchQuery: query, searchSort: sort, view: this.state.view, page: page}
       }).done( recipes => {
         this.setState( { recipes: recipes.recipesArray })
       }).fail( data => {
@@ -112,13 +112,9 @@ class Recipes extends Component {
     }
 
 	displaySearch() {
-		if (this.state.view !== 'favorites') {
 			return(
-		 		<RecipeSearch handleSearch={this.handleSearch} />
+		 		<RecipeSearch handleSearch={this.handleSearch} changeView={this.changeView} view={this.state.view} recipesInView={this.state.recipes.length} />
 	 		)
-		} else {
-				return null
-		}
 	}
 
 	addNewRecipe(){
@@ -141,14 +137,12 @@ class Recipes extends Component {
 		}
 	}
 
-
     render() {
       if(this.state.recipes) {
     		return(
     			<div className='center container'>
             <div>
       				<h1 style={ styles.title }><img src={ logoImg }/> Recipe Box</h1>
-							<RecipesViews changeView={ this.changeView }/>
 							{ this.instructSuggest() }
 							{ this.displaySearch() }
 							{ this.addNewRecipe() }

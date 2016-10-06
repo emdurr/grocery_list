@@ -16,7 +16,6 @@ class RecipesViews extends React.Component {
       </div>
     )
   }
-
 }
 
 export default RecipesViews;
