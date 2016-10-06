@@ -17,6 +17,7 @@ gem 'cloudinary'
 gem 'attachinary'
 gem 'dotenv-rails'
 gem 'spoonacular'
+gem 'rack-cors', :require => 'rack/cors'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do

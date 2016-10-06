@@ -129,7 +129,7 @@ class EditRecipe extends Component {
 	    return(
   	    <div className='container'>
 					<div className='card'>
-						<RecipeHeader {...this.state.recipeHeaderInfo} />
+						<RecipeHeader recipeHeaderInfo={this.state.recipeHeaderInfo} edit={true}/>
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients}
                                handleAddNewIngredient ={ this.handleAddNewIngredient }
                                deleteIngredient ={ this.deleteIngredient }

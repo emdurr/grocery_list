@@ -16,18 +16,13 @@ class EditPantryIngredient extends Component {
 		this.toggleEdit = this.toggleEdit.bind(this);
 		this.handleEditIngredient = this.handleEditIngredient.bind(this);
 		this.handleRemoveIngredient = this.handleRemoveIngredient.bind(this);
-		this.popout = this.popout.bind(this);
-		this.popoutClosed = this.popoutClosed.bind(this);
+		this.closeModal = this.closeModal.bind(this);
 		this.popoutContent = this.popoutContent.bind(this);
-		this.state = { edit: false , isPoppedOut: false };
+		this.state = { edit: false , modal: null };
 	}
 
-	popout() {
-		this.setState({isPoppedOut: true});
-	}
-
-	popoutClosed() {
-		this.setState({isPoppedOut: false});
+	closeModal() {
+		this.setState( { modal: null } )
 	}
 
 	toggleEdit() {
@@ -41,13 +36,11 @@ class EditPantryIngredient extends Component {
 	}
 
 	popoutContent() {
-		if (this.state.isPoppedOut) {
+		if (this.state.modal === 'popoutContent') {
 			return(
 				<div>
-		      <Popout title='Window title' onClosing={this.popoutClosed}>
-		        <PopoutComponent handleRemoveIngredient={this.handleRemoveIngredient}
-		        								 popoutClosed={this.popoutClosed} />
-	  	    </Popout>
+		      <PopoutComponent handleRemoveIngredient={this.handleRemoveIngredient}
+		       								 closeModal={this.closeModal} />
 	  	  </div>
 			)
 		} else {
@@ -102,7 +95,7 @@ class EditPantryIngredient extends Component {
 						</div>
 						<div className='center col s2' >
 							<p className="btn-floating btn-xs grey">
-					    <i className="xs material-icons" onClick={this.popout}>check</i></p>
+					    <i className="xs material-icons" onClick={ () => this.setState( { modal: 'popoutContent'} )}>check</i></p>
 						</div>
 					</li>
 				</div>

@@ -55,7 +55,7 @@ class Api::V1::RecipesController < ApiController
     end
 
     def update
-      if @recipe.update
+      if @recipe.update(recipe_params)
         render json: @recipe
       else
         render json: { errors: @recipe_errors }, status: 401
@@ -74,6 +74,6 @@ class Api::V1::RecipesController < ApiController
     end
 
     def recipe_params
-      params.require(:recipe).permit(:title, :ready_in_minutes, :image, :servings, :credit_text, :vegetarian, :vegan, :cuisines, :dish_types, :very_healthy, :cheap, :user_id)
+      params.require(:recipe).permit(:title, :ready_in_minutes, :published, :image, :servings, :credit_text, :vegetarian, :vegan, :cuisines, :dish_types, :very_healthy, :cheap, :user_id)
     end
 end

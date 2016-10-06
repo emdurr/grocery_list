@@ -95,8 +95,7 @@ class RecipeOptions extends React.Component {
 					<button className='btn' onClick={ () => this.setState( {modal: 'addToMenu' } ) }>Add to Menu</button>
 					<button className='btn' onClick={ () => this.setState( {modal: 'addIngredients' } ) }>Add Ingredients to Shopping List</button>
 					{this.chooseFavoriteButton()}
-					<button className='btn' onClick={this.addToFavorites}>Favorite</button>
-						{ this.belongsToUser() }
+					{ this.belongsToUser() }
 				</div>
 				<div>
 					<div>

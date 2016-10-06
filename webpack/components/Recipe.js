@@ -81,11 +81,11 @@ class Recipe extends React.Component {
 	}
 
 	render() {
-		if(this.state.recipeIngredients) {
+		if(this.state.recipeIngredients && this.state.recipeHeaderInfo && this.state.recipeSteps) {
 			return (
 				<div style={ styles.cardstyle } className='container'>
 					<div className='card'>
-						<RecipeHeader {...this.state.recipeHeaderInfo} favoriteComment={this.state.favoriteComment} />
+						<RecipeHeader recipeHeaderInfo={this.state.recipeHeaderInfo} edit={null} favoriteComment={this.state.favoriteComment} />
 						<RecipeOptions favoriteId={this.state.favoriteId} id={this.state.recipeHeaderInfo.id} title={this.state.recipeHeaderInfo.title}
 							favorite={this.state.favorite} updateFavorite={this.updateFavorite} user={this.state.recipeHeaderInfo.user}
 							duplicateRecipe={this.duplicateRecipe}/>

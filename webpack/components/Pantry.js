@@ -54,7 +54,6 @@ class Pantry extends Component {
 	}
 
 	editIngredient(refs, listObject) {
-		debugger
 		let pantry_ingredient_id = listObject.ingredient.pantry_ingredients.id;
 		let ingredient = listObject.ingredient;
 		let qty = refs.editQty.value;
