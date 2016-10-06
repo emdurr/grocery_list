@@ -12,7 +12,8 @@ class RecipeHeader extends Component {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 		this.publishBox = this.publishBox.bind(this);
-		this.state = { recipeHeaderInfo: this.props.recipeHeaderInfo, published: this.props.recipeHeaderInfo.published }
+		this.state = { recipeHeaderInfo: this.props.recipeHeaderInfo, 
+									 published: this.props.recipeHeaderInfo.published }
 	}
 
 	handleClick() {
@@ -60,7 +61,7 @@ class RecipeHeader extends Component {
 			let credit_text = this.state.recipeHeaderInfo.credit_text;
 			let ingredientCount = this.state.recipeHeaderInfo.ingredientCount;
 			let imageUrl = this.state.recipeHeaderInfo.imageUrl;
-			let favoriteComment = this.state.favoriteComment;
+			let favoriteComment = this.props.favoriteComment;
 			return(
 				<div>
 					<h3 style={ styles.title }><img src={ logoImg }/> {title} </h3>
