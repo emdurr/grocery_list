@@ -14,6 +14,7 @@ class Recipe extends React.Component {
 		super(props);
 		this.updateFavorite = this.updateFavorite.bind(this)
 		this.getUser = this.getUser.bind(this);
+		this.updateComponent = this.updateComponent.bind(this);
 		this.duplicateRecipe = this.duplicateRecipe.bind(this);
 		this.state = { recipeHeaderInfo: null,
 									 recipeIngredients: null,
@@ -26,6 +27,24 @@ class Recipe extends React.Component {
 	componentWillMount() {
 		$.ajax({
 			url: `/api/v1/recipes/${this.props.params.id}`,
+			type: 'GET',
+			dataType: 'JSON'
+		}).done( data => {
+			this.setState({recipeHeaderInfo: data.recipeHeaderInfo,
+				recipeIngredients: data.recipeIngredients,
+				recipeSteps: data.recipeSteps,
+				favorite: data.favoriteInfo.favorite,
+				favoriteId: data.favoriteInfo.favoriteId,
+				favoriteComment: data.favoriteInfo.favoriteComment
+			});
+		}).fail( data => {
+			console.log('Get recipe failed')
+		});
+	};
+
+	updateComponent(id) {
+		$.ajax({
+			url: `/api/v1/recipes/${id}`,
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( data => {
@@ -75,6 +94,7 @@ class Recipe extends React.Component {
 		}).done( recipe => {
 			console.log(recipe.id)
 			this.props.history.push(`/recipes/${recipe.id}`)
+			this.updateComponent(recipe.id)
 		}).fail( data => {
 			console.log(data);
 		});
