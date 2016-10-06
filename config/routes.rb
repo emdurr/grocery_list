@@ -86,6 +86,7 @@ Rails.application.routes.draw do
       resources :pantry_ingredients, only: [:create, :update, :destroy]
       resources :steps, only: [:create, :update, :destroy]
       resources :favorites, except: [:new, :edit, :show]
+      post '/recipes/duplicate', to: 'recipes#duplicate'
   	end
   end
 

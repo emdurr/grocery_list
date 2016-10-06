@@ -14,8 +14,7 @@ class RecipeOptions extends React.Component {
 		this.addToFavorites = this.addToFavorites.bind(this)
 		this.chooseFavoriteButton = this.chooseFavoriteButton.bind(this)
 		this.deleteFavorite = this.deleteFavorite.bind(this)
-
-
+		this.belongsToUser = this.belongsToUser.bind(this);
 		this.state = { modal: null }
 	}
 
@@ -72,13 +71,22 @@ class RecipeOptions extends React.Component {
 	}
 
 	createCustom() {
+		this.props.duplicateRecipe()
 	}
 
 	closeModal() {
 		this.setState( { modal: null } )
 	}
 
-
+	belongsToUser() {
+		if (this.props.user) {
+			return( null )
+		} else {
+			return(
+				<button className='btn' onClick={this.createCustom}>Create Custom Version</button>
+			)
+		}
+	}
 
 	render() {
 		return(
@@ -87,7 +95,8 @@ class RecipeOptions extends React.Component {
 					<button className='btn' onClick={ () => this.setState( {modal: 'addToMenu' } ) }>Add to Menu</button>
 					<button className='btn' onClick={ () => this.setState( {modal: 'addIngredients' } ) }>Add Ingredients to Shopping List</button>
 					{this.chooseFavoriteButton()}
-					<button className='btn' onClick={this.createCustom}>Create Custom Version</button>
+					<button className='btn' onClick={this.addToFavorites}>Favorite</button>
+						{ this.belongsToUser() }
 				</div>
 				<div>
 					<div>

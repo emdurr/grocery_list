@@ -13,7 +13,8 @@ class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
 		this.updateFavorite = this.updateFavorite.bind(this)
-
+		this.getUser = this.getUser.bind(this);
+		this.duplicateRecipe = this.duplicateRecipe.bind(this);
 		this.state = { recipeHeaderInfo: null, recipeIngredients: null, recipeSteps: null, favorite: null, favoriteId: null};
 	}
 
@@ -38,6 +39,36 @@ class Recipe extends React.Component {
 		this.setState( {favorite: !this.state.favorite, favoriteId: favoriteId} )
 	}
 
+	getUser() {
+		if(this.state.recipeHeaderInfo.user) {
+			return(
+				<div>
+					<a className='btn' style={ styles.buttons } href={'/recipes/' + this.props.params.id + '/edit'}>Edit</a>
+				</div>
+			)
+		} else {
+			return(
+				<div>
+				</div>
+			)
+		}
+	}
+
+	duplicateRecipe() {
+		let recipe_id = this.state.recipeHeaderInfo.id
+		$.ajax({
+			url: '/api/v1/recipes/duplicate',
+			type: 'POST',
+			dataType: 'JSON',
+			data: { recipe_id }
+		}).done( recipe => {
+			console.log(recipe.id)
+			this.props.history.push(`/recipes/${recipe.id}`)
+		}).fail( data => {
+			console.log(data);
+		});
+	}
+
 	render() {
 		if(this.state.recipeIngredients) {
 			return (
@@ -45,11 +76,12 @@ class Recipe extends React.Component {
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
 						<RecipeOptions favoriteId={this.state.favoriteId} id={this.state.recipeHeaderInfo.id} title={this.state.recipeHeaderInfo.title}
-							favorite={this.state.favorite} updateFavorite={this.updateFavorite} />
+							favorite={this.state.favorite} updateFavorite={this.updateFavorite} user={this.state.recipeHeaderInfo.user} 
+							duplicateRecipe={this.duplicateRecipe}/>
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
 						<RecipeSteps steps={this.state.recipeSteps} edit={null} />
 						<div className='center' >
-							<a className='btn' style={ styles.buttons } href={'/recipes/' + this.props.params.id + '/edit'}>Edit</a>
+							{this.getUser()}
 						</div>
 					</div>
 				</div>
