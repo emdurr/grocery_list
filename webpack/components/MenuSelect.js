@@ -101,9 +101,11 @@ class MenuSelect extends React.Component {
 			return null
 		}
 		return(
-		 	<div>
-			 	<h5> Assign to Day </h5>
+		 	<div className='row'>
+			 	<h5 className='col s12'> Assign to Day </h5>
+			 	<div className=' col s12'>
 			 	{days}
+			 	</div>
 		 	</div>
 		 )
 	};
@@ -115,8 +117,8 @@ class MenuSelect extends React.Component {
 			)
 		} else if(this.state.days && this.state.addDayView) {
 			return(
-				<div className='row'>
-					<input className='col s6' ref='newDay' type='text' onBlur={() => this.setState( { addDayView: !this.state.addDayView } ) } />
+				<div className='row col s6'>
+					<input className='col s6' ref='newDay' type='text'/>
 					<button className='btn col s2' onClick={() => this.addToMenu(this.state.menu_id, this.refs.newDay.value)}> Add </button>
 				</div>
 			)

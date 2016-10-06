@@ -32,11 +32,7 @@ class MenuRecipeListItem extends React.Component {
 		let recipe_info = this.state.recipe_info
 		return(
 			<div className='card-panel hoverable'>
-				<form onSubmit={this.editMenuRec}>
-					Day: <input type='text' defaultValue={recipe_info.day} required ref="editRecipeDay" placeholder='Recipe day' />
-					<button type='submit' className='btn'>Save</button>
-				</form>
-				<button onClick={this.toggleEdit} className='btn'>Cancel</button>
+					Day: <input onBlur={this.editMenuRec} type='text' defaultValue={recipe_info.day} required ref="editRecipeDay" placeholder='Recipe day' />
 				<h3> {recipe_info.name} </h3>
 				<p>Ingredients: {recipe_info.ingredients_count ? recipe_info.ingredients_count : '0' } </p>
 			</div>

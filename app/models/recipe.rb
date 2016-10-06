@@ -24,11 +24,25 @@ class Recipe < ApplicationRecord
 
 		# SEARCH FUNCTIONALITY
 
-		def distribute_params(search_type, search_query, search_sort)
-			results = set_type(search_type, search_query)
-			 sorted_results = results.set_filter(search_sort)
-			 sorted_results.uniq
+		def find_pantry_id(current_user)
+			@pantry_id = current_user.pantry.id
 		end
+
+		def distribute_params(search_type, search_query, search_sort, view, page)
+			results = set_type(search_type, search_query)
+			sorted_results = results.set_sort(search_sort)
+			if view == 'suggest'
+				sorted_results = sorted_results.uniq.apply_pantry_filter
+			elsif view == 'search'
+				unique_results = sorted_results.uniq
+				paginated_results = unique_results.limit(30).offset(30 * (page.to_i - 1))
+			else
+				sorted_results.uniq
+			end
+			
+			
+		end
+		
 
 
 		def set_type(search_type, search_query)
@@ -42,14 +56,12 @@ class Recipe < ApplicationRecord
 			end
 		end
 
-		def set_filter(search_sort)
+		def set_sort(search_sort)
 			case search_sort
 			when 'alphabetical'
 				order(title: :asc)
 			when 'fewest ingredients'
 				order(recipe_ings_count: :asc)
-			when 'in my pantry'
-				apply_pantry_filter
 			when 'shortest preptime'
 				order(ready_in_minutes: :asc)
 			else
@@ -101,8 +113,8 @@ class Recipe < ApplicationRecord
 
 		def apply_pantry_filter
 			# needs to use only user's pantry
-			pantry = Pantry.find(current_user.id).ingredients.ids
-			Recipe.all.select { |i| (i.ingredients.id - pantry).count <= 3 }
+			pantry = Pantry.find(@pantry_id).ingredients.ids
+			select { |i| (i.ingredients.ids - pantry).count <= 3 }
 		end
 
 		def pantry_filter_2
@@ -138,7 +150,7 @@ class Recipe < ApplicationRecord
 			favorites.each do |fav|
 				recipes << Recipe.find(fav.recipe_id)
 			end
-			recipes.uniq
+			recipes.uniq.sort_by! { |hsh| hsh[:title] }
 		end
 
 		def is_favorite?(recipe_id, user_id)

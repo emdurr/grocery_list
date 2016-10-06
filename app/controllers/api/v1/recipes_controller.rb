@@ -2,8 +2,9 @@ class Api::V1::RecipesController < ApiController
   before_action :set_recipe, except: [:index, :create, :duplicate]
 
     def index
-      if params[:searchType] && params[:searchQuery] && params[:searchSort]
-        @recipes = Recipe.distribute_params(params[:searchType], params[:searchQuery], params[:searchSort])
+      if params[:searchQuery]
+        Recipe.find_pantry_id(current_user)
+        @recipes = Recipe.distribute_params(params[:searchType], params[:searchQuery], params[:searchSort], params[:view], params[:page])
       else
         @recipes = Recipe.find_favorites(current_user.id)
       end
