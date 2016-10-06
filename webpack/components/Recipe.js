@@ -12,6 +12,8 @@ const styles = {
 class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
+		this.getUser = this.getUser.bind(this);
+		this.duplicateRecipe = this.duplicateRecipe.bind(this);
 		this.state = { recipeHeaderInfo: null, recipeIngredients: null, recipeSteps: null };
 	}
 
@@ -30,6 +32,35 @@ class Recipe extends React.Component {
 		});
 	};
 
+	getUser() {
+		if(this.state.recipeHeaderInfo.user) {
+			return(
+				<div>
+					<a className='btn' style={ styles.buttons } href={'/recipes/' + this.props.params.id + '/edit'}>Edit</a>
+				</div>
+			)
+		} else {
+			return(
+				<div>
+				</div>
+			)
+		}
+	}
+
+	duplicateRecipe() {
+		let recipe_id = this.state.recipeHeaderInfo.id
+		$.ajax({
+			url: '/api/v1/recipes/duplicate',
+			type: 'POST',
+			dataType: 'JSON',
+			data: { recipe_id }
+		}).done( recipe => {
+			console.log(recipe.id)
+			this.props.history.push(`/recipes/${recipe.id}`)
+		}).fail( data => {
+			console.log(data);
+		});
+	}
 
 	render() {
 		if(this.state.recipeIngredients) {
@@ -37,11 +68,11 @@ class Recipe extends React.Component {
 				<div style={ styles.cardstyle } className='container'>
 					<div className='card'>
 						<RecipeHeader {...this.state.recipeHeaderInfo} />
-						<RecipeOptions id={this.state.recipeHeaderInfo.id} />
+						<RecipeOptions id={this.state.recipeHeaderInfo.id} duplicateRecipe={this.duplicateRecipe} user={this.state.recipeHeaderInfo.user} />
 						<RecipeIngredients recipeIngs={this.state.recipeIngredients} edit={null} />
 						<RecipeSteps steps={this.state.recipeSteps} edit={null} />
 						<div className='center' >
-							<a className='btn' style={ styles.buttons } href={'/recipes/' + this.props.params.id + '/edit'}>Edit</a>
+							{this.getUser()}
 						</div>
 					</div>
 				</div>

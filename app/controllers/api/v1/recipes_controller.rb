@@ -1,5 +1,5 @@
 class Api::V1::RecipesController < ApiController
-  before_action :set_recipe, except: [:index, :create]
+  before_action :set_recipe, except: [:index, :create, :duplicate]
 
     def index
       if params[:searchType] && params[:searchQuery] && params[:searchSort]
@@ -19,13 +19,32 @@ class Api::V1::RecipesController < ApiController
 
     def create
       recipe = Recipe.new(recipe_params)
-
       recipe.user_id = current_user.id
       if recipe.save
         render json: recipe
       else
         render json: { errors: recipe.errors }, status: 401
       end
+    end
+
+    def duplicate
+      recipe = Recipe.find(params[:recipe_id])
+      new_recipe = recipe.dup
+      new_recipe.user_id = current_user.id
+      new_recipe.title = recipe.title + ' - copy'
+      new_recipe.save
+      recipe.recipe_ings.each do |recing|
+        new_ri = recing.dup
+        new_ri.recipe_id = new_recipe.id
+        new_ri.save
+      end
+      recipe.steps.each do |step|
+        new_step = step.dup
+        new_step.recipe_id = new_recipe.id
+        new_step.save
+      end
+
+      render json: new_recipe
     end
 
     def image

@@ -6,6 +6,7 @@ json.recipeHeaderInfo do
 	json.servings @recipe.servings
 	json.credit_text @recipe.credit_text
 	json.imageUrl @recipe.image
+	json.user @recipe.user_id
 end
 
 recipe_ings = @recipe.recipe_ings.sort_by { |x| x['id']}

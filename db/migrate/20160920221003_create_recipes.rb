@@ -13,6 +13,7 @@ class CreateRecipes < ActiveRecord::Migration[5.0]
       t.boolean :vegetarian
       t.boolean :vegan
       t.string :type
+      t.boolean :published
       t.integer :recipe_ings_count, default: 0
       t.belongs_to :user
 

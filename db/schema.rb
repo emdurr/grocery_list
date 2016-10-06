@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20161004202112) do
     t.boolean  "vegetarian"
     t.boolean  "vegan"
     t.string   "type"
+    t.boolean  "published"
     t.integer  "recipe_ings_count", default: 0
     t.integer  "user_id"
     t.datetime "created_at",                     null: false

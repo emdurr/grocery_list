@@ -21,9 +21,10 @@ class NewRecipe extends Component {
     this.recipeAddForm = this.recipeAddForm.bind(this);
     this.ingredientAddForm = this.ingredientAddForm.bind(this);
     this.recipeStepAddForm = this.recipeStepAddForm.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.displayRecipe = this.displayRecipe.bind(this);
     this.onDrop = this.onDrop.bind(this);
-    this.state = { showAddIngredients: false, recipeHeaderInfo: null, files: [] }
+    this.state = { showAddIngredients: false, recipeHeaderInfo: null, files: [], checked: false }
   }
 
   displayRecipe(id) {
@@ -38,12 +39,13 @@ class NewRecipe extends Component {
     let servings = this.refs.addServings.value;
     let credit_text = this.refs.addCreditText.value;
     let file = this.state.files[0];
+    let published = this.state.checked;
 
     $.ajax({
       url: '/api/v1/recipes',
       type: 'POST',
       dataType: 'JSON',
-      data: { recipe: { title, ready_in_minutes, servings, credit_text}}
+      data: { recipe: { title, ready_in_minutes, servings, credit_text, published}}
     }).done( recipe => {
       if (file) {
         let req = request.post(`/api/v1/recipes/${recipe.id}/image`);
@@ -70,6 +72,10 @@ class NewRecipe extends Component {
     // });
   }
 
+  handleClick() {
+    this.setState({ checked: !this.state.checked })
+  }
+
   recipeAddForm() {
     return(
       <div>
@@ -78,7 +84,21 @@ class NewRecipe extends Component {
           <input type='number' ref='addReadyInMinutes' placeholder='Will be ready in how many minutes?' />
           <input type='number' ref='addServings' placeholder='How many servings?'/>
           <input type='text' ref='addCreditText' placeholder='Who gets the credit for this wonderful recipe?'/>
-          <Dropzone ref='addImage' style={{border: 'none', textAlign: 'left'}} onDrop={this.onDrop} multiple={false}><div>Click to upload image</div></Dropzone>
+          <input 
+                 id="publish"
+                 type='checkbox' 
+                 name='check' 
+                 defaultChecked={this.state.checked} 
+                 onChange={this.handleClick}
+                 value={ false }
+          />
+          <label htmlFor='publish'>Would you like to pubish for others to enjoy?
+          </label>
+          <Dropzone ref='addImage' 
+                    style={{border: 'none', textAlign: 'left'}} 
+                    onDrop={this.onDrop} 
+                    multiple={false}><div>Click to upload image</div>
+          </Dropzone>
           <button type='submit'>Add Ingredients and Steps</button>
         </form>
       </div>
