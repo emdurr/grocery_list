@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuRecipeListItem from './MenuRecipeListItem';
+import { Link } from 'react-router';
 
 class Menu extends React.Component {
 	constructor(props) {
@@ -55,6 +56,7 @@ class Menu extends React.Component {
 		return(
 			<div>
 				<h3>{this.state.name}</h3>
+				<Link to='/recipes'>Search And Add Recipes</Link>
 				<ul>
 					{this.displayMenuRecipes()}
 				</ul>

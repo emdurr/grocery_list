@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router';
 
 let backdropStyle = {
   position: 'absolute',
@@ -13,13 +13,14 @@ let backdropStyle = {
 
 let modalStyle = {
   position: 'absolute',
-  height: '50vh',
+  height: '80vh',
   width: '80vw',
-  top: '50%',
+  top: '30%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   zIndex: '9999',
-  background: '#fff'
+  background: '#fff',
+  padding: '50px'
 }
 
 class MenuSelect extends React.Component {
@@ -45,12 +46,30 @@ class MenuSelect extends React.Component {
 	};
 
 	menuSelectOptions() {
-		let menus = this.state.menus.map( menu => {
-			return(
-				<button key={menu.id} className='btn' onClick={() => this.getDayOptions(menu.id)}> {menu.name} </button>
-			)
-		});
-	return menus
+		if(this.state.menus) {
+			let menus = this.state.menus.map( menu => {
+				return(
+					<button key={menu.id} className='btn' onClick={() => this.getDayOptions(menu.id)}> {menu.name} </button>
+				)
+			});
+			if(menus.length > 0) {
+				return(
+					<div>
+						<h5> Menus Available: </h5>
+						 {menus}
+					 </div>
+				)	 
+			} else {
+				return(
+					<div>
+					<h4> Create a menu before adding recipes </h4>
+					<h4> <Link to='/menus'>Menus</Link> </h4>
+					</div>
+				)
+			}
+		} else {
+			return null
+		}
 	}
 
 	getDayOptions(menu_id) {
@@ -82,7 +101,12 @@ class MenuSelect extends React.Component {
 		} else {
 			return null
 		}
-		return days
+		return(
+		 	<div>
+			 	<h5> Assign to Day </h5>
+			 	{days}
+		 	</div>
+		 )
 	};
 
 	addNewDay() {
@@ -92,9 +116,9 @@ class MenuSelect extends React.Component {
 			)
 		} else if(this.state.days && this.state.addDayView) {
 			return(
-				<div>
-					<input ref='newDay' type='text' />
-					<button className='btn' onClick={() => this.addToMenu(this.state.menu_id, this.refs.newDay.value)}> Add </button>
+				<div className='row'>
+					<input className='col s6' ref='newDay' type='text' onBlur={() => this.setState( { addDayView: !this.state.addDayView } ) } />
+					<button className='btn col s2' onClick={() => this.addToMenu(this.state.menu_id, this.refs.newDay.value)}> Add </button>
 				</div>
 			)
 		} else {
@@ -118,21 +142,18 @@ class MenuSelect extends React.Component {
 
 
 	render() {
-		if(this.state.menus) {
-			return(
-				<div style={backdropStyle}>
-					<div style={modalStyle}>
-						<div>
-							{this.menuSelectOptions()} <br />
-							{this.daySelectOptions()} 
-							{this.addNewDay()} <br />
-							<button className='btn' onClick={this.props.closeModal}>Cancel</button>
-						</div>
+		return(
+			<div style={backdropStyle}>
+				<div style={modalStyle}>
+					<div>
+						{this.menuSelectOptions()} <br />
+						{this.daySelectOptions()} 
+						{this.addNewDay()} <br />
+						<button className='btn' onClick={this.props.closeModal}>Cancel</button>
 					</div>
 				</div>
-			)
-		} else 
-			return null
+			</div>
+		)
 	}
 }
 

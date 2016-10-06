@@ -63,7 +63,9 @@ class Recipe < ApplicationRecord
 				word = word.strip.downcase
 				singular = word.singularize
 				plural = word.pluralize
-				if plural =~ /.*ies$/
+				if singular.length <= 2
+					search_array << "#{word}"
+				elsif plural =~ /.*ies$/ && singular =~ /.*y$/
 					search_array << "%#{plural.split('ies')[0]}%"
 				else
 					search_array << "%#{singular}%"
@@ -98,8 +100,34 @@ class Recipe < ApplicationRecord
 		end
 
 		def apply_pantry_filter
-			pantry = Pantry.ingredients.all
-			select { |i| (i.ingredients - pantry).count <= 3 }
+			# needs to use only user's pantry
+			pantry = Pantry.find(current_user.id).ingredients.ids
+			Recipe.all.select { |i| (i.ingredients.id - pantry).count <= 3 }
+		end
+
+		def pantry_filter_2
+			pantry = current_user.pantry.ingredients
+			recipes = Recipe.all
+			matches = []
+			recipes.each do |recipe|
+				length = recipe.ingredients.length
+				not_found = 0
+				ingredients = recipe.ingredients 
+				i = 0
+				while not_found < 3
+					if i >= (recipe.length - 1)
+						matches << recipe
+						break
+					end
+					if pantry.include?(ingredients[i])
+						nil
+					else
+						not_found += 1
+					end
+					i += 1
+				end
+			end
+			matches
 		end
 
 		# FAVORITES FUNCTIONS
