@@ -6,7 +6,8 @@
     "dev_server": "./node_modules/.bin/webpack-dev-server --config config/webpack.config.js",
     "build": "webpack --config=config/webpack.config.js -p",
     "webpack:deploy": "webpack --config=config/webpack.config.js -p",
-    "heroku-postbuild": "npm run webpack:deploy"
+    "heroku-postbuild": "npm run webpack:deploy",
+    "rake webpack":"compile"
   },
   "dependencies": {
     "babel-core": "^6.9.1",
