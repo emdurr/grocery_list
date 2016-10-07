@@ -77,6 +77,7 @@ class List extends Component {
 	            </div>
 	            <div className="card-action">
 	            </div>
+	            <Link className='btn black-text' style={ styles.cbtn } to={'/lists'} >Back to Lists</Link>
 	          </div>
 	        </div>
 	      </div>
