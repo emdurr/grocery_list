@@ -3,6 +3,7 @@ import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
 import RecipeSteps from './RecipeSteps';
 import RecipeOptions from './RecipeOptions';
+import { Link } from 'react-router';
 
 const styles = {
 	cardstyle: { backgroundColor: 'red'},

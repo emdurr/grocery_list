@@ -21,7 +21,19 @@ class ListIngs extends Component {
 		this.deleteIngredient = this.deleteIngredient.bind(this);
 		this.removeIngredient = this.removeIngredient.bind(this);
 		this.addIngredientToPantry = this.addIngredientToPantry.bind(this);
-		this.state = { listIngredients: this.props.list.ingredients, listId: this.props.list.id};
+		this.state = { ingredients: [], listIngredients: this.props.list.ingredients, listId: this.props.list.id};
+	}
+
+	componentWillMount() {
+		$.ajax({
+			url: '/api/v1/ingredients',
+			type: 'GET',
+			dataType: 'JSON'
+		}).done( ingedients => {
+			this.setState({ ingredients });
+		}).fail( data => {
+			console.log(data);
+		});
 	}
 
 	displayIngredients() {
@@ -56,6 +68,16 @@ class ListIngs extends Component {
 		}).fail( data => {
 			console.log(data);
 		});
+	}
+
+	suggest(e) {
+		e.preventDefault;
+		clearTimeout(timeElapsed)
+		timeElapsed = setTimeout(this.handleSuggestion, 800)
+	}
+
+	handleSuggestion() {
+
 	}
 
 	removeIngredient(ingredientData) {
@@ -163,7 +185,12 @@ class ListIngs extends Component {
 					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
 					</button>
 					<div className='col s7 offset-s1' style={ styles.ingInput }>
-						<input style={ styles.input } type='text' ref='addName' placeholder='Item To Purchase' required/>
+						<input style={ styles.input } 
+									 type='text' 
+									 ref='addName' 
+									 placeholder='Item To Purchase' 
+									 onChange= {this.suggest}
+									 required/>
 					</div>
 					<div className='col s4'>
 						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY to Buy' required/>
