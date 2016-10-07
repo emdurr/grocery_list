@@ -1,5 +1,5 @@
 class ThirdPartyAuthController < ApplicationController
-	skip_before_action :verify_authentication_token
+	skip_before_action :verify_authenticity_token
 
 	def facebook
 		auth = params[:auth]
