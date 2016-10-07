@@ -114,6 +114,7 @@ class Recipe extends React.Component {
 						<div className='center' >
 							{this.getUser()}
 						</div>
+						<Link className='btn black-text' style={ styles.cbtn } to={'/recipes'} >Back to Recipes</Link>
 					</div>
 				</div>
 			)
