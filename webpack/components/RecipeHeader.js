@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import logoImg from '../images/ilarder_logo.png';
 
 const styles = {
-	imgstyle: { width: '350px', border: '1px solid gray'},
+	imgstyle: { width: '100%', border: '1px solid gray'},
 	title: { backgroundColor: '#414E49', color: 'white', textAlign: 'center', padding: '10px 0'},
-	cardmargin: { marginTop: '40px'}
+	comment: {fontFamily: 'Kalam', color: '#1b4fa3',transform: 'rotate(-10deg)', fontSize: '120%'}
 
 }
 class RecipeHeader extends Component {
@@ -12,7 +12,7 @@ class RecipeHeader extends Component {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 		this.publishBox = this.publishBox.bind(this);
-		this.state = { recipeHeaderInfo: this.props.recipeHeaderInfo, 
+		this.state = { recipeHeaderInfo: this.props.recipeHeaderInfo,
 									 published: this.props.recipeHeaderInfo.published }
 	}
 
@@ -36,11 +36,11 @@ class RecipeHeader extends Component {
   	if(this.props.edit) {
   		return(
   			<div>
-	  			<input 
+	  			<input
 			                 id="publish"
-			                 type='checkbox' 
-			                 name='check' 
-			                 defaultChecked={this.state.published} 
+			                 type='checkbox'
+			                 name='check'
+			                 defaultChecked={this.state.published}
 			                 onChange={this.handleClick}
 			                 value={ false }
 			  	/>
@@ -67,20 +67,23 @@ class RecipeHeader extends Component {
 					<h3 style={ styles.title }><img src={ logoImg }/> {title} </h3>
 					<div className='row'>
 						<div style={ styles.cardmargin }className='container'>
-							<div  className='col s5'>
+							<div  className='col s6 m3'>
 								<h5> Ingredients: {ingredientCount} </h5>
 								<p> {ready_in_minutes ? ("Prep Time: " + ready_in_minutes) : null } </p>
 								<h5> {servings ? ("Servings: " + servings) : null } </h5>
 								<p> {credit_text ? ("By: " + credit_text) : null } </p>
-								<p> {favoriteComment} </p>
+								</div>
+								<div>
+									<p className='center col s6 m3' style={ styles.comment }> {favoriteComment} </p>
+								</div>
 								{this.publishBox()}
 							</div>
-							<div>
-								<img style={ styles.imgstyle } src={imageUrl} alt={title} />
+							<div className='col s12 m5'>
+								{imageUrl ? <img style={ styles.imgstyle } src={imageUrl} alt={title} /> : null }
 							</div>
 						</div>
 					</div>
-				</div>
+
 			)
 		} else {
 			return(<div></div>)

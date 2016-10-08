@@ -6,7 +6,7 @@ import foodImg from '../images/banana-pancakes.jpg';
 
 const styles = {
 	title: { color: 'white'},
-	input: { borderBottom: '2px solid #414E49', height: '80px', marginLeft: '70px', fontSize: '180%'},
+	input: { borderBottom: '2px solid #414E49', fontSize: '120%'},
 	food: { height: 'auto',
 					position: 'relative',
 					backgroundImage: 'url(' + foodImg + ')',
@@ -87,27 +87,23 @@ class Menus extends React.Component {
 
 	render() {
 		return(
-			<div className='container center'>
-					<div className='row'>
-							<div>
-
-							</div>
-							<div>
-								<h1 style={ styles.logo }><img src={ logoImg } style={ styles.logoStyle }/> Menu Lists</h1>
-							</div>
-							<div className='container' style={ styles.food }>
-								<div style={ styles.form }>
-									<form ref='addForm' id='addForm' onSubmit={this.handleCreate}>
-										<input style={ styles.input } className='col s9 offset-s1' type='text' ref='menuName' required placeholder='Enter Menu Name'/>
-										<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
-										</button>
-									</form>
-									<ul style={ styles.form }>
-										{ this.displayMenus() }
-									</ul>
-								</div>
+			<div className='center'>
+				<div className='row'>
+					<div>
+						<h3 style={ styles.logo }><img src={ logoImg } style={ styles.logoStyle }/> Menu Lists</h3>
+					</div>
+					<div className='container' style={ styles.food }>
+						<div style={ styles.form }>
+							<form ref='addForm' id='addForm' onSubmit={this.handleCreate}>
+								<input style={ styles.input } className='col s9' type='text' ref='menuName' required placeholder='Enter Menu Name'/>
+								<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
+								</button>
+							</form>
+							<ul style={ styles.form }>
+								{ this.displayMenus() }
+							</ul>
 						</div>
-
+				  </div>
 				</div>
 			</div>
 		)

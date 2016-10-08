@@ -7,7 +7,6 @@ const styles = {
 	addBtn: { fontSize: '18px' },
 	cborder: { borderBottom: '1px solid grey', margin: '0' },
 	tborder: { margin: '25px 6px 0 0 ', backgroundColor: '#e7ebea', padding: '10px', fontSize: '120%' },
-	strike: { textDecoration: 'line-through' },
 	ingInput: { margin: '0'},
 	input: { borderBottom: '2px solid #414E49'}
 }
@@ -28,8 +27,8 @@ class ListIngs extends Component {
 		let listIngredients = this.state.listIngredients.map( ingredientData => {
 			return(
 				<div className="row" key={ingredientData.ingredient.id} style={ styles.cborder } >
-					<ListIng 	ingredientData={ingredientData} 
-									 	editIngredient={this.editIngredient} 
+					<ListIng 	ingredientData={ingredientData}
+									 	editIngredient={this.editIngredient}
 										deleteIngredient={this.deleteIngredient}
 										removeIngredient={this.removeIngredient} />
 				</div>
@@ -94,7 +93,7 @@ class ListIngs extends Component {
 			dataType: 'JSON'
 		}).done( data => {
 			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.ingredient.id );
-      if (findIngredient === -1) { 
+      if (findIngredient === -1) {
         this.setState({ listIngredients: [...listIngredients, data] })
       } else {
         this.setState({ listIngredients: [...listIngredients.slice(0, findIngredient),
@@ -139,7 +138,7 @@ class ListIngs extends Component {
 			data: { list_id: id, list_ing: { id: list_ing_id, qty_to_buy: qty_to_buy }, ingredient: { id: ingredient.id, name: ingredient.name } }
 		}).done( data => {
 			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.id );
-      if (findIngredient === -1) { 
+      if (findIngredient === -1) {
         this.setState({ listIngredients: [...listIngredients, data] })
       } else {
         this.setState({ listIngredients: [...listIngredients.slice(0, findIngredient),
@@ -160,26 +159,26 @@ class ListIngs extends Component {
   	return (
     	<div className='row' >
     		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
-					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
-					</button>
-					<div className='col s7 offset-s1' style={ styles.ingInput }>
+					<div className='col s6 offset-s1' style={ styles.ingInput }>
 						<input style={ styles.input } type='text' ref='addName' placeholder='Item To Purchase' required/>
 					</div>
 					<div className='col s4'>
-						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY to Buy' required/>
+						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY' required/>
 					</div>
+					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
+					</button>
 				</form>
 				<div className="row" style={ styles.tborder } >
-					<div className='col s6'>
+					<div className='col s4'>
 						<p>Item </p>
 					</div>
-					<div className='col s3 center'>
-						<p>Quantity</p>
+					<div className='col s2 center'>
+						<p>QTY</p>
 					</div>
-					<div className='col s1 center' >
+					<div className='col s3 center' >
 						<p>Delete</p>
 					</div>
-					<div className='col s1 offset-s1 center' >
+					<div className='col s2 center' >
 						<p>Bought</p>
 					</div>
 				</div>

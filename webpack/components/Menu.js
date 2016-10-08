@@ -1,6 +1,13 @@
 import React from 'react';
 import MenuRecipeListItem from './MenuRecipeListItem';
 import { Link } from 'react-router';
+import logoImg from '../images/ilarder_logo.png';
+
+const styles = {
+	lhead: { backgroundColor: '#3B4743', padding: '10px', color: 'white', margin: '0'},
+	backing: { backgroundColor: '#f3f3f3', display:'center', marginTop: '15px'},
+	button: { margin: '10px'}
+}
 
 class Menu extends React.Component {
 	constructor(props) {
@@ -54,13 +61,15 @@ class Menu extends React.Component {
 
 	render() {
 		return(
-			<div>
-				<h3>{this.state.name}</h3>
-				<Link to='/recipes'>Search And Add Recipes</Link>
-				<ul>
-					{this.displayMenuRecipes()}
-				</ul>
-			</div>
+				<div className='container center' style={ styles.backing }>
+
+						<h3 style={ styles.lhead } className='center'><img src={ logoImg }/> {this.state.name}</h3>
+						<Link className='btn' style={ styles.button } to='/recipes'>Search And Add Recipes</Link>
+						<ul className='container'>
+							{this.displayMenuRecipes()}
+						</ul>
+
+				</div>
 		)
 	}
 }

@@ -5,7 +5,6 @@ import RecipeSteps from './RecipeSteps';
 import RecipeOptions from './RecipeOptions';
 
 const styles = {
-	cardstyle: { backgroundColor: 'red'},
 	buttons: { margin: '30px'},
 }
 

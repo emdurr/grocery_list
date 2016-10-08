@@ -6,10 +6,12 @@ const styles = {
 
 const RecipeIngredient = ({amount, unit, name, metaInformation}) => {
 	return(
-		<div className='offset-s1 col s4'>
-			<p style={ styles.spacing }>
-				{`${amount} ${unit} ${name}`}
-			</p>
+		<div >
+			<div className='col s9 offset-s1 '>
+				<p style={ styles.spacing }>
+					{`${amount} ${unit} ${name}`}
+				</p>
+			</div>
 		</div>
 	)
 }

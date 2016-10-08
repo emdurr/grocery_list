@@ -22,6 +22,11 @@ let modalStyle = {
   padding: '20px'
 }
 
+const styles = {
+  menuopt: { width: '100%', marginTop: '10px', backgroundColor: '#6e7874'},
+  cancelbtn: { margin: '5px 0'}
+}
+
 class MenuSelect extends React.Component {
 	constructor(props) {
 		super(props)
@@ -48,7 +53,7 @@ class MenuSelect extends React.Component {
 		if(this.state.menus) {
 			let menus = this.state.menus.map( menu => {
 				return(
-					<button key={menu.id} className='btn' onClick={() => this.getDayOptions(menu.id)}> {menu.name} </button>
+					<button key={menu.id} style={ styles.menuopt } className='btn' onClick={() => this.getDayOptions(menu.id)}> {menu.name} </button>
 				)
 			});
 			if(menus.length > 0) {
@@ -93,7 +98,7 @@ class MenuSelect extends React.Component {
 			let i = 0
 			days = this.state.days.map( day => {
 				return(
-					<button className='btn' onClick={() => this.addToMenu(this.state.menu_id, day )} key={day} value={day}>{day}</button>
+					<button className='btn' style={ styles.menuopt } onClick={() => this.addToMenu(this.state.menu_id, day )} key={day} value={day}>{day}</button>
 				)
 				i += 1
 			});
@@ -147,8 +152,8 @@ class MenuSelect extends React.Component {
 			<div style={backdropStyle}>
 				<div style={modalStyle}>
 					<div>
-						{this.menuSelectOptions()} <br />
-						{this.daySelectOptions()}
+					  {this.menuSelectOptions()}
+          	{this.daySelectOptions()}
 						{this.addNewDay()} <br />
 						<button className='btn' onClick={this.props.closeModal}>Cancel</button>
 					</div>

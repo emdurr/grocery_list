@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+
 class MenuRecipeListItem extends React.Component {
 	constructor(props) {
 		super(props)
@@ -46,11 +47,13 @@ class MenuRecipeListItem extends React.Component {
 				<p> Day: {recipe_info.day} </p>
 				<h3> <Link to={`recipes/${this.state.recipe_info.recipe_id}`}> {recipe_info.name} </Link> </h3>
 				<p>Ingredients: {recipe_info.ingredients_count ? recipe_info.ingredients_count : '0' } </p>
-				<button onClick={() => this.props.deleteMenuRec(recipe_info.menu_rec_id)} className='btn'>Delete</button>
-				<button onClick={this.toggleEdit} className='btn'>Edit</button>
+				<button onClick={() => this.props.deleteMenuRec(recipe_info.menu_rec_id)} className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">delete</i></button>
+				<button onClick={this.toggleEdit} className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">edit</i></button>
 			</div>
 		)
 	}
+
+
 
 	toggleEdit() {
 		this.setState( { edit: !this.state.edit } );
