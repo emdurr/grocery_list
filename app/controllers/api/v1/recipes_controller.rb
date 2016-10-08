@@ -10,9 +10,8 @@ class Api::V1::RecipesController < ApiController
       end
     end
 
-    def search
-      # accepting two params: 'search term', 'field name'
-      # return search queries
+    def ingredients_list
+      @user = current_user
     end
 
     def show

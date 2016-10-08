@@ -1,13 +1,13 @@
 import React from 'react';
 import MenuSelect from './MenuSelect';
-import AddRecipeIngredients from './AddRecipeIngredients';
+import AddBulkIngredients from './AddBulkIngredients';
 import AddToFavorites from './AddToFavorites';
 
 class RecipeOptions extends React.Component {
 	constructor(props) {
 		super(props)
 		this.addToMenu = this.addToMenu.bind(this)
-		this.addIngredients = this.addIngredients.bind(this)
+		this.addBulkIngredients = this.addBulkIngredients.bind(this)
 		this.addToFavorites = this.addToFavorites.bind(this)
 		this.createCustom = this.createCustom.bind(this)
 		this.closeModal = this.closeModal.bind(this)
@@ -51,10 +51,10 @@ class RecipeOptions extends React.Component {
 			return null
 	}
 
-	addIngredients() {
-		if(this.state.modal === 'addIngredients') {
+	addBulkIngredients() {
+		if(this.state.modal === 'addBulkIngredients') {
 			return(
-				<AddRecipeIngredients closeModal={this.closeModal} recipeId={this.props.id} />
+				<AddBulkIngredients closeModal={this.closeModal} recipeId={this.props.id} />
 			)
 		} else
 			return null
@@ -102,7 +102,7 @@ class RecipeOptions extends React.Component {
 				<div>
 					<div>
 						{this.addToMenu()}
-						{this.addIngredients()}
+						{this.addBulkIngredients()}
 						{this.addToFavorites()}
 					</div>
 				</div>
