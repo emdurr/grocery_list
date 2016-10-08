@@ -3,7 +3,7 @@ import RecipeIngredient from './RecipeIngredient';
 import EditRecipe from './EditRecipe';
 
 const styles = {
-	spacing: { margin: '40px'},
+	spacing: { margin: '10px'},
 	heading: { borderBottom: '1px solid #414E49', paddingBottom: '4px'},
 }
 
@@ -18,9 +18,13 @@ class RecipeIngredients extends React.Component {
 		let ingredients = this.props.recipeIngs.map( ingredient => {
 			if (this.props.edit) {
 				return(
-					<div key={ingredient.id} >
-						<RecipeIngredient  {...ingredient} />
-						<button className='col s1' onClick={ () => this.props.deleteIngredient(ingredient)}>x</button>
+					<div className='row'>
+					<div >
+						<div key={ingredient.id} >
+							<RecipeIngredient  {...ingredient} />
+							<button className='col s1' onClick={ () => this.props.deleteIngredient(ingredient)}>x</button>
+						</div>
+					</div>
 					</div>
 				)
 			} else {
@@ -48,13 +52,13 @@ class RecipeIngredients extends React.Component {
 			return(
 				<div className='row'>
 					<form id='addRecipeIngredientForm' onSubmit={ this.handlePreventDefault }>
-			      <div className='col s1'>
+			      <div className='col s2'>
 			  			<input type='text' ref='addIngredientAmount' placeholder='Amnt' required />
 			      </div>
 			      <div className='col s2'>
-			      	<input type='text' ref='addIngredientUnit' placeholder='Cup, Tsp, etc' required />
+			      	<input type='text' ref='addIngredientUnit' placeholder='Unit' required />
 			   		</div>
-						<div className='col s8'>
+						<div className='col s6'>
 			      	<input type='text' ref='addAnotherIngredient' placeholder='Ingredient Name' required />
 			   		</div>
 			   		<div className='col s1'>
@@ -78,7 +82,9 @@ class RecipeIngredients extends React.Component {
 						{this.addIngredientForm()}
 						<ul>
 							<div className='row'>
-								{this.displayIngredients()}
+								<div className='col s12 m6'>
+									{this.displayIngredients()}
+								</div>
 							</div>
 						</ul>
 					</div>

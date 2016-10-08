@@ -24,7 +24,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='page-flexbox-wrapper'>
         <Navbar auth={this.props.auth} history={this.props.history} />
         {this.props.children}
 				<Footer />

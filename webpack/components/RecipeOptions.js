@@ -21,11 +21,11 @@ class RecipeOptions extends React.Component {
 	chooseFavoriteButton() {
 		if(this.props.favorite) {
 			return(
-				<button onClick={ () => this.deleteFavorite(this.props.favoriteId)} className='btn'>Unfavorite</button>
+				<button onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves yellow"><i className="material-icons">star</i></button>
 			)
 		} else {
 			return(
-				<button className='btn' onClick={ () => this.setState( {modal: 'addToFavorites' } ) }>Favorite</button>
+				<button className="btn-floating btn-medium waves-effect waves yellow" onClick={ () => this.setState( {modal: 'addToFavorites' } ) }><i className="material-icons">star</i></button>
 			)
 		}
 	}
@@ -83,19 +83,21 @@ class RecipeOptions extends React.Component {
 			return( null )
 		} else {
 			return(
-				<button className='btn' onClick={this.createCustom}>Create Custom Version</button>
+				<button className="btn-floating btn-medium waves-effect waves grey" onClick={this.createCustom}><i className="material-icons">C</i></button>
 			)
 		}
 	}
 
+
+
 	render() {
 		return(
 			<div>
-				<div>
-					<button className='btn' onClick={ () => this.setState( {modal: 'addToMenu' } ) }>Add to Menu</button>
-					<button className='btn' onClick={ () => this.setState( {modal: 'addIngredients' } ) }>Add Ingredients to Shopping List</button>
+				<div className='center'>
+					<button className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addToMenu' } ) }><i className="material-icons">description</i></button>
+					<button className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addIngredients' } ) }><i className="material-icons">list</i></button>
 					{this.chooseFavoriteButton()}
-					{ this.belongsToUser() }
+					{this.belongsToUser()}
 				</div>
 				<div>
 					<div>

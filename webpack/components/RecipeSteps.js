@@ -2,7 +2,7 @@ import React from 'react';
 import RecipeStep from './RecipeStep';
 
 const styles = {
-	spacing: { margin: '40px'},
+	spacing: { margin: '15px'},
 	heading: { borderBottom: '1px solid #414E49', paddingBottom: '4px'},
 	bottom: { paddingBottom: '30px'},
 }
@@ -48,10 +48,10 @@ class RecipeSteps extends React.Component {
 				<div className='row'>
 					<form id='addRecipeStepForm' onSubmit={ this.handlePreventDefault }>
 				 		<div className='col s2'>
-				      <input type='number' ref='addStepNumber' placeholder='Step Number' required />
+				      <input type='number' ref='addStepNumber' placeholder='Step' required />
 				    </div>
-						<div className='col s9'>
-				 			<input type='text' ref='addStepText' placeholder='Step Directions' required />
+						<div className='col s8'>
+				 			<input type='text' ref='addStepText' placeholder='Directions' required />
 			  		</div>
 				    <div className='col s1'>
 						<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>

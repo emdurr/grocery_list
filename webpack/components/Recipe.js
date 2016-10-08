@@ -6,7 +6,6 @@ import RecipeOptions from './RecipeOptions';
 import { Link } from 'react-router';
 
 const styles = {
-	cardstyle: { backgroundColor: 'red'},
 	buttons: { margin: '30px'},
 }
 

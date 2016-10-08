@@ -7,12 +7,11 @@ import logoSmall from '../images/ilarder_logo_small.png';
 const styles = {
 	logoName: { paddingRight: '10px', color: 'white', fontSize: '40px' },
 	aboutLink: { fontSize: '18px', color: 'black', width: '200px' },
-  navBack: { backgroundColor: '#81D153' },
+  navBack: { backgroundColor: '#81D153'},
   dropDwn: { backgroundColor: '#414E49', constrainWidth: 'false' },
   hamburger: { color: 'white', paddingLeft: '20px' }
-
 }
-
+// , fontFamily: 'Ubuntu'
 
 class Navbar extends React.Component {
 	constructor(props) {

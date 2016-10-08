@@ -16,8 +16,8 @@ const styles = {
 				  boxShadow: '10px 10px 5px #444444' },
 	form: { textAlign: 'center', padding: '30px', color: 'white', backgroundColor: 'none'},
 	input: { borderBottom: '2px solid #414E49', height: '65px', marginLeft: '5%'},
-	logo: { paddingTop: '10px', color: 'white'},
-	logoStyle: {margin: '18px'}
+	logo: { color: 'white'},
+
 }
 
 class Lists extends Component {
@@ -106,26 +106,22 @@ class Lists extends Component {
 	render() {
 		return(
 			<div className='container'>
-					<div className='row'>
-							<div className='col s1 offset-s4'>
-								<img src={ logoImg } style={ styles.logoStyle }/>
-							</div>
-							<div>
-								<h1 style={ styles.logo }> Lists</h1>
-							</div>
-							<div className='container' style={ styles.food }>
-								<div style={ styles.form }>
-									<form id='addForm' onSubmit={this.handleAddList}>
-										<input style={ styles.input } className='col s9 offset-s1' type='text' ref='addName' required/>
-										<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
-										</button>
-									</form>
-									<ul style={ styles.form }>
-										{ this.displayLists() }
-									</ul>
-								</div>
+				<div className='row'>
+					<div>
+						<h3 style={ styles.logo } className='center'><img src={ logoImg }/> Lists</h3>
+					</div>
+					<div className='container' style={ styles.food }>
+						<div style={ styles.form }>
+							<form id='addForm' onSubmit={this.handleAddList}>
+								<input style={ styles.input } className='col s8 offset-s1' type='text' ref='addName' required />
+								<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
+								</button>
+							</form>
+							<ul style={ styles.form }>
+								{ this.displayLists() }
+							</ul>
 						</div>
-
+					</div>
 				</div>
 			</div>
 		)

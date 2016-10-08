@@ -11,7 +11,8 @@ const styles = {
   navBack: { backgroundColor: '#F9E883' },
 	backing: { backgroundColor: '#f3f3f3'},
 	heading: { backgroundColor: '#414E49', padding: '10px', color: 'white'},
-	recipecard: { backgroundColor: '#6e7874'},
+	recipecard: { backgroundColor: '#f3f3f3', padding: '5px 15px', margin: '0'},
+	suggest: { margin: '0', paddingBottom: '1px'}
 }
 
 class Recipes extends Component {
@@ -122,7 +123,7 @@ class Recipes extends Component {
 	addNewRecipe(){
 		if (this.state.view === 'favorites') {
 			return(
-				<Link to="/recipes/new" className='btn col s3 offset-s1' style={ styles.txt }>Add New Recipe</Link>
+				<Link to="/recipes/new" className="fixed-action-btn btn-floating btn-medium grey" style={{bottom: '30px', right: '30px', padding: '0'}} ><i className="material-icons">add</i></Link>
 			)
 		} else {
 			  return null
@@ -132,7 +133,7 @@ class Recipes extends Component {
 	instructSuggest() {
 		if (this.state.view === 'suggest') {
 			return(
-				<h5>Enter a keyword for Recipe suggestions using your Pantry</h5>
+				<h5 style={ styles.suggest }>Enter a keyword for Recipe suggestions using your Pantry</h5>
 			)
 		} else {
 				return null
@@ -145,10 +146,10 @@ class Recipes extends Component {
     			<div className='container'>
 						<div style={ styles.backing } >
 							<div className='center' >
-			            <div>
-			      				<h1 style={ styles.heading }><img src={ logoImg }/> Recipe Box</h1>
-										{ this.instructSuggest() }
+			            <div style={ styles.suggest }>
+			      				<h3 style={ styles.heading }><img src={ logoImg }/> Recipe Box</h3>
 										{ this.displaySearch() }
+										{ this.instructSuggest() }
 										{ this.addNewRecipe() }
 									</div>
 							</div>

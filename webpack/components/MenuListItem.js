@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const styles = {
-	lcard: { fontSize: '20px', color: 'black',
-					 backgroundColor: '#D0D7D5', margin: '10px 50px'},
+	lcard: { fontSize: '20px', color: 'black',backgroundColor: '#D0D7D5'},
 	btnstyle: { margin: '8px 10px'},
 	input: { color: 'black' },
 	buttons: { margin: '5px', backgroundColor: 'transparent', color: 'black'},

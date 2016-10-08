@@ -11,7 +11,11 @@ require('superagent-rails-csrf')(request);
 const styles = {
 	lcard: { fontSize: '40px' },
 	aboutLink: { fontSize: '20px', color: 'black' },
-  navBack: { backgroundColor: '#F9E883' }
+  navBack: { backgroundColor: '#F9E883' },
+	head: { backgroundColor: '#f3f3f3'},
+	recipeCard: { padding: '30px', margin: '30px'},
+	dots: { height: '1px', borderTop: '2px dashed tomato'}
+
 }
 
 class NewRecipe extends Component {
@@ -84,19 +88,19 @@ class NewRecipe extends Component {
           <input type='number' ref='addReadyInMinutes' placeholder='Will be ready in how many minutes?' />
           <input type='number' ref='addServings' placeholder='How many servings?'/>
           <input type='text' ref='addCreditText' placeholder='Who gets the credit for this wonderful recipe?'/>
-          <input 
+          <input
                  id="publish"
-                 type='checkbox' 
-                 name='check' 
-                 defaultChecked={this.state.checked} 
+                 type='checkbox'
+                 name='check'
+                 defaultChecked={this.state.checked}
                  onChange={this.handleClick}
                  value={ false }
           />
           <label htmlFor='publish'>Would you like to pubish for others to enjoy?
           </label>
-          <Dropzone ref='addImage' 
-                    style={{border: 'none', textAlign: 'left'}} 
-                    onDrop={this.onDrop} 
+          <Dropzone ref='addImage'
+                    style={{border: 'none', textAlign: 'left'}}
+                    onDrop={this.onDrop}
                     multiple={false}><div>Click to upload image</div>
           </Dropzone>
           <button type='submit'>Add Ingredients and Steps</button>
@@ -140,9 +144,13 @@ class NewRecipe extends Component {
       )
     } else {
       return(
-        <div className='center container'>
+        <div className='center container' style={ styles.head }>
           <h1>Build Your Recipe</h1>
-          { this.recipeAddForm() }
+					<div className='card' style={ styles.recipeCard }>
+					<div style={ styles.dots }>
+					</div>
+          	{ this.recipeAddForm() }
+					</div>
         </div>
       )
     }

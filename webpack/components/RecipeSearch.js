@@ -1,9 +1,18 @@
 import React from 'react';
 
 const styles = {
-	stylesearch: { backgroundColor: '#f3f3f3', padding: '20px', margin: '50px 0', boxShadow: '10px 10px 5px #686b6a'},
-	buttons: { backgroundColor: 'transparent', color: 'black'},
+	form: { margin: '0 15px'},
 
+	tab_buttons: {
+		backgroundColor: '#D0d7d5',
+		color: 'black',
+		borderRadius: '3px 3px 0px 0px',
+		boxShadow: 'none',
+		fontSize: '90%'},
+
+	spaced: {margin: '0 5px'},
+	tabbox: { borderBottom: '1px solid gray',	marginLeft: '15px'},
+	nextbtn: { margin: '10px 10px 0 0',}
 }
 
 var timeElapsed;
@@ -40,18 +49,21 @@ class RecipeSearch extends React.Component {
 		if(this.props.recipesInView > 0) {
 			return(
 				<div className='row'>
-					<div className='col s12 m4 offset-m4'>
-						{(this.state.page > 1) ? <button className='col s6'onClick={this.previousPage}>Prev</button> : null }
-						{(this.props.recipesInView === 30) ? <button className='col s6 m6'onClick={this.nextPage}>Next</button> : null }
-					</div>
+					{(this.state.page > 1) ? <button style={ styles.nextbtn } className='btn col s2' onClick={this.previousPage}>Prev</button> : null }
+					{(this.props.recipesInView === 30) ? <button style={ styles.nextbtn }className='btn col s2' onClick={this.nextPage}>Next</button> : null }
 				</div>
 			)
 		}
 	}
 
-	changeView(view) {
+	changeView(e, view) {
 		this.props.changeView(view)
 		this.setState( {page: 1 } )
+		let buttons = e.target.parentElement.children
+		for(var button of buttons) {
+			button.style.backgroundColor='#D0d7d5'
+		}
+		e.target.style.backgroundColor='#f3f3f3'
 	}
 
 	nextPage() {
@@ -67,7 +79,7 @@ class RecipeSearch extends React.Component {
 	searchBar() {
 		if(this.props.view !== 'favorites') {
 			return(
-				<form onSubmit={this.doISearch}>
+				<form style={ styles.form } onSubmit={this.doISearch}>
 					<input type='text' ref='searchQuery' onChange={this.doISearch}
 					required placeholder='Recipe name, Ingredient, etc.' />
 					<br/>
@@ -83,17 +95,17 @@ class RecipeSearch extends React.Component {
 						<option value="alphabetical">Alphabetical</option>
 					</select>
 				</form>
-			)	
+			)
 		}
 	}
 
 	render() {
 		return(
-			<div>
-				<div>
-				  <button className='btn' onClick={ () => this.changeView('favorites')}>Favorites</button>
-				  <button className='btn' onClick={ () => this.changeView('search')}>Search</button>
-				  <button className='btn' onClick={ () => this.changeView('suggest')}>Suggest</button>
+			<div className='row'>
+				<div className='col s12' style={ styles.tabbox }>
+				  <button className='col s3 m3 btn' style={ styles.tab_buttons } onClick={ (e) => this.changeView(e, 'favorites')}>Favorites</button>
+				  <button className='col s3 m3 btn' style={ {...styles.tab_buttons, ...styles.spaced} } onClick={ (e) => this.changeView(e, 'search')}>Search</button>
+				  <button className='col s3 m3 btn' style={ styles.tab_buttons } onClick={ (e) => this.changeView(e, 'suggest')}>Suggest</button>
 				</div>
 				{ this.searchBar() }
 				{ this.pagination() }

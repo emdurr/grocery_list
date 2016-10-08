@@ -6,8 +6,8 @@ import logoImg from '../images/ilarder_logo.png';
 const styles = {
 	cborder: { borderBottom: '1px solid grey', margin: '5px' },
 	tborder: { margin: '35px 6px 0 0 ', backgroundColor: '#e7ebea', fontSize: '120%' },
-	heading: { backgroundColor: '#414E49', padding: '10px', color: 'white'},
-	backing: { backgroundColor: '#f3f3f3'},
+	heading: { margin: '0', backgroundColor: '#414E49', padding: '10px', color: 'white'},
+	backing: { backgroundColor: '#f3f3f3', display:'center', marginTop: '15px'},
 	input: { borderBottom: '2px solid #414E49'},
 	pbody: { margin: '10px'},
 	qtystyle: { marginLeft: '55px', border: '1px solid #6e7874', borderRadius: '3px', padding: '5px'},
@@ -106,33 +106,33 @@ class Pantry extends Component {
 
 	showPantry() {
 			return(
-				<div style={ styles.backing } className='container'>
-					<div className='center' >
+				<div style={ styles.backing } className='container center'>
+					<div >
 						<h3 style={ styles.heading }><img src={ logoImg }/> { this.state.pantry.pantry.name } </h3>
 					</div>
 					<div style={ styles.pbody } className='row'>
 	    			<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
-						<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
-						</button>
-						<div className='col s8'>
+						<div className='col s7'>
 							<input autoFocus={ true } style={ styles.input } type='text' ref='addName' placeholder='Ingredient Name' required />
 						</div>
 						<div className='col s3'>
-							<input style={ styles.input } type='number' ref='addQty' placeholder='QTY on Hand'/>
+							<input style={ styles.input } type='number' ref='addQty' placeholder='QTY'/>
 						</div>
+						<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
+						</button>
 						</form>
 					<div className="row" style={ styles.tborder } >
-						<div className='col s6'>
-							<p> Ingredient </p>
+						<div className='col s5'>
+							<p>Ingredient</p>
 						</div>
-						<div className='col s2 center'>
+						<div className='col s3 center'>
 							<p>Quantity</p>
 						</div>
 						<div className='col s2 center' >
 							<p>Delete</p>
 						</div>
 						<div className='col s2 center' >
-							<p>Add to List</p>
+							<p>List</p>
 						</div>
 					</div>
 					<ul>
