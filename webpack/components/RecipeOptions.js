@@ -99,7 +99,7 @@ class RecipeOptions extends React.Component {
 			<div>
 				<div className='center'>
 					<button style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addToMenu' } ) }><i className="material-icons">description</i></button>
-					<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addIngredients' } ) }><i className="material-icons">list</i></button>
+					<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addBulkIngredients' } ) }><i className="material-icons">list</i></button>
 					{this.chooseFavoriteButton()}
 					{this.belongsToUser()}
 				</div>
