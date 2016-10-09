@@ -20,7 +20,11 @@ class ListIngs extends Component {
 		this.deleteIngredient = this.deleteIngredient.bind(this);
 		this.removeIngredient = this.removeIngredient.bind(this);
 		this.addIngredientToPantry = this.addIngredientToPantry.bind(this);
-		this.state = { ingredients: [], listIngredients: this.props.list.ingredients, listId: this.props.list.id};
+		this.handleSuggestion = this.handleSuggestion.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
+		this.displaySearchIngredients = this.displaySearchIngredients.bind(this);
+		this.addToDefaultValue = this.addToDefaultValue.bind(this);
+		this.state = { addName: [], ingredients: [], listIngredients: this.props.list.ingredients, listId: this.props.list.id, defVal: null};
 	}
 
 	componentWillMount() {
@@ -28,7 +32,7 @@ class ListIngs extends Component {
 			url: '/api/v1/ingredients',
 			type: 'GET',
 			dataType: 'JSON'
-		}).done( ingedients => {
+		}).done( ingredients => {
 			this.setState({ ingredients });
 		}).fail( data => {
 			console.log(data);
@@ -69,15 +73,47 @@ class ListIngs extends Component {
 		});
 	}
 
-	suggest(e) {
-		e.preventDefault;
-		clearTimeout(timeElapsed)
-		timeElapsed = setTimeout(this.handleSuggestion, 800)
+	handleSuggestion(e) {
+		e.preventDefault();
+		let r = this.refs
+		if(r.addName.value.length >= 3) {
+			this.handleSearch(r.addName.value)
+		} else {
+			return null
+		}
 	}
 
-	handleSuggestion() {
+	handleSearch(name) {
+		let addName = this.state.addName;
+		let addNameArr = [];
+    let ingredients = this.state.ingredients.map( ingredient => {
+    	let nameLength = name.length
+    	let ingredientName = ''
+    	let i = 0
+    	let ingArr = ingredient.name.split('')
+    	while (i < nameLength) {
+    		ingredientName = ingredientName + ingArr[i]
+    		i ++
+    	}
+    	if (name === ingredientName) {
+    		addNameArr = [...addNameArr, ingredient]
+    	}
+    })
+    this.setState({ addName: addNameArr})
+    return ingredients
+  }
 
-	}
+  displaySearchIngredients() {
+	  	let ingredients = this.state.addName.map( ingredient => {
+  			return(
+  				<div key={ingredient.id}>
+  					<h2 onClick={(e) => this.addToDefaultValue(e, ingredient)}>{ingredient.name}</h2>
+  				</div>
+  			)
+	  	})
+	  	return ingredients;
+  }
+
 
 	removeIngredient(ingredientData) {
 		let listIngredients = this.state.listIngredients;
@@ -101,6 +137,11 @@ class ListIngs extends Component {
 		});
 	}
 
+	addToDefaultValue(e, ingredient) {
+		e.preventDefault();
+		this.refs.addIngredientForm.reset();
+		this.setState({ addName: [], defVal: ingredient.name})
+	}
 
 	handleAddIngredient(e) {
 
@@ -184,11 +225,12 @@ class ListIngs extends Component {
 					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
 					</button>
 					<div className='col s7 offset-s1' style={ styles.ingInput }>
-						<input style={ styles.input }
-									 type='text'
-									 ref='addName'
-									 placeholder='Item To Purchase'
-									 onChange= {this.suggest}
+						<input style={ styles.input } 
+									 type='text' 
+									 ref='addName' 
+									 placeholder='Item To Purchase' 
+									 defaultValue={this.state.defVal}
+									 onChange= {this.handleSuggestion}
 									 required/>
 					</div>
 					<div className='col s4'>
@@ -197,6 +239,9 @@ class ListIngs extends Component {
 					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
 					</button>
 				</form>
+				<div>
+					<h2>{this.displaySearchIngredients()}</h2>
+				</div>
 				<div className="row" style={ styles.tborder } >
 					<div className='col s4'>
 						<p>Item </p>

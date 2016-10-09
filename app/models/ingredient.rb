@@ -15,4 +15,6 @@ class Ingredient < ApplicationRecord
 	has_many :pantries, :through => :pantry_ingredients
 	has_many :recipes, :through => :recipe_ings
 	has_many :lists, :through => :list_ings
+
+	
 end
