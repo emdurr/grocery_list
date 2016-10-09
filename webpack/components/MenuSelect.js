@@ -118,13 +118,17 @@ class MenuSelect extends React.Component {
 	addNewDay() {
 		if(this.state.days && !this.state.addDayView) {
 			return(
-				<button className='btn' onClick={() => this.setState( { addDayView: true} ) }>Assign to New Day</button>
-			)
+        <div className='row'>
+          <div className='col s6'>
+				    <button className='btn' onClick={() => this.setState( { addDayView: true} ) }>Assign to New Day</button>
+          </div>
+        </div>
+      )
 		} else if(this.state.days && this.state.addDayView) {
 			return(
 				<div className='row col s6'>
 					<input className='col s6' ref='newDay' type='text'/>
-					<button className='btn col s2' onClick={() => this.addToMenu(this.state.menu_id, this.refs.newDay.value)}> Add </button>
+					<button className='btn-floating btn-medium waves-effect waves grey' onClick={() => this.addToMenu(this.state.menu_id, this.refs.newDay.value)}><i className="material-icons">add</i></button>
 				</div>
 			)
 		} else {
