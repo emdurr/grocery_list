@@ -18,9 +18,11 @@ class RecipeSteps extends React.Component {
 			let steps = this.props.steps.map( step => {
 			if (this.props.edit) {
 				return(
-					<div key={step.id}>
-						<RecipeStep  {...step} />
-						<button className='col s1' onClick={ () => this.props.deleteStep(step)}>x</button>
+					<div className='row'>
+						<div key={step.id}>
+							<RecipeStep  {...step} />
+							<button className='col s1' onClick={ () => this.props.deleteStep(step)}>x</button>
+						</div>
 					</div>
 				)
 			} else {
@@ -73,8 +75,12 @@ class RecipeSteps extends React.Component {
 					<div>
 						{ this.addStep() }
 						<div>
-							<ul className='row'>
-								{this.displaySteps()}
+							<ul>
+							 	<div className='row'>
+									<div className='col s12'>
+										{this.displaySteps()}
+									</div>
+								</div>
 							</ul>
 						</div>
 					</div>

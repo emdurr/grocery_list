@@ -12,8 +12,8 @@ const styles = {
   lonnie: { width: 'auto', height: '200px', borderRadius: '50%', backgroundImage: 'url(' + lonnieImg + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' },
   jo: { width: 'auto', height: '200px', borderRadius: '50%', backgroundImage: 'url(' + joImg + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' },
 	github: { height: '40px', width: '40px', padding: '5px', backgroundSize: 'cover'},
-	about: { backgroundColor: '#D0D7D5'},
-	lhead: { backgroundColor: '#3B4743', color: 'white', padding: '10px'},
+	about: { backgroundColor: '#D0D7D5', marginTop: '20px'},
+	lhead: { backgroundColor: '#3B4743', color: 'white', padding: '10px', margin: '0'},
 	team: { margin: '50px'},
 	padding: { padding: '30px 0', margin: '0'}
 }

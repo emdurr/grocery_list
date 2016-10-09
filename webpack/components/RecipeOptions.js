@@ -3,6 +3,10 @@ import MenuSelect from './MenuSelect';
 import AddBulkIngredients from './AddBulkIngredients';
 import AddToFavorites from './AddToFavorites';
 
+const styles = {
+	floatbtn: { margin: '10px'}
+}
+
 class RecipeOptions extends React.Component {
 	constructor(props) {
 		super(props)
@@ -21,11 +25,11 @@ class RecipeOptions extends React.Component {
 	chooseFavoriteButton() {
 		if(this.props.favorite) {
 			return(
-				<button onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves yellow"><i className="material-icons">star</i></button>
+				<button  style={ styles.floatbtn } onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves grey"><i className="material-icons">star</i></button>
 			)
 		} else {
 			return(
-				<button className="btn-floating btn-medium waves-effect waves yellow" onClick={ () => this.setState( {modal: 'addToFavorites' } ) }><i className="material-icons">star</i></button>
+				<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves yellow" onClick={ () => this.setState( {modal: 'addToFavorites' } ) }><i className="material-icons">star</i></button>
 			)
 		}
 	}
@@ -83,7 +87,7 @@ class RecipeOptions extends React.Component {
 			return( null )
 		} else {
 			return(
-				<button className="btn-floating btn-medium waves-effect waves grey" onClick={this.createCustom}><i className="material-icons">C</i></button>
+				<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={this.createCustom}><i className="material-icons">C</i></button>
 			)
 		}
 	}
@@ -94,8 +98,8 @@ class RecipeOptions extends React.Component {
 		return(
 			<div>
 				<div className='center'>
-					<button className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addToMenu' } ) }><i className="material-icons">description</i></button>
-					<button className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addIngredients' } ) }><i className="material-icons">list</i></button>
+					<button style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addToMenu' } ) }><i className="material-icons">description</i></button>
+					<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addIngredients' } ) }><i className="material-icons">list</i></button>
 					{this.chooseFavoriteButton()}
 					{this.belongsToUser()}
 				</div>

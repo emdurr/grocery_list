@@ -7,6 +7,7 @@ import { Link } from 'react-router';
 
 const styles = {
 	buttons: { margin: '30px'},
+	cbtn: { margin:'5px 0', backgroundColor: 'transparent', width: '100%'},
 }
 
 class Recipe extends React.Component {

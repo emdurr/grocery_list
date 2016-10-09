@@ -4,7 +4,8 @@ import logoImg from '../images/ilarder_logo.png';
 const styles = {
 	imgstyle: { width: '100%', border: '1px solid gray'},
 	title: { backgroundColor: '#414E49', color: 'white', textAlign: 'center', padding: '10px 0'},
-	comment: {fontFamily: 'Kalam', color: '#1b4fa3',transform: 'rotate(-10deg)', fontSize: '120%'}
+	comment: {fontFamily: 'Kalam', color: '#1b4fa3',transform: 'rotate(-10deg)', fontSize: '120%'},
+	publish: { padding: '10px'}
 
 }
 class RecipeHeader extends Component {
@@ -35,14 +36,14 @@ class RecipeHeader extends Component {
   publishBox() {
   	if(this.props.edit) {
   		return(
-  			<div>
+  			<div style={ styles.publish }>
 	  			<input
-			                 id="publish"
-			                 type='checkbox'
-			                 name='check'
-			                 defaultChecked={this.state.published}
-			                 onChange={this.handleClick}
-			                 value={ false }
+             id="publish"
+             type='checkbox'
+             name='check'
+             defaultChecked={this.state.published}
+             onChange={this.handleClick}
+             value={ false }
 			  	/>
 			    <label htmlFor='publish'>Would you like to pubish for others to enjoy?
 			    </label>
@@ -76,9 +77,9 @@ class RecipeHeader extends Component {
 								<div>
 									<p className='center col s6 m3' style={ styles.comment }> {favoriteComment} </p>
 								</div>
-								{this.publishBox()}
 							</div>
 							<div className='col s12 m5'>
+								{this.publishBox()}
 								{imageUrl ? <img style={ styles.imgstyle } src={imageUrl} alt={title} /> : null }
 							</div>
 						</div>

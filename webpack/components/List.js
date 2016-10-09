@@ -4,7 +4,7 @@ import logoImg from '../images/ilarder_logo.png';
 import { Link } from 'react-router';
 
 const styles = {
-	cbtn: { margin:'5px 0', backgroundColor: 'transparent', width: '100%'},
+	cbtn: { margin:'20px', backgroundColor: 'transparent'},
 	lhead: { backgroundColor: '#3B4743', padding: '10px', color: 'white'},
 	logo: { paddingRight: '10px'}
 
@@ -48,12 +48,12 @@ class List extends Component {
 		          <div className="card-content black-text" onClick={this.revealListIng} >
 	              <ListIngs list={this.state.list} />
 	            </div>
-	            <div className="card-action"> 
+	            <div className="card-action">
 	            	<button className=' btn black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
 	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
 	            	<Link className= 'btn black-text' style={ styles.cbtn } to={'/pantry'} >Pantry</Link>
+								<Link className='btn black-text' style={ styles.cbtn } to={'/lists'} >Back to Lists</Link>
 	            </div>
-	            <Link className='btn black-text' style={ styles.cbtn } to={'/lists'} >Back to Lists</Link>
 	          </div>
 	        </div>
 	      </div>

@@ -19,12 +19,12 @@ class RecipeIngredients extends React.Component {
 			if (this.props.edit) {
 				return(
 					<div className='row'>
-					<div >
-						<div key={ingredient.id} >
-							<RecipeIngredient  {...ingredient} />
-							<button className='col s1' onClick={ () => this.props.deleteIngredient(ingredient)}>x</button>
+						<div>
+							<div key={ingredient.id} >
+								<RecipeIngredient  {...ingredient} />
+								<button className='col s1' onClick={ () => this.props.deleteIngredient(ingredient)}>x</button>
+							</div>
 						</div>
-					</div>
 					</div>
 				)
 			} else {

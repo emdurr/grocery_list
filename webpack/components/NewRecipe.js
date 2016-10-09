@@ -6,16 +6,15 @@ import RecipeIngredients from './RecipeIngredients';
 import RecipeSteps from './RecipeSteps';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
+import logoImg from '../images/ilarder_logo.png';
 require('superagent-rails-csrf')(request);
 
 const styles = {
-	lcard: { fontSize: '40px' },
-	aboutLink: { fontSize: '20px', color: 'black' },
-  navBack: { backgroundColor: '#F9E883' },
-	head: { backgroundColor: '#f3f3f3'},
+	head: { backgroundColor: '#f3f3f3', marginTop: '20px'},
 	recipeCard: { padding: '30px', margin: '30px'},
-	dots: { height: '1px', borderTop: '2px dashed tomato'}
-
+	lhead: { backgroundColor: '#3B4743', padding: '10px', color: 'white', margin: '0'},
+	logo: { paddingRight: '10px'},
+	imagebtn: { backgroundColor: 'transparent', margin: '10px 20px'}
 }
 
 class NewRecipe extends Component {
@@ -98,12 +97,15 @@ class NewRecipe extends Component {
           />
           <label htmlFor='publish'>Would you like to pubish for others to enjoy?
           </label>
-          <Dropzone ref='addImage'
-                    style={{border: 'none', textAlign: 'left'}}
-                    onDrop={this.onDrop}
-                    multiple={false}><div>Click to upload image</div>
-          </Dropzone>
-          <button type='submit'>Add Ingredients and Steps</button>
+					<div className='row'>
+	          <Dropzone className='col s10 m4 push-m1 btn black-text'
+											style={ styles.imagebtn }
+											ref='addImage'
+	                    onDrop={this.onDrop}
+	                    multiple={false}><div>Upload image</div>
+	          </Dropzone>
+	          <button style={ styles.imagebtn } className='col s10 m4 push-m1 btn black-text' type='submit'>Next Steps</button>
+					</div>
         </form>
       </div>
     )
@@ -145,9 +147,9 @@ class NewRecipe extends Component {
     } else {
       return(
         <div className='center container' style={ styles.head }>
-          <h1>Build Your Recipe</h1>
+          <h3  style={ styles.lhead } ><img src={ logoImg }/> Build Your Recipe</h3>
 					<div className='card' style={ styles.recipeCard }>
-					<div style={ styles.dots }>
+					<div>
 					</div>
           	{ this.recipeAddForm() }
 					</div>

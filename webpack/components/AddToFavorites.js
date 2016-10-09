@@ -20,6 +20,11 @@ let modalStyle = {
   padding: '20px',
 }
 
+const styles = {
+  btns: { }
+}
+
+
 
 class addToFavorites extends React.Component {
   constructor(props) {
@@ -45,13 +50,15 @@ class addToFavorites extends React.Component {
 
   render() {
     return (
-      <div style={ backdropStyle }>
-        <div style={ modalStyle }>
-          <h5>Adding Recipe To Favorites</h5>
-          <h4>{ this.props.title }</h4>
-            <input ref='favoriteComment' type='text' placeholder='Comments'/>
-            <button className='btn' onClick={ this.handleAddFavorite }>Confirm</button>
-            <button className='btn' onClick={ this.props.closeModal }>Cancel</button>
+      <div className='row'>
+        <div style={ backdropStyle }>
+          <div style={ modalStyle }>
+            <h5>Adding Recipe To Favorites</h5>
+            <h4>{ this.props.title }</h4>
+              <input ref='favoriteComment' type='text' placeholder='Comments'/>
+              <button className='col s12 m3 btn' onClick={ this.handleAddFavorite }>Confirm</button>
+              <button className='col s12 m3 btn' onClick={ this.props.closeModal }>Cancel</button>
+          </div>
         </div>
       </div>
     )

@@ -223,11 +223,11 @@ class ListIngs extends Component {
     		<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
 					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
 					</button>
-					<div className='col s7 offset-s1' style={ styles.ingInput }>
-						<input style={ styles.input } 
-									 type='text' 
-									 ref='addName' 
-									 placeholder='Item To Purchase' 
+					<div className='col s6 offset-s1' style={ styles.ingInput }>
+						<input style={ styles.input }
+									 type='text'
+									 ref='addName'
+									 placeholder='Item To Purchase'
 									 defaultValue={this.state.defVal}
 									 onChange= {this.handleSuggestion}
 									 required/>
@@ -235,8 +235,6 @@ class ListIngs extends Component {
 					<div className='col s4'>
 						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY' required/>
 					</div>
-					<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
-					</button>
 				</form>
 				<div>
 					<h2>{this.displaySearchIngredients()}</h2>

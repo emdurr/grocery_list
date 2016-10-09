@@ -6,13 +6,13 @@ const styles = {
 
 const RecipeStep =({number, stepText}) => {
 	return(
-		<div clasName='row'>
-			<div className='col s12'>
+		<div className='row'>
+			<div>
 				<div style={ styles.spacing }>
 					<div className='col s1'>
 						<p style={ styles.spacing }> {number} </p>
 					</div>
-					<div className='col s9'>
+					<div className='col s8'>
 						<p style={ styles.spacing }> {stepText} </p>
 					</div>
 				</div>
