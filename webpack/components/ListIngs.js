@@ -123,7 +123,7 @@ class ListIngs extends Component {
 			dataType: 'JSON',
 			data: { list_id: this.state.listId }
 		}).done( () => {
-			let removeIndex = listIngredients.findIndex( listIngredient => listIngredient.ingredient.ingredient.id === ingredientData.ingredient.id);
+			let removeIndex = listIngredients.findIndex( listIngredient => listIngredient.ingredient.id === ingredientData.ingredient.id);
 			this.setState({
 				listIngredients: [
 					...listIngredients.slice(0, removeIndex),
@@ -165,7 +165,6 @@ class ListIngs extends Component {
       }
 			this.refs.addIngredientForm.reset();
 			this.refs.addName.focus();
-
 		}).fail( data => {
 			console.log(data);
 		})
