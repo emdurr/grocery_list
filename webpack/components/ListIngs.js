@@ -236,7 +236,13 @@ class ListIngs extends Component {
 									 required/>
 					</div>
 					<div className='col s4'>
-						<input style={ styles.input } type='number' ref='addQty' placeholder='QTY' required/>
+						<input style={ styles.input } 
+									 type='number' 
+									 min='0'
+									 pattern="^[0-9]"
+									 ref='addQty' 
+									 placeholder='QTY' 
+									 required/>
 					</div>
 				</form>
 				<div>

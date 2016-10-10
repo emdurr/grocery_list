@@ -21,6 +21,22 @@ class EditPantryIngredient extends Component {
 		this.state = { edit: false , modal: null };
 	}
 
+	componentWillMount() {
+		if (this.props.ingredientData.ingredient.pantry_ingredients.qty <= 0) {
+			this.setState({ modal: 'popoutContent'})
+		} else {
+			return null
+		}
+	}
+
+	componentDidUpdate() {
+		if (this.props.ingredientData.ingredient.pantry_ingredients.qty <= 0) {
+			this.setState({ modal: 'popoutContent'})
+		} else {
+			return null
+		}   
+	}
+
 	closeModal() {
 		this.setState( { modal: null } )
 	}
@@ -57,50 +73,58 @@ class EditPantryIngredient extends Component {
 
 	render() {
 		let ingredientData = this.props.ingredientData
-		if (this.state.edit) {
-			return(
-				<div>
+			if (this.state.edit) {
+				return(
+					<div>
+						<div className="row" style={ styles.cborder } >
+							<li>
+								<div className='col s8'>
+									<p> { ingredientData.ingredient.name } </p>
+								</div>
+								<div className='center col s3'>
+									<form ref='editIngredientForm' id='editIngredientForm' onSubmit={this.handleEditIngredient}>
+										<input autoFocus={ true } 
+													 style={ styles.input } 
+													 type='text' 
+													 ref='editQty' 
+													 defaultValue={`${ingredientData.ingredient.pantry_ingredients.qty}`} 
+													 placeholder='Qty' 
+													 min='0'
+													 pattern="^[0-9]"
+													 required/>
+									</form>
+								</div>
+								<div className='center col s1' >
+									<p className="btn-floating btn-xs grey">
+									<i className="xs material-icons" onClick={ () => this.props.deleteIngredient(ingredientData)}>delete</i></p>
+								</div>
+							</li>
+						</div>
+					</div>
+				)
+			} else {
+				return(
 					<div className="row" style={ styles.cborder } >
+						{ this.popoutContent() }
 						<li>
-							<div className='col s8'>
+							<div className='col s5'>
 								<p> { ingredientData.ingredient.name } </p>
 							</div>
 							<div className='center col s3'>
-								<form ref='editIngredientForm' id='editIngredientForm' onSubmit={this.handleEditIngredient}>
-									<input autoFocus={ true } style={ styles.input } type='text' ref='editQty' defaultValue={`${ingredientData.ingredient.pantry_ingredients.qty}`} placeholder='Qty' required/>
-								</form>
+								<p style={ styles.qtystyle } onClick={ () => this.toggleEdit()} >{ingredientData.ingredient.pantry_ingredients.qty}</p>
 							</div>
-							<div className='center col s1' >
+							<div className='center col s2' >
 								<p className="btn-floating btn-xs grey">
 								<i className="xs material-icons" onClick={ () => this.props.deleteIngredient(ingredientData)}>delete</i></p>
 							</div>
+							<div className='center col s2' >
+								<p className="btn-floating btn-xs grey">
+						    <i className="xs material-icons" onClick={ () => this.setState( { modal: 'popoutContent'} )}>check</i></p>
+							</div>
 						</li>
 					</div>
-				</div>
-			)
-		} else {
-			return(
-				<div className="row" style={ styles.cborder } >
-					{ this.popoutContent() }
-					<li>
-						<div className='col s5'>
-							<p> { ingredientData.ingredient.name } </p>
-						</div>
-						<div className='center col s3'>
-							<p style={ styles.qtystyle } onClick={ () => this.toggleEdit()} >{ingredientData.ingredient.pantry_ingredients.qty}</p>
-						</div>
-						<div className='center col s2' >
-							<p className="btn-floating btn-xs grey">
-							<i className="xs material-icons" onClick={ () => this.props.deleteIngredient(ingredientData)}>delete</i></p>
-						</div>
-						<div className='center col s2' >
-							<p className="btn-floating btn-xs grey">
-					    <i className="xs material-icons" onClick={ () => this.setState( { modal: 'popoutContent'} )}>check</i></p>
-						</div>
-					</li>
-				</div>
-			)
-		}
+				)
+			}
 	}
 }
 

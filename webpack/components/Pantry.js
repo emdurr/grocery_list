@@ -173,7 +173,12 @@ class Pantry extends Component {
 										 required />
 						</div>
 						<div className='col s3'>
-							<input style={ styles.input } type='number' ref='addQty' placeholder='QTY'/>
+							<input style={ styles.input } 
+										 type='number' 
+										 ref='addQty' 
+										 min='0'
+										 pattern="^[0-9]"
+										 placeholder='QTY'/>
 						</div>
 						<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
 						</button>
