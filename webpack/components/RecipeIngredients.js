@@ -18,18 +18,14 @@ class RecipeIngredients extends React.Component {
 		let ingredients = this.props.recipeIngs.map( ingredient => {
 			if (this.props.edit) {
 				return(
-					<div className='row'>
-						<div>
-							<div key={ingredient.id} >
-								<RecipeIngredient  {...ingredient} />
-								<button className='col s1' onClick={ () => this.props.deleteIngredient(ingredient)}>x</button>
-							</div>
-						</div>
+					<div  key={ingredient.id} className='row'>
+						<RecipeIngredient  {...ingredient} />
+						<button className='col s1' onClick={ () => this.props.deleteIngredient(ingredient)}>x</button>
 					</div>
 				)
 			} else {
 				return(
-					<div key={ingredient.id} >
+					<div key={ingredient.id} className='row'>
 						<RecipeIngredient  {...ingredient} />
 					</div>
 				)

@@ -3,6 +3,7 @@ import BulkIngredientListItem from './BulkIngredientListItem';
 
 const styles = {
 	backdropStyle: {
+
 		position: 'fixed',
 		width: '100%',
 		height: '100%',
@@ -13,6 +14,8 @@ const styles = {
 	},
 
 	modalStyle: {
+		maxHeight: 'calc(100vh - 50px)',
+		overflowY: 'auto',
 		position: 'fixed',
 		width: '75%',
 		top: '50%',
@@ -59,7 +62,7 @@ class AddBulkIngredients extends React.Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( data => {
-			this.setState( {listOptions: data.listOptions, 
+			this.setState( {listOptions: data.listOptions,
 				ingredientsBundle: data.ingredientsBundle } )
 			this.generateListsList()
 		}).fail( data => {

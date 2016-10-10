@@ -107,7 +107,7 @@ class ListIngs extends Component {
 	  	let ingredients = this.state.addName.map( ingredient => {
   			return(
   				<div key={ingredient.id}>
-  					<h2 onClick={(e) => this.addToDefaultValue(e, ingredient)}>{ingredient.name}</h2>
+  					<h5 onClick={(e) => this.addToDefaultValue(e, ingredient)}>{ingredient.name}</h5>
   				</div>
   			)
 	  	})
