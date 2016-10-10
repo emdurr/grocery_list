@@ -144,27 +144,30 @@ class ListIngs extends Component {
 	}
 
 	handleAddIngredient(e) {
-
 		e.preventDefault();
 		let name = this.refs.addName.value;
 		let qty_to_buy = this.refs.addQty.value;
 		let listIngredients = this.state.listIngredients
+		this.refs.addIngredientForm.reset();
+		this.refs.addName.focus();
 		$.ajax({
 			url: `/api/v1/list_ings`,
 			type: 'POST',
 			data: { list_id: this.state.listId, ingredient: { name }, list_ing: { qty_to_buy }},
 			dataType: 'JSON'
 		}).done( data => {
-			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.ingredient.id );
+			let findIngredient = listIngredients.findIndex( ingredient => ingredient.ingredient.id === data.ingredient.id );
       if (findIngredient === -1) {
-        this.setState({ listIngredients: [...listIngredients, data] })
+        this.setState({ listIngredients: [...listIngredients, data],
+       									defVal: '',
+       									addName: [] })
       } else {
         this.setState({ listIngredients: [...listIngredients.slice(0, findIngredient),
                                           data,
-                                          ...listIngredients.slice(findIngredient + 1, listIngredients.length)]})
+                                          ...listIngredients.slice(findIngredient + 1, listIngredients.length)],
+                        defVal: '',
+                        addName: []})
       }
-			this.refs.addIngredientForm.reset();
-			this.refs.addName.focus();
 		}).fail( data => {
 			console.log(data);
 		})

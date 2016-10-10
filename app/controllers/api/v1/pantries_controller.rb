@@ -1,8 +1,6 @@
 class Api::V1::PantriesController < ApiController
 	before_action :set_pantry, except: [:index, :create]
   def index
-    
-
   end
 
   def show

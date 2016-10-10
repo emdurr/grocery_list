@@ -18,3 +18,9 @@ json.pantry do
 
   json.url api_v1_pantry_url(@pantry)
 end
+
+@ingredients = Ingredient.all
+json.ingredients @ingredients do |ingredient|
+  json.id ingredient.id
+  json.name ingredient.name
+end

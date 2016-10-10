@@ -23,7 +23,11 @@ class Pantry extends Component {
 		this.editIngredient = this.editIngredient.bind(this);
 		this.removeIngredient = this.removeIngredient.bind(this);
 		this.deleteIngredient = this.deleteIngredient.bind(this);
-		this.state = { pantry: {} , pantryIngredients: [] };
+		this.addToDefaultValue = this.addToDefaultValue.bind(this);
+		this.displaySearchIngredients = this.displaySearchIngredients.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
+		this.handleSuggestion = this.handleSuggestion.bind(this);
+		this.state = { pantry: {} , pantryIngredients: [], addName: [], defVal: null, ingredients: [] };
 	}
 
 	componentWillMount() {
@@ -32,12 +36,58 @@ class Pantry extends Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( pantry => {
-			this.setState({ pantry, pantryIngredients: pantry.pantry.ingredients });
+			this.setState({ pantry, pantryIngredients: pantry.pantry.ingredients, ingredients: pantry.ingredients });
 		}).fail( data => {
 			console.log('Failed!!')
 		})
 	}
 
+	handleSuggestion(e) {
+		e.preventDefault();
+		let r = this.refs
+		if(r.addName.value.length >= 3) {
+			this.handleSearch(r.addName.value)
+		} else {
+			return null
+		}
+	}
+
+	handleSearch(name) {
+		let addName = this.state.addName;
+		let addNameArr = [];
+    let ingredients = this.state.ingredients.map( ingredient => {
+    	let nameLength = name.length
+    	let ingredientName = ''
+    	let i = 0
+    	let ingArr = ingredient.name.split('')
+    	while (i < nameLength) {
+    		ingredientName = ingredientName + ingArr[i]
+    		i ++
+    	}
+    	if (name === ingredientName) {
+    		addNameArr = [...addNameArr, ingredient]
+    	}
+    })
+    this.setState({ addName: addNameArr})
+    return ingredients
+  }
+
+  displaySearchIngredients() {
+  	let ingredients = this.state.addName.map( ingredient => {
+ 			return(
+ 				<div key={ingredient.id}>
+ 					<h2 onClick={(e) => this.addToDefaultValue(e, ingredient)}>{ingredient.name}</h2>
+ 				</div>
+ 			)
+  	})
+  	return ingredients;
+  }
+
+	addToDefaultValue(e, ingredient) {
+		e.preventDefault();
+		this.refs.addIngredientForm.reset();
+		this.setState({ addName: [], defVal: ingredient.name})
+	}
 
 	displayIngredients() {
 		let pantryIngredients = this.state.pantryIngredients.map( ingredientData => {
@@ -113,7 +163,14 @@ class Pantry extends Component {
 					<div style={ styles.pbody } className='row'>
 	    			<form ref='addIngredientForm' id='addIngredientForm' onSubmit={this.handleAddIngredient}>
 						<div className='col s7'>
-							<input autoFocus={ true } style={ styles.input } type='text' ref='addName' placeholder='Ingredient Name' required />
+							<input autoFocus={ true } 
+										 style={ styles.input } 
+										 type='text' 
+										 defaultValue={this.state.defVal} 
+										 ref='addName'
+										 onChange= {this.handleSuggestion}
+										 placeholder='Ingredient Name' 
+										 required />
 						</div>
 						<div className='col s3'>
 							<input style={ styles.input } type='number' ref='addQty' placeholder='QTY'/>
@@ -121,6 +178,7 @@ class Pantry extends Component {
 						<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
 						</button>
 						</form>
+						{this.displaySearchIngredients() }
 					<div className="row" style={ styles.tborder } >
 						<div className='col s5'>
 							<p>Ingredient</p>
