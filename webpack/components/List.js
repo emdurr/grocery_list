@@ -4,7 +4,7 @@ import logoImg from '../images/ilarder_logo.png';
 import { Link } from 'react-router';
 
 const styles = {
-	cbtn: { margin:'20px', backgroundColor: 'transparent'},
+	cbtn: { margin:'5px 8px', backgroundColor: 'transparent'},
 	lhead: { backgroundColor: '#3B4743', padding: '10px', color: 'white'},
 	logo: { paddingRight: '10px'}
 
@@ -49,11 +49,13 @@ class List extends Component {
 	              <ListIngs list={this.state.list} />
 	            </div>
 	            <div className="card-action">
-	            	<button className=' btn black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
-	            	<button className='btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
-	            	<Link className= 'btn black-text' style={ styles.cbtn } to={'/pantry'} >Pantry</Link>
-								<Link className='btn black-text' style={ styles.cbtn } to={'/lists'} >Back to Lists</Link>
-	            </div>
+							<div className='row'>
+	            	<button className='col s11 m3 btn  black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
+	            	<button className='col s11 m2 btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
+	            	<Link className= 'col s11 m2 btn black-text' style={ styles.cbtn } to={'/pantry'} >Pantry</Link>
+								<Link className='col s11 m2 btn black-text' style={ styles.cbtn } to={'/lists'} >Back to Lists</Link>
+								</div>
+						  </div>
 	          </div>
 	        </div>
 	      </div>

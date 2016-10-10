@@ -14,7 +14,8 @@ class Api::V1::StepsController < ApiController
 	end
 
 	def destroy
-		
+		@step = @recipe.steps.find(params[:id])
+		@step.destroy
 	end
 
 	private

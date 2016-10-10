@@ -49,8 +49,8 @@ class RecipeSearch extends React.Component {
 		if(this.props.recipesInView > 0) {
 			return(
 				<div className='row'>
-					{(this.state.page > 1) ? <button style={ styles.nextbtn } className='btn col s2' onClick={this.previousPage}>Prev</button> : null }
-					{(this.props.recipesInView === 30) ? <button style={ styles.nextbtn }className='btn col s2' onClick={this.nextPage}>Next</button> : null }
+					{(this.state.page > 1) ? <button style={ styles.nextbtn } className='btn col s2 push-s4' onClick={this.previousPage}>Prev</button> : null }
+					{(this.props.recipesInView === 30) ? <button style={ styles.nextbtn }className='btn col s2 push-s4' onClick={this.nextPage}>Next</button> : null }
 				</div>
 			)
 		}
@@ -64,6 +64,9 @@ class RecipeSearch extends React.Component {
 			button.style.backgroundColor='#D0d7d5'
 		}
 		e.target.style.backgroundColor='#f3f3f3'
+		if (this.refs.searchQuery) {
+			this.refs.searchQuery.focus()	
+		}
 	}
 
 	nextPage() {
@@ -81,7 +84,7 @@ class RecipeSearch extends React.Component {
 			return(
 				<form style={ styles.form } onSubmit={this.doISearch}>
 					<input type='text' ref='searchQuery' onChange={this.doISearch}
-					required placeholder='Recipe name, Ingredient, etc.' />
+					required placeholder='Recipe name, Ingredient, etc.' autoFocus={focus}/>
 					<br/>
 					<select className='browser-default' ref='searchType' onChange={this.doISearch}>
 						<option value="all">All</option>

@@ -94,7 +94,7 @@ class PopoutComponent extends Component {
                 </button>
               </form>
               <div className='row'>
-                <button className='btn col s12' onClick={this.props.closeModal}>Cancel</button>
+                <button className='btn col s6 push-s3 m3 push-m4' onClick={this.props.closeModal}>Cancel</button>
               </div>
             </div>
           </div>

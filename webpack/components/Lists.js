@@ -5,7 +5,7 @@ import foodImg from '../images/banana-pancakes.jpg';
 import logoImg from '../images/ilarder_logo.png';
 
 const styles = {
-	lcard: { fontSize: '30px', color: 'black', backgroundColor: '#D0D7D5' },
+	lcard: { fontSize: '30px', color: 'black', backgroundColor: '#D0D7D5', padding: '6px' },
 	aboutLink: { fontSize: '20px', color: 'black' },
   navBack: { backgroundColor: '#F9E883' },
 	food: { height: 'auto',
@@ -17,6 +17,7 @@ const styles = {
 	form: { textAlign: 'center', padding: '30px', color: 'white', backgroundColor: 'none'},
 	input: { borderBottom: '2px solid #414E49', height: '65px', marginLeft: '5%'},
 	logo: { color: 'white'},
+	floatbtn: { margin: '20px 0 0 10px'}
 
 }
 
@@ -68,7 +69,7 @@ class Lists extends Component {
 	        <div className="col s12">
 						<Link to={`/lists/${list.id}`} >
 		        <div className="card" style={ styles.lcard } >
-		          <div className="card-content black-text">
+		          <div className="black-text">
 								<li>
 									{ list.name }
 								</li>
@@ -112,11 +113,13 @@ class Lists extends Component {
 					</div>
 					<div className='container' style={ styles.food }>
 						<div style={ styles.form }>
-							<form id='addForm' onSubmit={this.handleAddList}>
-								<input style={ styles.input } className='col s8 offset-s1' type='text' ref='addName' required />
-								<button type="submit" className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">add</i>
-								</button>
+							<form className='col s9' id='addForm' onSubmit={this.handleAddList}>
+								<input style={ styles.input }  type='text' ref='addName' required />
 							</form>
+							<div className='col s2' style={ styles.floatbtn }>
+								<button type="submit" className="btn-floating btn-medium waves-effect waves grey">
+								<i className="material-icons">add</i></button>
+							</div>
 							<ul style={ styles.form }>
 								{ this.displayLists() }
 							</ul>
