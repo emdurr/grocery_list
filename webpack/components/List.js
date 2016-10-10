@@ -52,7 +52,7 @@ class List extends Component {
 							<div className='row'>
 	            	<button className='col s11 m3 btn  black-text' style={ styles.cbtn } onClick={() => this.toggleEditList()} >Edit List Name</button>
 	            	<button className='col s11 m2 btn black-text' style={ styles.cbtn } onClick={() => this.deleteList(this.state.list.id)}>Delete List</button>
-	            	<Link className= 'col s11 m2 btn black-text' style={ styles.cbtn } to={'/pantry'} >Pantry</Link>
+	            	<Link className= 'col s11 m2 btn black-text' style={ styles.cbtn } to={'/pantry'} >Larder</Link>
 								<Link className='col s11 m2 btn black-text' style={ styles.cbtn } to={'/lists'} >Back to Lists</Link>
 								</div>
 						  </div>

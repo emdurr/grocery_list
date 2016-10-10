@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleSignup } from './actions';
 import logoImg from '../../images/ilarder_logo.png';
+import FacebookLogin from 'react-facebook-login';
 
 const styles = {
   inForm: { border: '1px solid grey', borderRadius: '8px', padding: '15px',
             marginTop:' 15px', boxShadow: '10px 10px 5px #888888' },
   cbtn: { margin: '20px', backgroundColor: 'transparent'},
   lhead: { backgroundColor: '#3B4743', padding: '15px', color: 'white'},
-  formstyle: { margin: '25px'}
+  formstyle: { margin: '25px', padding: '10px'}
 }
 
 
@@ -31,6 +32,13 @@ class Signup extends React.Component {
     )
   }
 
+  responseFacebook = (auth) => {
+    let name = auth.name.split(" ");
+    let firstName = [0];
+    let lastName = [1];
+    this.props.dispatch(handleFacebookLogin(auth, firstName, lastName, this.props.history));
+  }
+
   render() {
     return (
       <div className='container'>
@@ -43,6 +51,16 @@ class Signup extends React.Component {
             <input ref="password" type="password" required placeholder="Password (Required)" />
             <input ref="passwordConf" type="password" required placeholder="Re-Enter Password" />
             <button style={ styles.cbtn } type="submit" className="btn black-text">Sign Up</button>
+            <div   style={ styles.cbtn }>
+              <FacebookLogin
+                appId='ENV'
+                autoLoad={false}
+                fields='name, email'
+                cssClass='btn blue'
+                icon='fa-facebook'
+                callback={this.responseFacebook}
+              />
+            </div>
           </form>
         </div>
       </div>

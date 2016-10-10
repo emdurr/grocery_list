@@ -133,7 +133,7 @@ class Recipes extends Component {
 	instructSuggest() {
 		if (this.state.view === 'suggest') {
 			return(
-				<h5 style={ styles.suggest }>Enter a keyword for Recipe suggestions using your Pantry</h5>
+				<h5 style={ styles.suggest }>Enter a keyword for Recipe suggestions using your Larder</h5>
 			)
 		} else {
 				return null

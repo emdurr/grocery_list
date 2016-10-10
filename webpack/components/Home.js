@@ -49,14 +49,9 @@ class Home extends Component {
 		} else {
 			return(
 			<div>
-				<div className='container'>
+				<div className='container center'>
 					<div className='row' >
-						<div className='col s1 offset-s4'>
-							<img src={ logoImg }/>
-						</div>
-						<div>
-							<h2 style={ styles.logo }>iLarder</h2>
-						</div>
+						<h2 style={ styles.logo }><img src={ logoImg }/> iLarder</h2>
 			 			<div style={ styles.food } >
 			 				<div style={ styles.emptyBlock} >
 			 					<p></p>
