@@ -48,7 +48,7 @@ class Pantry extends Component {
 		if(r.addName.value.length >= 3) {
 			this.handleSearch(r.addName.value)
 		} else {
-			return null
+			this.setState({ defVal: '', addName: []})
 		}
 	}
 
