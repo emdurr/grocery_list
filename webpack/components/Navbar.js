@@ -36,7 +36,7 @@ class Navbar extends React.Component {
 					<li className="divider"></li>
 					<li> <Link to='/recipes' style={ styles.aboutLink }>Recipe Box</Link> </li>
 	        <li className="divider"></li>
-	        <li> <Link to='/pantry' style={ styles.aboutLink }>Pantry</Link> </li>
+	        <li> <Link to='/pantry' style={ styles.aboutLink }>Larder</Link> </li>
 	        <li className="divider"></li>
 	        <li> <Link to='/menus' style={ styles.aboutLink }>Menus</Link> </li>
 	        <li className="divider"></li>
