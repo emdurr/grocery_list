@@ -1,8 +1,8 @@
 class Api::V1::ListsController < ApiController
 	before_action :set_list, except: [:index, :create]
   def index
-    lists = current_user.lists
-  	render json: lists
+    @lists = current_user.lists
+  	render json: @lists
   end
 
   def show

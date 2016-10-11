@@ -15,7 +15,7 @@ RSpec.describe Api::V1::ListsController, type: :controller do
     end
 
     it 'has lists in the instance variable' do
-      List.create(name: 'test')
+      List.create(name: 'test', user_id: controller.current_user.id)
       get :index 
       expect(assigns(:lists).length).to eq(1)
       expect(assigns(:lists).first.name).to eq('test')

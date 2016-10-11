@@ -21,3 +21,4 @@
 
 .env
 cloudinary.yml
+.DS_Store
