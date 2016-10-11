@@ -29,6 +29,7 @@ group :development, :test do
 	gem 'shoulda-matchers'
 	gem 'simplecov'
 	gem 'database_cleaner'
+	gem 'rails-controller-testing'
 end
 
 group :development do
