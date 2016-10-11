@@ -83,7 +83,7 @@ Rails.application.routes.draw do
       resources :recipe_ings, only: [:create, :update, :destroy]
       get 'menu_recs/days_list', to: 'menu_recs#days_list'
       resources :menu_recs, only: [:create, :update, :destroy]
-      resources :list_ings, only: [:create, :update, :destroy]
+      resources :list_ings
       resources :pantry_ingredients, only: [:create, :update, :destroy]
       resources :steps, only: [:create, :update, :destroy]
       resources :favorites, except: [:new, :edit, :show]

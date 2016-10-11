@@ -3,7 +3,7 @@ class Api::V1::ListIngsController < ApiController
 	def index
 		@list_ings = @list.list_ings.all
 		render json: @list_ings
-	end
+	end 
 
 	def create
 		ingredient_name = params[:ingredient][:name].downcase
