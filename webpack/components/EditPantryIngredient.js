@@ -56,7 +56,8 @@ class EditPantryIngredient extends Component {
 			return(
 				<div>
 		      <PopoutComponent handleRemoveIngredient={this.handleRemoveIngredient}
-		       								 closeModal={this.closeModal} />
+		       								 closeModal={this.closeModal}
+		       								 ingredient={this.props.ingredientData.ingredient} />
 	  	  </div>
 			)
 		} else {

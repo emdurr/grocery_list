@@ -83,10 +83,11 @@ class PopoutComponent extends Component {
         );
       })
       return(
+
         <div>
           <div style={backdropStyle}>
             <div style={modalStyle}>
-              <p style={ styles.headpop }>Pick a list to add item to</p>
+              <p style={ styles.headpop }>Pick a list to add {this.props.ingredient.name} to</p>
               {lists}
               <form id='addForm' onSubmit={this.handleAddList}>
                 <input style={ styles.input } className='col s9 offset-s1' type='text' ref='addName' required/>

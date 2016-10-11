@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_many :ingredients, :through => :pantry
 
   after_create do
-    Pantry.create({ name: 'Pantry', user_id: id })
+    Pantry.create({ name: 'Larder', user_id: id })
   end
 
 
