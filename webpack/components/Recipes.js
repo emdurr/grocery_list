@@ -87,32 +87,32 @@ class Recipes extends Component {
     displayRecipes() {
       let recipes = this.state.recipes.map( recipe => {
         return(
-          <RecipeListItem key={recipe.id} {...recipe} />
+          <RecipeListItem key={recipe.id} {...recipe} view={this.state.view} />
         )
       })
       return recipes;
     }
 
-    handleAddRecipe(e) {
-      e.preventDefault();
-      let name = this.refs.addName.value;
-      $.ajax({
-        url: '/api/v1/recipes',
-        type: 'POST',
-        dataType: 'JSON',
-        data: { recipe: { name }}
-      }).done( recipe => {
-        this.setState({
-          recipes: [
-            ...this.state.recipes,
-            recipe
-          ]
-        });
-        this.refs.addName.value = '';
-      }).fail( data => {
-        console.log(data);
+  handleAddRecipe(e) {
+    e.preventDefault();
+    let name = this.refs.addName.value;
+    $.ajax({
+      url: '/api/v1/recipes',
+      type: 'POST',
+      dataType: 'JSON',
+      data: { recipe: { name }}
+    }).done( recipe => {
+      this.setState({
+        recipes: [
+          ...this.state.recipes,
+          recipe
+        ]
       });
-    }
+      this.refs.addName.value = '';
+    }).fail( data => {
+      console.log(data);
+    });
+  }
 
 	displaySearch() {
 			return(
@@ -133,7 +133,7 @@ class Recipes extends Component {
 	instructSuggest() {
 		if (this.state.view === 'suggest') {
 			return(
-				<h5 style={ styles.suggest }>Enter a keyword for Recipe suggestions using your Larder</h5>
+				<h6 style={ styles.suggest }>Enter a keyword for Recipe suggestions using your Larder</h6>
 			)
 		} else {
 				return null

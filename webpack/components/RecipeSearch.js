@@ -12,7 +12,8 @@ const styles = {
 
 	spaced: {margin: '0 5px'},
 	tabbox: { borderBottom: '1px solid gray',	marginLeft: '15px'},
-	nextbtn: { margin: '10px 10px 0 0',}
+	nextbtn: { margin: '10px 10px 0 0',},
+	searchbtn: { padding: '10px 10px 0 0' }
 }
 
 var timeElapsed;
@@ -83,8 +84,15 @@ class RecipeSearch extends React.Component {
 		if(this.props.view !== 'favorites') {
 			return(
 				<form style={ styles.form } onSubmit={this.doISearch}>
-					<input type='text' ref='searchQuery' onChange={this.doISearch}
-					required placeholder='Recipe name, Ingredient, etc.' autoFocus={focus}/>
+					<div className='row'>
+						<div className='col s10'>
+							<input type='text' ref='searchQuery' onChange={this.doISearch}
+							required placeholder='Recipe name, Ingredient, etc.' autoFocus={focus} />
+						</div>
+						<div className='col s2' style={styles.searchbtn}>
+							<button className='btn-floating btn-medium waves-effect waves grey' onClick={this.handleSearch}><i className='material-icons'>search</i></button>
+						</div>
+					</div>
 					<br/>
 					<select className='browser-default' ref='searchType' onChange={this.doISearch}>
 						<option value="all">All</option>

@@ -114,7 +114,7 @@ class Recipe < ApplicationRecord
 		def apply_pantry_filter
 			# needs to use only user's pantry
 			pantry = Pantry.find(@pantry_id).ingredients.ids
-			select { |i| (i.ingredients.ids - pantry).count <= 3 }
+			select { |i| (i.ingredients.ids - pantry).count == 0 }
 		end
 
 		def pantry_filter_2

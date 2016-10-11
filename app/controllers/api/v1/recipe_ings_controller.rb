@@ -5,6 +5,12 @@ class Api::V1::RecipeIngsController < ApiController
 		render json: @recipe_ings
 	end
 
+	def recipe_ings_preview
+		@recipe = Recipe.find(params[:recipe_id])
+		@recipe_ings = @recipe.recipe_ings
+		@pantry = current_user.pantry
+	end
+
 	def create
 		ingredient_name = params[:ingredient][:name].downcase
 		@ingredient = Ingredient.where(name: ingredient_name).first_or_initialize do |ingredient|

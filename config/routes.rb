@@ -80,6 +80,7 @@ Rails.application.routes.draw do
       get '/recipes/:id/ingredients', to: 'recipes#ingredients_list'
       resources :ingredients, except: [:new, :edit]
       resources :pantries, except: [:new, :edit]
+      get 'recipe_ings/recipe_ings_preview', to: 'recipe_ings#recipe_ings_preview'
       resources :recipe_ings, only: [:create, :update, :destroy]
       get 'menu_recs/days_list', to: 'menu_recs#days_list'
       resources :menu_recs, only: [:create, :update, :destroy]

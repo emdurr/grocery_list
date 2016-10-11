@@ -90,7 +90,7 @@ class AddBulkIngredients extends React.Component {
 	}
 
 	submitAll() {
-		 let ingsCount = this.state.ingredientsBundle.length
+		let ingsCount = this.state.ingredientsBundle.length
 		for (let i = 0; i < ingsCount; i++) {
 			console.log('ing' + i)
 			this.refs['ing' + i].handleCreate()
