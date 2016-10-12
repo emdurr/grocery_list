@@ -12,7 +12,7 @@ const styles = {
 	backing: { backgroundColor: '#f3f3f3'},
 	heading: { backgroundColor: '#414E49', padding: '10px', color: 'white'},
 	recipecard: { backgroundColor: '#f3f3f3', padding: '5px 15px', margin: '0'},
-	suggest: { margin: '0', paddingBottom: '1px'}
+	suggest: { margin: '0', paddingBottom: '1px'},
 }
 
 class Recipes extends Component {
@@ -87,7 +87,7 @@ class Recipes extends Component {
     displayRecipes() {
       let recipes = this.state.recipes.map( recipe => {
         return(
-          <RecipeListItem key={recipe.id} {...recipe} view={this.state.view} />
+          <RecipeListItem style={ styles.recipemar } key={recipe.id} {...recipe} view={this.state.view} />
         )
       })
       return recipes;
@@ -151,14 +151,12 @@ class Recipes extends Component {
 										{ this.displaySearch() }
 										{ this.instructSuggest() }
 										{ this.addNewRecipe() }
+										<ul style={ styles.recipecard }>
+										{this.displayRecipes()}
+										</ul>
 									</div>
 							</div>
 						</div>
-							<div>
-		    				<ul style={ styles.recipecard }>
-		              {this.displayRecipes()}
-		    				</ul>
-							</div>
 					</div>
 
     		)
