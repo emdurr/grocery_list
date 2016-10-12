@@ -140,11 +140,15 @@ class Pantry extends Component {
 		}).done( data => {
 			let findIngredient = pantryIngredients.findIndex( ingredient => ingredient.ingredient.id === data.ingredient.id );
       if (findIngredient === -1) {
-        this.setState({ pantryIngredients: [...pantryIngredients, data] })
+        this.setState({ pantryIngredients: [...pantryIngredients, data],
+        								defVal: '',
+                        addName: [] })
       } else {
         this.setState({ pantryIngredients: [...pantryIngredients.slice(0, findIngredient),
                                           data,
-                                          ...pantryIngredients.slice(findIngredient + 1, pantryIngredients.length)]})
+                                          ...pantryIngredients.slice(findIngredient + 1, pantryIngredients.length)],
+                        defVal: '',
+                        addName: []})
       }
 			this.refs.addIngredientForm.reset();
 			this.refs.addName.focus();
