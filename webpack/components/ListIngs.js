@@ -245,7 +245,8 @@ class ListIngs extends Component {
 									 required/>
 					</div>
 				</form>
-				<div>
+				<br />
+				<div className='left-align'>
 					<h2>{this.displaySearchIngredients()}</h2>
 				</div>
 				<div className="row" style={ styles.tborder } >

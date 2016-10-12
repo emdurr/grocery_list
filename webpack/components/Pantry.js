@@ -187,7 +187,10 @@ class Pantry extends Component {
 						<button type="submit" className=" btn-floating btn-small waves-effect waves grey"><i className="material-icons">add</i>
 						</button>
 						</form>
-						{this.displaySearchIngredients() }
+						<br />
+						<div className='left-align'>
+							{this.displaySearchIngredients() }
+						</div>
 					<div className="row" style={ styles.tborder } >
 						<div className='col s5'>
 							<p>Ingredient</p>
