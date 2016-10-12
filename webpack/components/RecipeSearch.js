@@ -13,7 +13,8 @@ const styles = {
 	spaced: {margin: '0 5px'},
 	tabbox: { borderBottom: '1px solid gray',	marginLeft: '15px'},
 	nextbtn: { margin: '10px 10px 0 0',},
-	searchbtn: { padding: '10px 10px 0 0' }
+	searchbtn: { padding: '10px 10px 0 0' },
+	margin: {margin: '0'}
 }
 
 var timeElapsed;
@@ -49,7 +50,7 @@ class RecipeSearch extends React.Component {
 	pagination() {
 		if(this.props.recipesInView > 0) {
 			return(
-				<div className='row'>
+				<div style={ styles.margin } className='row'>
 					{(this.state.page > 1) ? <button style={ styles.nextbtn } className='btn col s2 push-s4' onClick={this.previousPage}>Prev</button> : null }
 					{(this.props.recipesInView === 30) ? <button style={ styles.nextbtn }className='btn col s2 push-s4' onClick={this.nextPage}>Next</button> : null }
 				</div>
@@ -66,7 +67,7 @@ class RecipeSearch extends React.Component {
 		}
 		e.target.style.backgroundColor='#f3f3f3'
 		if (this.refs.searchQuery) {
-			this.refs.searchQuery.focus()	
+			this.refs.searchQuery.focus()
 		}
 	}
 
@@ -93,7 +94,6 @@ class RecipeSearch extends React.Component {
 							<button className='btn-floating btn-medium waves-effect waves grey' onClick={this.handleSearch}><i className='material-icons'>search</i></button>
 						</div>
 					</div>
-					<br/>
 					<select className='browser-default' ref='searchType' onChange={this.doISearch}>
 						<option value="all">All</option>
 						<option value="title">Title Only</option>
@@ -112,7 +112,7 @@ class RecipeSearch extends React.Component {
 
 	render() {
 		return(
-			<div className='row'>
+			<div  className='row'>
 				<div className='col s12' style={ styles.tabbox }>
 				  <button className='col s3 m3 btn' style={ styles.tab_buttons } onClick={ (e) => this.changeView(e, 'favorites')}>Favorites</button>
 				  <button className='col s3 m3 btn' style={ {...styles.tab_buttons, ...styles.spaced} } onClick={ (e) => this.changeView(e, 'search')}>Search</button>
