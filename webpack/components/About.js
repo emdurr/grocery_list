@@ -77,7 +77,7 @@ const About = () => (
 	    	<div className='center col s12 m4'>
 					<img src={ ericImg } style={ styles.eric }/>
 					<h5 className="blue-text">Eric Durr</h5>
-					<p className="light center black-text">Eric, was born. He currently resides in a tinyhouse that he fondly calls frontrunner. He is so generous that he shares it with many an odd fellow and can be found squished up against a window working on his laptop while offering his shoulder to a random drooling, sleeping roommate.  The cramped quarters have paid off because he is top of the class and able to daydream without falling behind. Not that he does.</p>
+					<p className="light center black-text">Eric, was raised on the east coast and longs, one day, to return to the warm, humid envirornment there. He came to DevPoint Labs from sales with very little coding knowledge and has found, in coding, something that he loves tremendously and will use to take over the world.</p>
           <a href='https://github.com/emdurr' target="github"><img src={ githubImg } style={ styles.github }></img></a>
           <a href='https://www.linkedin.com/in/ericdurr' target="linkedin"><img src={ linkedinImg } style={ styles.github }></img></a>
           <a href='mailto:emdurr@gmail.com'><img src={ mailImg } style={ styles.github }></img></a>
