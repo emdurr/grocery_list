@@ -29,19 +29,19 @@ RSpec.describe Api::V1::ListsController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      list = List.create(name: 'test')
+      list = List.create(name: 'test', user_id: controller.current_user.id)
       get :show, id: list.id
       expect(response).to have_http_status(:success)
     end
 
     it 'sets the list instance variable' do
-      list = List.create(name: 'test')
+      list = List.create(name: 'test', user_id: controller.current_user.id)
       get :show, id: list.id
       expect(assigns(:list)).to eq([])
     end
 
     it "renders the show template" do
-      list = List.create(name: 'test')
+      list = List.create(name: 'test', user_id: controller.current_user.id)
       get :show, id: list.id
       expect(response.content_type).to eq("application/json")
     end
@@ -49,7 +49,7 @@ RSpec.describe Api::V1::ListsController, type: :controller do
 
   describe "POST #create" do
     it "successfully creates a list" do
-      list_params = {list: {name: 'test'}}
+      list_params = {list: {name: 'test', user_id: controller.current_user.id}}
       post :create, list_params
       expect(List.count).to eq(1)
       expect(List.first.name).to eq(list_params[:list][:name])
