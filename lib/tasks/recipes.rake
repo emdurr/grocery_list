@@ -20,9 +20,9 @@ namespace :recipes do
 	  	# Thus, max number of recipes per task run is 1000
 	  	dish_types = ['main course', 'side dish', 'dessert', 'appetizer', 'salad', 'bread', 'breakfast', 'soup', 'beverage', 'sauce', 'drink']
 	  	dish_types.each do |dish|
-			10.times do
+			1.times do
 			  	api_client = Spoonacular::API.new(ENV['SPOONACULAR_API_KEY'])
-			  	results = api_client.search_recipes({'number'=>'100', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
+			  	results = api_client.search_recipes({'number'=>'100', 'offset'=>"200", 'type'=>"#{dish}" }).body['results']
 			  	results.each do |recipe|
 			  		begin
 				  		full_recipe = api_client.get_recipe_information(recipe['id']).body
