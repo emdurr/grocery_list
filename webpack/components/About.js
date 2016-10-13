@@ -27,22 +27,18 @@ const About = () => (
 	    <div className='card-panel'>
 	       <h3>The App</h3>
 	       <p style={{textAlign: "left"}}>
-				 		 This app is amazing you will love having it.
-	           more and more words here to see if it works
-	       		 Proin eget tortor risus. Nulla porttitor accumsan tincidunt.
-	           Curabitur arcu erat, accumsan id imperdiet et,
-	           porttitor at sem. Curabitur non nulla sit
-	           amet nisl tempus convallis quis ac lectus.
-	           Vestibulum ante ipsum primis in faucibus
-	           orci luctus et ultrices posuere cubilia Curae;
-	           Donec velit neque, auctor sit amet aliquam vel,
-	           ullamcorper sit amet ligula. Cras ultricies ligula
-	           sed magna dictum porta. Sed porttitor lectus
-	           nibh. Vivamus magna justo, lacinia eget
-	           consectetur sed, convallis at tellus. Quisque
-	           velit nisi, pretium ut lacinia in, elementum id enim.
-	           Curabitur aliquet quam id dui posuere blandit.
+	 			iLarder allows makes food simple. 'Larder' is an old-fashioned word for pantry. The contrast between old and new that is implied in the name iLarder, 
+	 			reflects our interest in taking a very traditional chore and simplifying it with technology.
+			</p>
+			<p style={{textAlign: "left"}}>
+	 			With iLarder, your grocery list automatically updates your pantry. Your pantry automatically updates your grocery list. 
+	 			And you can add all or some of the ingredients from any recipe to your grocery list quickly and simply. 
+	 			You know what you have and what you need all the time.
 	       </p>
+       		<p style={{textAlign: "left"}}>
+    			Because iLarder knows the food you have on hand, it can provide recipe suggestions using only the food you have onhand.
+    			This allows you to discover new ways to use the items you already buy. And a robust search feature allows you to discover new recipes.
+             </p>
 	       <br/>
 	    </div>
 	  </div>
@@ -51,19 +47,9 @@ const About = () => (
 	    <div className='card-panel'>
 	       <h3>The Code</h3>
 	       <p style={{textAlign: "left"}}>
-	       		 Proin eget tortor risus. Nulla porttitor accumsan tincidunt.
-	           Curabitur arcu erat, accumsan id imperdiet et,
-	           porttitor at sem. Curabitur non nulla sit
-	           amet nisl tempus convallis quis ac lectus.
-	           Vestibulum ante ipsum primis in faucibus
-	           orci luctus et ultrices posuere cubilia Curae;
-	           Donec velit neque, auctor sit amet aliquam vel,
-	           ullamcorper sit amet ligula. Cras ultricies ligula
-	           sed magna dictum porta. Sed porttitor lectus
-	           nibh. Vivamus magna justo, lacinia eget
-	           consectetur sed, convallis at tellus. Quisque
-	           velit nisi, pretium ut lacinia in, elementum id enim.
-	           Curabitur aliquet quam id dui posuere blandit.
+	    		iLarder represents a massive effort over a very short time period. We created and utilized a Ruby on Rails API and used the React library for our user-interface.
+	    		In total, the app required 12 controllers, 13 database tables and 38 react components. We made extensive use of Rails 'has_many :through' model associations.
+	    		The app incorporates a number of Ruby Gems, and populates its database of recipes and ingredients through integration with the Spoonacular API.
 	       </p>
 	       <br/>
 	    </div>
@@ -85,7 +71,15 @@ const About = () => (
 	    	<div className='center col s12 m4'>
 					<img src={ lonnieImg } style={ styles.lonnie }/>
 					<h5 className="blue-text">Lonnie Horlacher</h5>
-					<p className="light center black-text">Lonnie, a native of Nevada, suddenly realized it was really hot there and didn't care for sweating.  Suffering from heat stroke he signed up for a bootcamp in cooler climates, little did he know that it would be in an artic freezer that he would be taught.  Turns out it was a good move though as he is really skilled and killing it in the class. An unexpected skill from the class is he has learned to blow frosty breath rings in the air.</p>
+					<p className="light center black-text">
+						Lonnie graduated from Southern Utah University in December of 2013 with a bachelors degree in accounting. After spending 2 1/2 on the financial and analytical side of marketing, he decided to take a leap into the world of web development. 
+					</p>
+					<p className="light center black-text">
+						At DevPoint Labs, he has collaborated to create Teach Me, an app to help music teachers communicate with their students, and iLarder, to answer the question "What do we have to eat?"
+					</p>
+					<p className="light center black-text">
+						In his free time, he codes, reads, plays the piano and enjoys visiting new and sketchy restaurants with his husband.
+					</p>
           <a href='https://github.com/lhorlacher' target="github"><img src={ githubImg } style={ styles.github }></img></a>
           <a href='https://www.linkedin.com/in/lonnie-horlacher' target="linkedin"><img src={ linkedinImg } style={ styles.github }></img></a>
           <a href='mailto:horlacher.lonnie@gmail.com'><img src={ mailImg } style={ styles.github }></img></a>
