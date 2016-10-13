@@ -5,7 +5,7 @@ namespace :ingredients do
 		main_ings = Ingredient.where("recipe_ings_count > 5").sample(50)
 		addl_ings = Ingredient.where("recipe_ings_count < 5").sample(50)
 		ingredients = main_ings + addl_ings
-		user_pantry_id  = User.find(1).pantry.id
+		user_pantry_id  = User.find(8).pantry.id
 		ingredients.each do |ing|
 			pantry_ingredient = PantryIngredient.where("ingredient_id = ? and pantry_id = ?", ing.id, user_pantry_id).first_or_initialize(
 				ingredient_id: ing.id, pantry_id: user_pantry_id)
