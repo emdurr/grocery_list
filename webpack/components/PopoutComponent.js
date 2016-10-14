@@ -47,9 +47,10 @@ class PopoutComponent extends Component {
     });
   }
 
-  redirectClose(listId) {
-    this.props.closeModal;
-    this.props.handleRemoveIngredient(listId);
+  redirectClose(e, listId) {
+    e.preventDefault();
+    this.props.closeModal();
+    this.props.handleRemoveIngredient( listId);
   }
 
   handleAddList(e, listId) {
@@ -78,7 +79,7 @@ class PopoutComponent extends Component {
       let lists = this.state.lists.map( list => {
         return (
           <div style={ styles.popup } key={ list.id } >
-            <div onClick={ () => this.redirectClose(list.id)}>{list.name}</div>
+            <div onClick={ (e) => this.redirectClose(e, list.id)}>{list.name}</div>
           </div>
         );
       })
@@ -95,7 +96,7 @@ class PopoutComponent extends Component {
                 </button>
               </form>
               <div className='row'>
-                <button className='btn col s6 push-s3 m3 push-m4' onClick={this.props.closeModal}>Cancel</button>
+                <button className='btn col s6 push-s3 m3 push-m4' onClick={() => this.props.closeModal()}>Cancel</button>
               </div>
             </div>
           </div>
