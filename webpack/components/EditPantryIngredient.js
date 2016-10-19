@@ -29,14 +29,6 @@ class EditPantryIngredient extends Component {
 		}
 	}
 
-	// componentDidUpdate() {
-	// 	if (this.props.ingredientData.ingredient.pantry_ingredients.qty <= 0) {
-	// 		this.setState({ modal: 'popoutContent'})
-	// 	} else {
-	// 		return null
-	// 	}   
-	// }
-
 	closeModal() {
 		this.setState( { modal: null } )
 	}
@@ -47,19 +39,34 @@ class EditPantryIngredient extends Component {
 
 	handleEditIngredient(e) {
 		e.preventDefault();
-		this.props.editIngredient(this.refs, this.props.ingredientData);
-		this.setState({ edit: false })
+		if (this.refs.editQty.value === '0') {
+			this.props.editIngredient(this.refs, this.props.ingredientData);
+			this.setState({ edit: false, modal: 'popoutContent' })
+		} else {
+			this.props.editIngredient(this.refs, this.props.ingredientData);
+			this.setState({ edit: false })
+		}
 	}
 
 	popoutContent() {
 		if (this.state.modal === 'popoutContent') {
-			return(
-				<div>
-		      <PopoutComponent handleRemoveIngredient={this.handleRemoveIngredient}
-		       								 closeModal={this.closeModal}
-		       								 ingredient={this.props.ingredientData.ingredient} />
-	  	  </div>
-			)
+			if (this.refs.editQty) {
+				return(
+					<div>
+						<PopoutComponent  handleRemoveIngredient={this.handleRemoveIngredient}
+		       								 		closeModal={this.closeModal}
+		       								 		ingredient={this.props.ingredientData.ingredient} />
+		      </div>
+				)
+			} else {
+				return(
+					<div>
+		      	<PopoutComponent handleRemoveIngredient={this.handleRemoveIngredient}
+		       									 closeModal={this.closeModal}
+		      	 								 ingredient={this.props.ingredientData.ingredient} />
+	  	  	</div>
+				)
+			}
 		} else {
 			return(
 				null
@@ -91,7 +98,6 @@ class EditPantryIngredient extends Component {
 													 defaultValue={`${ingredientData.ingredient.pantry_ingredients.qty}`} 
 													 placeholder='Qty' 
 													 min='0'
-													 pattern="^[0-9]"
 													 required/>
 									</form>
 								</div>

@@ -263,7 +263,7 @@ class Pantry extends Component {
 
 	addIngredientToList(e, ingredientData, list_id) {
 		e.preventDefault();
-		let qty_to_buy = ingredientData.ingredient.pantry_ingredients.qty;
+		let qty_to_buy = ingredientData.ingredient.pantry_ingredients.qty <= 0 ? 1 : ingredientData.ingredient.pantry_ingredients.qty
 		let name = ingredientData.ingredient.name;
 		let ingId = ingredientData.ingredient.id;
 		$.ajax({

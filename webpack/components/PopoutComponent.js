@@ -84,7 +84,6 @@ class PopoutComponent extends Component {
         );
       })
       return(
-
         <div>
           <div style={backdropStyle}>
             <div style={modalStyle}>
