@@ -20,7 +20,7 @@ class Login extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     let location = this.props.location.query.redirect;
-    let redirectLocation = location ? location : '/lists';
+    let redirectLocation = location ? location : '/';
     this.state = { error: false, redirectRoute: redirectLocation }
   }
 
