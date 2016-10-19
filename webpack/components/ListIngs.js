@@ -184,7 +184,6 @@ class ListIngs extends Component {
 			data: { pantry_id: this.state.pantryId, ingredient: { name }, pantryIngredients: { qty }},
 			dataType: 'JSON'
 		}).done( data => {
-			console.log(data);
 		}).fail( data => {
 			console.log(data);
 		})

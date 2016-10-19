@@ -113,13 +113,16 @@ class Lists extends Component {
 					</div>
 					<div className='container' style={ styles.food }>
 						<div style={ styles.form }>
-							<form className='col s9' id='addForm' onSubmit={this.handleAddList}>
-								<input style={ styles.input }  type='text' ref='addName' required />
+							<form id='addForm' onSubmit={this.handleAddList}>
+								<div className='col s9'>
+									<input style={ styles.input }  type='text' ref='addName' required />
+								</div>
+								<div className='col s2' style={ styles.floatbtn }>
+									<button type="submit" className="btn-floating btn-medium waves-effect waves grey">
+									<i className="material-icons">add</i></button>
+								</div>
 							</form>
-							<div className='col s2' style={ styles.floatbtn }>
-								<button type="submit" className="btn-floating btn-medium waves-effect waves grey">
-								<i className="material-icons">add</i></button>
-							</div>
+							
 							<ul style={ styles.form }>
 								{ this.displayLists() }
 							</ul>

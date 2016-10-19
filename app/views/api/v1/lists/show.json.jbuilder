@@ -9,7 +9,8 @@ json.list do
   	  json.name ingredient.name
 
   	  json.list_ing do
-  	  	list_ing = ingredient.list_ings.where(ingredient_id: ingredient.id).first
+        binding.pry
+  	  	list_ing = ingredient.list_ings.where(ingredient_id: ingredient.id, list_id: @list.id).first
   	  	json.id list_ing.id
   		  json.qty_to_buy list_ing.qty_to_buy
   	  end

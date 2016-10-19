@@ -9,7 +9,7 @@ json.pantry do
   	  json.name ingredient.name
 
   	  json.pantry_ingredients do
-  	  	pantry_ingredient = ingredient.pantry_ingredients.where(ingredient_id: ingredient.id).first
+  	  	pantry_ingredient = ingredient.pantry_ingredients.where(ingredient_id: ingredient.id, pantry_id: @pantry.id).first
   	  	json.id pantry_ingredient.id
         json.qty pantry_ingredient.qty
   	  end

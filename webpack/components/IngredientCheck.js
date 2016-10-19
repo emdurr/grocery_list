@@ -25,7 +25,6 @@ class IngredientCheck extends React.Component {
 				type: 'DELETE',
 				dataType: 'JSON'
 			}).done( data => {
-				console.log(data)
 			}).fail( data => {
 				console.log(data)
 			})
