@@ -201,7 +201,7 @@ class ListIngs extends Component {
 			dataType: 'JSON',
 			data: { list_id: id, list_ing: { id: list_ing_id, qty_to_buy: qty_to_buy }, ingredient: { id: ingredient.id, name: ingredient.name } }
 		}).done( data => {
-			let findIngredient = listIngredients.findIndex( ingredient => ingredient.id === data.id );
+			let findIngredient = listIngredients.findIndex( ingredient => ingredient.ingredient.id === data.ingredient.id );
       if (findIngredient === -1) {
         this.setState({ listIngredients: [...listIngredients, data] })
       } else {

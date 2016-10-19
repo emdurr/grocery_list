@@ -15,7 +15,7 @@ class PantryIngredients extends Component {
 						<input type='text' ref='addName' placeholder='Ingredient Name' required/>
 					</div>
 					<div className='col s3'>
-						<input type='number' ref='addQty' placeholder='QTY on Hand'/>
+						<input type='number' ref='addQty' placeholder='QTY on Hand' required/>
 					</div>
 					<button style={ styles.addBtn } type="submit">Add Ingredient</button>
 				</form>

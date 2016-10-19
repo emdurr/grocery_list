@@ -21,13 +21,13 @@ class EditPantryIngredient extends Component {
 		this.state = { edit: false , modal: null };
 	}
 
-	// componentWillMount() {
-	// 	if (this.props.ingredientData.ingredient.pantry_ingredients.qty <= 0) {
-	// 		this.setState({ modal: 'popoutContent'})
-	// 	} else {
-	// 		return null
-	// 	}
-	// }
+	componentWillMount() {
+		if (this.props.ingredientData.ingredient.pantry_ingredients.qty <= 0) {
+			this.setState({ modal: 'popoutContent'}) 
+		} else {
+			return null
+		}
+	}
 
 	// componentDidUpdate() {
 	// 	if (this.props.ingredientData.ingredient.pantry_ingredients.qty <= 0) {
