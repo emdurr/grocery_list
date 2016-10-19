@@ -22,18 +22,17 @@ namespace :recipes do
 	  	dish_types.each do |dish|
 			1.times do
 			  	api_client = Spoonacular::API.new(ENV['SPOONACULAR_API_KEY'])
-			  	results = api_client.search_recipes({'number'=>'100', 'offset'=>"200", 'type'=>"#{dish}" }).body['results']
+			  	results = api_client.search_recipes({'number'=>'1', 'offset'=>"#{pulled_recipes}", 'type'=>"#{dish}" }).body['results']
 			  	results.each do |recipe|
 			  		begin
 				  		full_recipe = api_client.get_recipe_information(recipe['id']).body
 				  		recipe_steps = get_analyzed_steps(recipe['id']).body[0]['steps']
-				  		r = Recipe.where(title: full_recipe['title']).first_or_initialize
+				  		r = Recipe.where("lower(title) LIKE ?", full_recipe['title'].strip.downcase).first_or_initialize(title: full_recipe['title'].titleize)
 				  	rescue
 				  		puts "********************************************RecipeSkipped"
 				  		recipes_skipped += 1
 				  		next
 				  	end
-
 				  	r.title = full_recipe['title'].titleize
 				  	r.ready_in_minutes = full_recipe['readyInMinutes']
 				  	r.image = full_recipe['image']
@@ -47,6 +46,7 @@ namespace :recipes do
 					end
 				  	r.cheap = full_recipe['cheap']
 				  	r.very_healthy = full_recipe['veryHealthy']
+				  	r.published = true
 
 			  		recipes_added += 1 if r.new_record?
 			  		pulled_recipes += 1

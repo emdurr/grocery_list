@@ -87,7 +87,7 @@ class Recipe < ApplicationRecord
 		end
 
 		def all_search(query_array)
-			where_statement = Recipe.joins(:ingredients)
+			where_statement = Recipe.joins(:ingredients).where(published: true)
 			query_array.each do |word|
 				where_statement = where_statement.where("lower(name) LIKE ? OR lower(title) LIKE ?",
 				word, word)
@@ -96,7 +96,7 @@ class Recipe < ApplicationRecord
 		end
 
 		def ingredient_search(query_array)
-			where_statement = Recipe.joins(:ingredients)
+			where_statement = Recipe.joins(:ingredients).where(published: true)
 			query_array.each do |word|
 				where_statement = where_statement.where("lower(ingredients.name) LIKE ?", word)
 			end
@@ -104,7 +104,7 @@ class Recipe < ApplicationRecord
 		end
 
 		def title_search(query_array)
-			where_statement = Recipe
+			where_statement = Recipe.where(published: true)
 			query_array.each do |word|
 				where_statement = where_statement.where("lower(title) LIKE ?", word)
 			end

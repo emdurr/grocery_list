@@ -66,8 +66,8 @@ class MenuSelect extends React.Component {
 			} else {
 				return(
 					<div>
-					<h4> Create a menu before adding recipes </h4>
-					<h4> <Link to='/menus'>Menus</Link> </h4>
+						<h4> Create a menu before adding recipes </h4>
+						<h4> <Link to='/menus'><button className='btn' >Visit Menus</button></Link> </h4>
 					</div>
 				)
 			}
@@ -107,7 +107,7 @@ class MenuSelect extends React.Component {
 		}
 		return(
 		 	<div className='row'>
-			 	<h5 className='col s12'> Assign to Day </h5>
+			 	<h5 className='col s12'> Existing Categories: </h5>
 			 	<div className=' col s12'>
 			 	{days}
 			 	</div>
@@ -120,14 +120,14 @@ class MenuSelect extends React.Component {
 			return(
         <div className='row'>
           <div className='col s6'>
-				    <button className='btn' onClick={() => this.setState( { addDayView: true} ) }>Assign to New Day</button>
+				    <button className='btn' onClick={() => this.setState( { addDayView: true} ) }>New</button>
           </div>
         </div>
       )
 		} else if(this.state.days && this.state.addDayView) {
 			return(
 				<div className='row col s6'>
-					<input className='col s6' ref='newDay' type='text'/>
+					<input className='col s9' ref='newDay' type='text' placeholder="Monday, Week 1, Etc."/>
 					<button className='btn-floating btn-medium waves-effect waves grey' onClick={() => this.addToMenu(this.state.menu_id, this.refs.newDay.value)}><i className="material-icons">add</i></button>
 				</div>
 			)

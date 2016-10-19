@@ -1,5 +1,6 @@
 import React from 'react';
 import BulkIngredientListItem from './BulkIngredientListItem';
+import { Link } from 'react-router'
 
 const styles = {
 	backdropStyle: {
@@ -102,18 +103,31 @@ class AddBulkIngredients extends React.Component {
 
 	render() {
 		if (this.state.lists) {
+			let areLists = this.state.lists.length !== 0
 			return(
 				<div style={styles.backdropStyle}>
 					<div style={styles.modalStyle}>
-						{ this.displayIngredients(this.state.lists) }
+						{ areLists
+							?
+								this.displayIngredients(this.state.lists)
+							:
+								<div>
+									<h5> You must create a list before adding ingredients </h5>
+								</div>
+						}
 						<div className='row' style={styles.outerCenter}>
 							<div style={styles.innerCenter}>
 								<button className='btn valign' style={styles.button} onClick={this.props.closeModal}>
 									Cancel
 								</button>
-								<button className='btn valign' style={styles.button} onClick={this.submitAll}>
-									Add All
-								</button>
+								{ areLists
+									?	
+										<button className='btn valign' style={styles.button} onClick={this.submitAll}>
+											Add All
+										</button>
+									:
+										<Link to='/lists'><button className='btn' style={styles.button}>Visit Lists</button></Link>
+								}
 							</div>
 						</div>
 					</div>

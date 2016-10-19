@@ -6,7 +6,9 @@ class Api::V1::RecipesController < ApiController
         Recipe.find_pantry_id(current_user)
         @recipes = Recipe.distribute_params(params[:searchType], params[:searchQuery], params[:searchSort], params[:view], params[:page])
       else
-        @recipes = Recipe.find_favorites(current_user.id)
+        favorites = Recipe.find_favorites(current_user.id)
+        owned = Recipe.where(user_id: current_user.id)
+        @recipes = favorites + owned
       end
     end
 

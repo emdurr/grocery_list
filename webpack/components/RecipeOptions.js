@@ -25,11 +25,11 @@ class RecipeOptions extends React.Component {
 	chooseFavoriteButton() {
 		if(this.props.favorite) {
 			return(
-				<button  style={ styles.floatbtn } onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves grey"><i className="material-icons">star</i></button>
+				<button  style={ styles.floatbtn } onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves yellow"><i className="material-icons">star</i></button>
 			)
 		} else {
 			return(
-				<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves yellow" onClick={ () => this.setState( {modal: 'addToFavorites' } ) }><i className="material-icons">star</i></button>
+				<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addToFavorites' } ) }><i className="material-icons">star</i></button>
 			)
 		}
 	}

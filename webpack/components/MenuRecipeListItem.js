@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+const styles = {
+	inline: {
+		display: 'inline',
+	}
+}
+
 
 class MenuRecipeListItem extends React.Component {
 	constructor(props) {
@@ -32,8 +38,9 @@ class MenuRecipeListItem extends React.Component {
 	editView() {
 		let recipe_info = this.state.recipe_info
 		return(
-			<div className='card-panel hoverable'>
-					Day: <input autoFocus={focus} onBlur={this.editMenuRec} type='text' defaultValue={recipe_info.day} required ref="editRecipeDay" placeholder='Recipe day' />
+			<div className='card-panel hoverable row'>
+					<p style={styles.inline} className='col s4'> Category: </p> 
+					<input style={styles.inline} className='col s6' autoFocus={focus} onBlur={this.editMenuRec} type='text' defaultValue={recipe_info.day} required ref="editRecipeDay" placeholder='Recipe day' />
 				<h3> {recipe_info.name} </h3>
 				<p>Ingredients: {recipe_info.ingredients_count ? recipe_info.ingredients_count : '0' } </p>
 			</div>
@@ -44,11 +51,10 @@ class MenuRecipeListItem extends React.Component {
 		let recipe_info = this.state.recipe_info
 		return(
 			<div className='card-panel hoverable'>
-				<p> Day: {recipe_info.day} </p>
+				<p onClick={this.toggleEdit}> Category: {recipe_info.day} </p>
 				<h3> <Link to={`recipes/${this.state.recipe_info.recipe_id}`}> {recipe_info.name} </Link> </h3>
 				<p>Ingredients: {recipe_info.ingredients_count ? recipe_info.ingredients_count : '0' } </p>
 				<button onClick={() => this.props.deleteMenuRec(recipe_info.menu_rec_id)} className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">delete</i></button>
-				<button onClick={this.toggleEdit} className=" btn-floating btn-medium waves-effect waves grey"><i className="material-icons">edit</i></button>
 			</div>
 		)
 	}

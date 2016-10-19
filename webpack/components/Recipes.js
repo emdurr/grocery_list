@@ -28,6 +28,7 @@ class Recipes extends Component {
   }
 
     componentWillMount() {
+      console.log('getting recipes')
   		$.ajax({
   			url: '/api/v1/recipes',
   			type: 'GET',
@@ -41,15 +42,21 @@ class Recipes extends Component {
 
 		changeView(view) {
 			this.setState({view: view })
-			$.ajax({
-				url: '/api/v1/recipes',
-				type: 'GET',
-				dataType: 'JSON'
-			}).done( recipes => {
-				this.setState({ recipes: recipes.recipesArray });
-			}).fail( data => {
-				console.log('get recipes failed');
-			});
+      this.setState( {recipes: [] } )
+      if (view == 'favorites') {
+    		$.ajax({
+    			url: '/api/v1/recipes',
+    			type: 'GET',
+    			dataType: 'JSON'
+    		}).done( recipes => {
+    			this.setState({ recipes: recipes.recipesArray });
+    		}).fail( data => {
+    			console.log('get recipes failed');
+    		});
+      } else {
+        return null
+      }
+
 		}
 
     handleSearch(query, type, sort, page) {
@@ -116,7 +123,8 @@ class Recipes extends Component {
 
 	displaySearch() {
 			return(
-		 		<RecipeSearch handleSearch={this.handleSearch} changeView={this.changeView} view={this.state.view} recipesInView={this.state.recipes.length} />
+		 		<RecipeSearch handleSearch={this.handleSearch} changeView={this.changeView} view={this.state.view}
+          recipesInView={this.state.recipes.length} />
 	 		)
 	}
 

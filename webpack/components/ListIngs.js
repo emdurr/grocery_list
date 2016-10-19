@@ -73,6 +73,8 @@ class ListIngs extends Component {
 		});
 	}
 
+	// array.filter(item => item.id != id)
+
 	handleSuggestion(e) {
 		e.preventDefault();
 		let r = this.refs

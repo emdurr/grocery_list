@@ -15,6 +15,7 @@ class MenuListItem extends React.Component {
 		this.editView = this.editView.bind(this)
 		this.editMenu = this.editMenu.bind(this)
 		this.toggleEdit = this.toggleEdit.bind(this)
+		this.cancelEdit = this.cancelEdit.bind(this)
 		this.state = { menu: this.props.menu.menu,
 			days: this.props.menu.days,
 			recipes: this.props.menu.recipes,
@@ -33,10 +34,14 @@ class MenuListItem extends React.Component {
 			console.log(data)
 			this.toggleEdit();
 			this.setState( { menu: data } )
-			this.refs.editMenuName.focus();
 		}).fail( data => {
 			console.log(data);
 		});
+	}
+
+	cancelEdit(e) {
+		e.preventDefault();
+		this.toggleEdit()
 	}
 
 	editView() {
@@ -45,7 +50,8 @@ class MenuListItem extends React.Component {
 				<form onSubmit={this.editMenu}>
 					<input style={ styles.input } type='text' defaultValue={this.state.menu.name} required  ref="editMenuName" placeholder='Menu Name' />
 					<br />
-					<button style={ styles.buttons } type='submit' className='btn'>Save</button>	<button style={ styles.buttons } onClick={this.toggleEdit} className='btn'>Cancel</button>
+					<button style={ styles.buttons } type='submit' className='btn'>Save</button>	
+					<button style={ styles.buttons } onClick={(e) => this.cancelEdit(e)} className='btn'>Cancel</button>
 				</form>
 			</div>
 		)
@@ -60,8 +66,8 @@ class MenuListItem extends React.Component {
 					<div className='card' style={ styles.lcard }>
 					<div className='card-content'>
 						<Link to={`menus/${this.state.menu.id}`}><h3> {this.state.menu.name} </h3>
-						<h6> Days Included: {this.state.days}</h6>
-						<h6>Recipes Included: {this.state.recipes} </h6>
+						<h6> Categories Included: {this.state.days}</h6>
+						<h6> Recipes Included: {this.state.recipes} </h6>
 						</Link>
 						<button style={ styles.btnstyle } onClick={() => this.props.deleteMenu(this.state.menu.id)} className='btn'>Delete</button>
 						<button style={ styles.btnstyle } onClick={this.toggleEdit} className='btn'>Edit</button>

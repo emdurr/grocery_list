@@ -22,3 +22,4 @@
 .env
 cloudinary.yml
 .DS_Store
+/webpack/.DS_Store
