@@ -35,8 +35,8 @@ class Signup extends React.Component {
 
   responseFacebook = (auth) => {
     let name = auth.name.split(" ");
-    let firstName = [0];
-    let lastName = [1];
+    let firstName = name[0];
+    let lastName = name[1];
     this.props.dispatch(handleFacebookLogin(auth, firstName, lastName, this.props.history));
   }
 
