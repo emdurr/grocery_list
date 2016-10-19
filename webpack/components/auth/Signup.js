@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleSignup } from './actions';
 import logoImg from '../../images/ilarder_logo.png';
+import { handleLogin, handleFacebookLogin } from './actions';
 import FacebookLogin from 'react-facebook-login';
 
 const styles = {
