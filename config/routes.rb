@@ -67,7 +67,7 @@ Rails.application.routes.draw do
         registrations: 'registrations',
         sessions: 'sessions'
       }
-  post 'facebook_login', to: 'third_party_auth#facebook'
+  post '/facebook_login', to: 'third_party_auth#facebook'
 # handle adding user ID in controller
   namespace :api do
 		namespace :v1 do

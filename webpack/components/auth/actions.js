@@ -81,7 +81,7 @@ export const handleFacebookLogin = (auth, firstName, lastName, history) => {
       url: '/facebook_login',
       type: 'POST',
       dataType: 'JSON',
-      type: { auth, firstName, lastName }
+      data: { auth, firstName, lastName }
     }).done( response => {
       let { id } = response;
       let api_key = getToken();
@@ -89,7 +89,7 @@ export const handleFacebookLogin = (auth, firstName, lastName, history) => {
       localStorage.setItem('apiKey', api_key);
       localStorage.setItem('userId', id);
       dispatch(loggedIn(id, api_key));
-      history.push(redirect);
+      history.push(history);
     }).fail( () => {
       dispatch(logout());
     })
