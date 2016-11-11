@@ -15,13 +15,11 @@ class RecipeHeader extends Component {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 		this.publishBox = this.publishBox.bind(this);
-		this.state = { recipeHeaderInfo: this.props.recipeHeaderInfo,
-									 published: this.props.recipeHeaderInfo.published }
 	}
 
 	handleClick() {
-		let id = this.state.recipeHeaderInfo.id;
-		let published = !this.state.published;
+		let id = this.props.recipeHeaderInfo.id;
+		let published = !this.props.published;
 		$.ajax({
 			url: `/api/v1/recipes/${id}`,
 			type: 'PUT',
@@ -32,7 +30,7 @@ class RecipeHeader extends Component {
 		}).fail( data => {
 			console.log('failed');
 		});
-    this.setState({ published: !this.state.published })
+    this.setState({ published: !this.props.published })
   }
 
   publishBox() {
@@ -43,7 +41,7 @@ class RecipeHeader extends Component {
              id="publish"
              type='checkbox'
              name='check'
-             defaultChecked={this.state.published}
+             defaultChecked={this.props.published}
              onChange={this.handleClick}
              value={ false }
 			  	/>
@@ -57,13 +55,13 @@ class RecipeHeader extends Component {
   }
 
 	render() {
-		if (this.state.recipeHeaderInfo) {
-			let title = this.state.recipeHeaderInfo.title;
-			let ready_in_minutes = this.state.recipeHeaderInfo.ready_in_minutes;
-			let servings = this.state.recipeHeaderInfo.servings;
-			let credit_text = this.state.recipeHeaderInfo.credit_text;
-			let ingredientCount = this.state.recipeHeaderInfo.ingredientCount;
-			let imageUrl = this.state.recipeHeaderInfo.imageUrl;
+		if (this.props.recipeHeaderInfo) {
+			let title = this.props.recipeHeaderInfo.title;
+			let ready_in_minutes = this.props.recipeHeaderInfo.ready_in_minutes;
+			let servings = this.props.recipeHeaderInfo.servings;
+			let credit_text = this.props.recipeHeaderInfo.credit_text;
+			let ingredientCount = this.props.recipeHeaderInfo.ingredientCount;
+			let imageUrl = this.props.recipeHeaderInfo.imageUrl;
 			let favoriteComment = this.props.favoriteComment;
 			return(
 				<div>

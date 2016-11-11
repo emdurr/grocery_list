@@ -19,18 +19,24 @@ class RecipeOptions extends React.Component {
 		this.chooseFavoriteButton = this.chooseFavoriteButton.bind(this)
 		this.deleteFavorite = this.deleteFavorite.bind(this)
 		this.belongsToUser = this.belongsToUser.bind(this);
-		this.state = { modal: null }
+		this.state = { modal: null, disable: false }
 	}
 
 	chooseFavoriteButton() {
-		if(this.props.favorite) {
+		if(this.state.disable) {
 			return(
-				<button  style={ styles.floatbtn } onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves yellow"><i className="material-icons">star</i></button>
+				<button disabled style={ styles.floatbtn } onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves yellow"><i className="material-icons">star</i></button>
 			)
 		} else {
-			return(
-				<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addToFavorites' } ) }><i className="material-icons">star</i></button>
-			)
+			if(this.props.favorite) {
+				return(
+					<button  style={ styles.floatbtn } onClick={ () => this.deleteFavorite(this.props.favoriteId)} className="btn-floating btn-medium waves-effect waves yellow"><i className="material-icons">star</i></button>
+				)
+			} else {
+				return(
+					<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={ () => this.setState( {modal: 'addToFavorites', disable: true } ) }><i className="material-icons">star</i></button>
+				)
+			}
 		}
 	}
 
@@ -76,6 +82,7 @@ class RecipeOptions extends React.Component {
 
 	createCustom() {
 		this.props.duplicateRecipe()
+		this.setState( {disable: true})
 	}
 
 	closeModal() {
@@ -83,12 +90,18 @@ class RecipeOptions extends React.Component {
 	}
 
 	belongsToUser() {
-		if (this.props.user) {
-			return( null )
-		} else {
+		if (this.state.disable) {
 			return(
-				<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={this.createCustom}><i className="material-icons">C</i></button>
+				<button disabled style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={this.createCustom}><i className="material-icons">C</i></button>
 			)
+		} else {
+			if (this.props.user) {
+				return( null )
+			} else {
+				return(
+					<button  style={ styles.floatbtn } className="btn-floating btn-medium waves-effect waves grey" onClick={this.createCustom}><i className="material-icons">C</i></button>
+				)
+			}
 		}
 	}
 

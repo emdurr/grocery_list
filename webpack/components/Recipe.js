@@ -26,22 +26,14 @@ class Recipe extends React.Component {
 	}
 
 	componentWillMount() {
-		$.ajax({
-			url: `/api/v1/recipes/${this.props.params.id}`,
-			type: 'GET',
-			dataType: 'JSON'
-		}).done( data => {
-			this.setState({recipeHeaderInfo: data.recipeHeaderInfo,
-				recipeIngredients: data.recipeIngredients,
-				recipeSteps: data.recipeSteps,
-				favorite: data.favoriteInfo.favorite,
-				favoriteId: data.favoriteInfo.favoriteId,
-				favoriteComment: data.favoriteInfo.favoriteComment
-			});
-		}).fail( data => {
-			console.log('Get recipe failed')
-		});
+		this.updateComponent(this.props.params.id)
 	};
+
+	componentWillReceiveProps(nextProps) {
+    if (nextProps.params.id != this.props.params.id) {
+    	this.updateComponent(nextProps.params.id)
+    }
+	}
 
 	updateComponent(id) {
 		$.ajax({
@@ -49,6 +41,7 @@ class Recipe extends React.Component {
 			type: 'GET',
 			dataType: 'JSON'
 		}).done( data => {
+			console.log(data);
 			this.setState({recipeHeaderInfo: data.recipeHeaderInfo,
 				recipeIngredients: data.recipeIngredients,
 				recipeSteps: data.recipeSteps,
@@ -95,7 +88,6 @@ class Recipe extends React.Component {
 		}).done( recipe => {
 			console.log(recipe.id)
 			this.props.history.push(`/recipes/${recipe.id}`)
-			this.updateComponent(recipe.id)
 		}).fail( data => {
 			console.log(data);
 		});
